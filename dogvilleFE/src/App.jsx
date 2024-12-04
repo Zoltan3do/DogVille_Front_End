@@ -10,6 +10,7 @@ import CustomSidebar from './components/sidebar/CustomSidebar'
 import LoginModal from "./components/modals/LoginModal.jsx";
 import CustomSignIn from './components/registration/CustomSignIn.jsx'
 import CustomFooter from './components/footer/CustomFooter.jsx'
+import DogListWithFilters from './components/filters/DogListWithFilters .jsx'
 
 function App() {
 
@@ -36,12 +37,15 @@ function App() {
               <CustomSignIn></CustomSignIn>
             }>
             </Route>
+            <Route path="/dogs" element={
+              <DogListWithFilters></DogListWithFilters>
+            }>
+            </Route>
             <Route path="*" element={<NotFoundPage />}></Route>
           </Routes>
-          <div>
+          <div className=''>
             <CustomFooter></CustomFooter>
           </div>
-
         </BrowserRouter>
 
         <LoginModal />

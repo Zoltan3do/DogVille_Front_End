@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 function CustomFooter() {
     const toggleState = useSelector((state) => state.sidebarToggle.value);
     return (
-        <footer className={` transition-all duration-300 p-4 bg-white sm:p-6 dark:bg-black  ${toggleState ? "!pl-72 " : "!pl-24"} w-full`}>
+        <footer className={` transition-all duration-300 p-4 bg-white sm:p-6 dark:bg-black  ${toggleState ? "!pl-72 " : "!pl-24"} w-full `}>
             <div className="md:flex md:justify-between">
                 <div className={`mb-6 md:mb-0 ${toggleState?'hidden':'block'}`}>
                     <a href="javascript:void(0)" className="flex items-center">

@@ -27,11 +27,20 @@ function LoginModal() {
         dispatch(changeModalState(!open));
     };
 
-    const handleLogin = () => {
-        dispatch(executeLoginFetch(email, password))
-        resetFields();
-        handleOpen();
+    const handleLogin = async () => {
+        try {
+            const result = await dispatch(executeLoginFetch(email, password))();
+            if (result.success) {
+                resetFields();
+                handleOpen();
+            } else {
+                console.error("Login fallito");
+            }
+        } catch (error) {
+            console.error("Errore inatteso durante il login:", error);
+        }
     };
+    
 
     const resetFields = () => {
         setEmail('');
