@@ -15,45 +15,42 @@ export const dogsFetchSlice = createSlice({
 })
 
 
-export const executedogsfetch = ([...filtri], [...valoreFiltri]) => async (dispatch) => {
-    try {
-      const genericUrl = "http://localhost:3001/cani/filter"; 
-  
-      let url = genericUrl;
-      let filterParams = "";
-  
-      if (filtri.length > 0 && valoreFiltri.length > 0) {
-        filterParams = filtri
-          .map((f, i) => {
-            return `${f}=${valoreFiltri[i]}`;
-          })
+export const executedogsfetch = (filters) => async (dispatch) => {
+  try {
+      const genericUrl = "http://localhost:3001/cani/filter";
+
+      const filterParams = Object.entries(filters)
+          .filter(([key, value]) => value) 
+          .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
           .join("&");
-  
-        url = `${genericUrl}?${filterParams}`;
-      }
-  
+
+      const url = filterParams ? `${genericUrl}?${filterParams}` : genericUrl;
+
       const response = await fetch(url, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": "Bearer " + localStorage.getItem("Access Token"),
-        },
+          method: "GET",
+          headers: {
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${localStorage.getItem("Access Token")}`,
+          },
       });
-  
+
       if (!response.ok) {
-        const errorData = await response.json();
-        alert(errorData.message);
+          const errorData = await response.json();
+          alert(errorData.message);
+          return { success: false };
       }
-  
+
       const data = await response.json();
+      console.log('Dati ricevuti dal backend:', data);
+
       dispatch(setDogsData(data));
-  
       return { success: true };
-    } catch (error) {
+  } catch (error) {
       console.error("Errore durante la fetch:", error);
-    }
-  };
-  
+      return { success: false };
+  }
+};
+
 
 
 export const { setDogsData } = dogsFetchSlice.actions;

@@ -2,34 +2,25 @@ import { useEffect, useState } from "react";
 import { DogCard } from "./DogCard";
 import { useSelector, useDispatch } from "react-redux";
 import { executedogsfetch } from "../../redux/dogsListFetchSlice";
+import { executemefetch } from "../../redux/meSlice";
 
 const DogListWithFilters = () => {
   const [filters, setFilters] = useState({
-    size: "",
+    dogSize: "",
     gender: "",
-    breed: "",
-    healthStatus: "",
-    weaned: "",
-    adopted: "",
+    race: "",
+    healthState: "",
     age: "",
   });
 
   const dispatch = useDispatch();
-  const dogs = useSelector((state) => state.dogsFetch.value);
+  const dogs = useSelector((state) => state.dogsFetch.value.content);
 
   useEffect(() => {
-    const filterKeys = Object.keys(filters);
-    const filtroArray = [];
-    const valoreArray = [];
+    dispatch(executemefetch())
+    dispatch(executedogsfetch(filters));
+  }, [filters, dispatch]);
 
-    filterKeys.forEach((key) => {
-      if (filters[key]) {
-        filtroArray.push(key);
-        valoreArray.push(filters[key])
-      }
-    })
-    dispatch(executedogsfetch(filtroArray, valoreArray));
-  }, [filters, dispatch])
 
   const handleFilterChange = (e) => {
     const { name, value } = e.target;
@@ -41,33 +32,30 @@ const DogListWithFilters = () => {
 
   const toggleState = useSelector((state) => state.sidebarToggle.value);
 
-
-  const filteredDogs =  Array.isArray(dogs) ? dogs.filter((dog) => {
+  const filteredDogs = Array.isArray(dogs) ? dogs.filter((dog) => {
     return (
-      (filters.size === "" || dog.size === filters.size) &&
+      (filters.dogSize === "" || dog.dogSize === filters.dogSize) &&
       (filters.gender === "" || dog.gender === filters.gender) &&
-      (filters.breed === "" || dog.breed === filters.breed) &&
-      (filters.healthStatus === "" || dog.healthStatus === filters.healthStatus) &&
-      (filters.weaned === "" || dog.weaned === (filters.weaned === "yes")) &&
-      (filters.adopted === "" || dog.adopted === (filters.adopted === "yes")) &&
+      (filters.race === "" || dog.race === filters.race) &&
+      (filters.healthState === "" || dog.healthState === filters.healthState) &&
       (filters.age === "" || dog.age === parseInt(filters.age))
     );
-  }): [];
+  }) : [];
 
   console.log(filteredDogs)
 
   return (
-    <div className={`p-4 bg-transparent ${toggleState ? "pl-72" : "pl-24"} transition-all duration-300`}>
+    <div className={`p-4 bg-transparent ${toggleState ? "pl-72" : "pl-24"} transition-all duration-300 min-h-screen`}>
       {/* Filtri */}
       <div className="p-4 rounded shadow mb-4">
         <h2 className="text-xl font-bold mb-4">Filtra Cani</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-6 gap-4">
           {/* Dropdown Taglia */}
           <div>
             <label className="block mb-1 text-sm font-medium">Taglia</label>
             <select
-              name="size"
-              value={filters.size}
+              name="dogSize"
+              value={filters.dogSize}
               onChange={handleFilterChange}
               className="border p-2 rounded text-black"
             >
@@ -112,8 +100,8 @@ const DogListWithFilters = () => {
           <div>
             <label className="block mb-1 text-sm font-medium">Stato di Salute</label>
             <select
-              name="healthStatus"
-              value={filters.healthStatus}
+              name="healthState"
+              value={filters.healthState}
               onChange={handleFilterChange}
               className="border p-2 rounded text-black"
             >
@@ -128,42 +116,12 @@ const DogListWithFilters = () => {
             </select>
           </div>
 
-          {/* Dropdown Svezzato */}
-          <div>
-            <label className="block mb-1 text-sm font-medium">Svezzato</label>
-            <select
-              name="weaned"
-              value={filters.weaned}
-              onChange={handleFilterChange}
-              className="border p-2 rounded text-black"
-            >
-              <option value="">Tutti</option>
-              <option value="yes">Sì</option>
-              <option value="no">No</option>
-            </select>
-          </div>
-
-          {/* Dropdown Adottato */}
-          <div>
-            <label className="block mb-1 text-sm font-medium">Adottato</label>
-            <select
-              name="adopted"
-              value={filters.adopted}
-              onChange={handleFilterChange}
-              className="border p-2 rounded text-black"
-            >
-              <option value="">Tutti</option>
-              <option value="yes">Sì</option>
-              <option value="no">No</option>
-            </select>
-          </div>
-
           {/* Dropdown Razza */}
           <div>
             <label className="block mb-1 text-sm font-medium">Razza</label>
             <select
-              name="breed"
-              value={filters.breed}
+              name="race"
+              value={filters.race}
               onChange={handleFilterChange}
               className="border p-2 rounded text-black"
             >
@@ -233,17 +191,19 @@ const DogListWithFilters = () => {
               <option value="Borzoi">Borzoi</option>
             </select>
           </div>
-
-
         </div>
       </div>
 
-      {/* Lista Cani */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {filteredDogs.map((dog) => (
-          <DogCard key={dog.id} {...dog} />
-        ))}
-      </div>
+      {/* Lista dei cani */}
+      {filteredDogs.length > 0 ? (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {filteredDogs.map((dog) => (
+            <DogCard key={dog.id} {...dog} />
+          ))}
+        </div>
+      ) : (
+        <p className="text-center text-gray-500">Nessun cane trovato con i filtri selezionati.</p>
+      )}
     </div>
   );
 };

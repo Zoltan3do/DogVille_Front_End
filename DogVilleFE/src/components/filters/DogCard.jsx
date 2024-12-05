@@ -1,58 +1,82 @@
-import {
-    Card,
-    CardHeader,
-    CardBody,
-    CardFooter,
-    Typography,
-    Avatar,
-    Tooltip,
-  } from "@material-tailwind/react";
-   
-  export function DogCard({ name, race, age, gender, size, profileImage, description, insertionDate }) {
-    return (
-      <Card className="max-w-[24rem] overflow-hidden">
-        <CardHeader
-          floated={false}
-          shadow={false}
-          color="transparent"
-          className="m-0 rounded-none"
-        >
-          <img
-            src={profileImage}
-            alt="ui/ux review check"
-          />
-        </CardHeader>
-        <CardBody>
-          <Typography variant="h4" color="blue-gray">
-           {name} - [{race}]
-          </Typography>
-          <Typography variant="lead" color="gray" className="mt-3 font-normal">
-            {description}
-          </Typography>
-        </CardBody>
-        <CardFooter className="flex items-center justify-between">
-          <div className="flex items-center -space-x-3">
-            <Tooltip content="Natali Craig">
-              <Avatar
-                size="sm"
-                variant="circular"
-                alt="natali craig"
-                src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1061&q=80"
-                className="border-2 border-white hover:z-10"
-              />
-            </Tooltip>
-            <Tooltip content="Tania Andrew">
-              <Avatar
-                size="sm"
-                variant="circular"
-                alt="tania andrew"
-                src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80"
-                className="border-2 border-white hover:z-10"
-              />
-            </Tooltip>
-          </div>
-          <Typography className="font-normal">{insertionDate}</Typography>
-        </CardFooter>
-      </Card>
-    );
-  }
+/* eslint-disable react/prop-types */
+import { Card, CardHeader, CardBody, CardFooter, Typography } from "@material-tailwind/react";
+import { HeartIcon as SolidHeartIcon } from "@heroicons/react/24/solid";
+import { HeartIcon as OutlineHeartIcon } from "@heroicons/react/24/outline";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addLikefetch, removeLikefetch } from "../../redux/likeSlice";
+
+export function DogCard({
+  name,
+  race,
+  age,
+  gender,
+  dogSize,
+  profileImage,
+  description,
+  insertionDate,
+  like_count,
+  id,
+}) {
+  const dispatch = useDispatch();
+
+  const likesList = useSelector((state) => state.meFetch.value.likes);
+  const [isLiked, setIsLiked] = useState(likesList.some(i => i.id === id));
+
+  const [localLikeCount, setLocalLikeCount] = useState(like_count);
+
+  const toggleLike = () => {
+    if (isLiked) {
+      dispatch(removeLikefetch(id));
+      setLocalLikeCount(localLikeCount - 1);
+    } else {
+      dispatch(addLikefetch(id));
+      setLocalLikeCount(localLikeCount + 1);
+    }
+    setIsLiked(!isLiked);
+  };
+
+  useEffect(() => {
+    setIsLiked(likesList.some(i => i.id === id));
+  }, [likesList, id]);
+
+  return (
+    <Card className="max-w-[24rem] overflow-hidden">
+      <CardHeader floated={false} shadow={false} color="transparent" className="m-0 rounded-none">
+        <img src={profileImage} alt="ui/ux review check" />
+      </CardHeader>
+      <CardBody>
+        <Typography variant="h4" color="blue-gray">
+          {name} - [{race}]
+        </Typography>
+        <Typography variant="lead" color="gray" className="mt-2">
+          {description}
+        </Typography>
+        <Typography variant="lead" color="gray" className="mt-5 text-base font-semibold">
+          Taglia: <span className="italic font-normal">{dogSize}</span>
+        </Typography>
+        <Typography variant="lead" color="gray" className="text-base font-semibold">
+          Età: <span className="italic font-normal">{age} anni</span>
+        </Typography>
+        <Typography variant="lead" color="gray" className="text-base font-semibold">
+          Genere: <span className="italic font-normal">{gender}</span>
+        </Typography>
+      </CardBody>
+      <CardFooter className="flex items-center justify-between">
+        <div className="flex items-center">
+          <button onClick={toggleLike} className="flex items-center space-x-2">
+            {isLiked ? (
+              <SolidHeartIcon className="w-6 h-6 text-red-500" />
+            ) : (
+              <OutlineHeartIcon className="w-6 h-6 text-gray-500" />
+            )}
+            <Typography variant="small" color="gray" className="font-medium">
+              {localLikeCount}
+            </Typography>
+          </button>
+        </div>
+        <Typography className="font-normal">{insertionDate}</Typography>
+      </CardFooter>
+    </Card>
+  );
+}

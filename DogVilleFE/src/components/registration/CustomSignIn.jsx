@@ -32,7 +32,7 @@ function CustomSignIn() {
 
     const toggleState = useSelector((state) => state.sidebarToggle.value);
     return (
-        <div className={`bg-transparent ${toggleState ? "pl-72" : "pl-24"} transition-all duration-300 flex-grow p-4 sm:relative lg:flex flex-row-reverse mt-5`}>
+        <div className={`bg-transparent ${toggleState ? "pl-72" : "pl-24"} transition-all duration-300 flex-grow p-4 sm:relative lg:flex flex-row-reverse mt-5 `}>
             <img src="src/assets/pastoreTedesco.png" alt="pt" className="md:block hidden  lg:w-2/4" />
             <Card color="transparent" shadow={false} className="">
                 <Typography variant="h4" color="white">
