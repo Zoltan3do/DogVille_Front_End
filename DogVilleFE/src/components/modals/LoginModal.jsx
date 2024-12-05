@@ -14,7 +14,6 @@ import "./login.css"
 import { executeLoginFetch } from "../../redux/loginFetchSlice";
 import { useState } from "react";
 import '../registration/registration.css'
-import { useNavigate } from "react-router-dom";
 
 
 function LoginModal() {

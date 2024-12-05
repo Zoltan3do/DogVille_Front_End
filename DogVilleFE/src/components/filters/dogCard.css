@@ -1,0 +1,26 @@
+/* 
+
+  .dogCard h2, .dogCard p, .dogCard div {
+    z-index: 2; /* Il contenuto rimane sopra */
+  /* } */
+/* 
+  .dogCard::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: url("https://cdn.leonardo.ai/users/1f20d408-0938-4531-8413-a7f81adad53b/generations/ec6ea061-84e8-40c7-9887-b50535e7a186/Leonardo_Phoenix_A_vibrant_and_highly_detailed_ultrarealistic_2.jpg") center/cover no-repeat;
+    border-radius: 50%;
+    transition: all 1s ease-in-out; 
+    z-index: 1; 
+  }
+
+  .dogCard:hover::after {
+    width: 300%;
+    height: 300%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+/* } */ 

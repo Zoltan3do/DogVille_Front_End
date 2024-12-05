@@ -10,6 +10,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { useRef, useState } from "react";
 import './registration.css'
 import { executeRegisterFetch } from "../../redux/loginFetchSlice";
+import { useNavigate } from 'react-router-dom';
+import Terms from "../modals/Terms";
 
 
 function CustomSignIn() {
@@ -23,9 +25,14 @@ function CustomSignIn() {
     const [address, setAddress] = useState('');
     const [telephoneNumber, setTelephoneNumber] = useState('');
 
+    const navigate = useNavigate();
+
     const handleRegister = (e) => {
         e.preventDefault()
         dispatch(executeRegisterFetch(name, surname, address, telephoneNumber, email, password))
+        .then(() => {
+            navigate('/');  
+        })
         formRef.current.reset()
     }
 
@@ -128,14 +135,13 @@ function CustomSignIn() {
                                 <a
                                     href="#"
                                     className="font-medium transition-colors hover:text-g !mr-10"
+                                    data-dialog-target="dialog"
                                 >
                                     &nbsp;Termini e Condizioni
                                 </a>
                             </Typography>
                         }
                         containerProps={{ className: "-ml-2.5 checkbox-label" }} required
-
-
                     />
                     <Button className="mt-6 bg-grigino text-whiteino " fullWidth onClick={handleRegister}>
                         Registrati
@@ -150,6 +156,7 @@ function CustomSignIn() {
             </Card>
 
             <img src="src/assets/pastoreTedesco.png" alt="pt2" className="block md:hidden lg:w-2/4" />
+            <Terms></Terms>
         </div>
 
     )

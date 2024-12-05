@@ -32,10 +32,10 @@ export const executeLoginFetch = (email, password) => async () => {
         const data = await response.json();
         localStorage.setItem("Access Token", data.accessToken);
         alert("Login avvenuto con successo!");
-        return true; 
+        return true;
     } catch (error) {
         console.error("Errore durante la fetch:", error);
-        return false; 
+        return false;
     }
 };
 
@@ -58,9 +58,11 @@ export const executeRegisterFetch = (param1, param2, param3, param4, param5, par
             })
             throw new Error("Errore nella chiamata API");
         }
-        alert("Resitrazione avvenuta con successo!")
+        alert("Registrazione avvenuta con successo!")
+        return Promise.resolve();
     } catch (error) {
         console.error("Errore durante la fetch:", error);
+        return Promise.reject(error);
     }
 };
 

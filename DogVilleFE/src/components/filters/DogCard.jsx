@@ -5,6 +5,8 @@ import { HeartIcon as OutlineHeartIcon } from "@heroicons/react/24/outline";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addLikefetch, removeLikefetch } from "../../redux/likeSlice";
+import "./dogCard.css"
+import { Link } from "react-router-dom";
 
 export function DogCard({
   name,
@@ -41,14 +43,14 @@ export function DogCard({
   }, [likesList, id]);
 
   return (
-    <Card className="max-w-[24rem] overflow-hidden">
-      <CardHeader floated={false} shadow={false} color="transparent" className="m-0 rounded-none">
-        <img src={profileImage} alt="ui/ux review check" />
+    <Card className="max-w-[24rem] overflow-hidden cursor-pointer hover:shadow-lg hover:shadow-gray-400 transition-all duration-300">
+      <CardHeader floated={false} shadow={false} color="transparent" className="m-0 rounded-none max-h-40">
+        <img src={profileImage} alt="ui/ux review check"  />
       </CardHeader>
       <CardBody>
         <Typography variant="h4" color="blue-gray">
           {name} - [{race}]
-        </Typography>
+        </Typography> 
         <Typography variant="lead" color="gray" className="mt-2">
           {description}
         </Typography>

@@ -14,12 +14,15 @@ const DogListWithFilters = () => {
   });
 
   const dispatch = useDispatch();
+  const [page, setPage] = useState(0);
   const dogs = useSelector((state) => state.dogsFetch.value.content);
+  const totPages = useSelector((state) => state.dogsFetch.value?.page?.totalPages);
+  console.log(totPages)
 
   useEffect(() => {
     dispatch(executemefetch())
-    dispatch(executedogsfetch(filters));
-  }, [filters, dispatch]);
+    dispatch(executedogsfetch(filters, page));
+  }, [filters, dispatch, page]);
 
 
   const handleFilterChange = (e) => {
@@ -28,6 +31,10 @@ const DogListWithFilters = () => {
       ...prev,
       [name]: value,
     }));
+  };
+
+  const handlePageChange = (newPage) => {
+    setPage(newPage);
   };
 
   const toggleState = useSelector((state) => state.sidebarToggle.value);
@@ -41,8 +48,6 @@ const DogListWithFilters = () => {
       (filters.age === "" || dog.age === parseInt(filters.age))
     );
   }) : [];
-
-  console.log(filteredDogs)
 
   return (
     <div className={`p-4 bg-transparent ${toggleState ? "pl-72" : "pl-24"} transition-all duration-300 min-h-screen`}>
@@ -204,6 +209,33 @@ const DogListWithFilters = () => {
       ) : (
         <p className="text-center text-gray-500">Nessun cane trovato con i filtri selezionati.</p>
       )}
+
+      {/* Paginazione */}
+      <div className="flex justify-center mt-6 text-black">
+        <button
+          onClick={() => handlePageChange(Math.max(0, page - 1))}
+          disabled={page === 0}
+          className="bg-gray-200 px-4 py-2 rounded-l"
+        >
+          Precedente
+        </button>
+        {[...Array(totPages)].map((_, idx) => (
+          <button
+            key={idx}
+            onClick={() => handlePageChange(idx)}
+            className={`px-4 py-2 ${idx === page ? 'bg-black text-white' : 'bg-gray-200'} rounded`}
+          >
+            {idx + 1}
+          </button>
+        ))}
+        <button
+          onClick={() => handlePageChange(Math.min(totPages - 1, page + 1))}
+          disabled={page === totPages - 1}
+          className="bg-gray-200 px-4 py-2 rounded-r"
+        >
+          Successiva
+        </button>
+      </div>
     </div>
   );
 };
