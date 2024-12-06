@@ -1,4 +1,5 @@
 import { useSelector } from "react-redux";
+import logo from "../../assets/dogvilleLogo-removebg.png"
 
 
 
@@ -10,7 +11,7 @@ function CustomFooter() {
                 <div className={`mb-6 md:mb-0 ${toggleState?'hidden':'block'}`}>
                     <a href="javascript:void(0)" className="flex items-center">
                         <img className="self-center text-4xl font-semibold whitespace-nowrap dark:text-white w-1/3"
-                            src="src/assets/dogvilleLogo-removebg.png" alt="logo" />
+                            src={logo} alt="logo" />
 
                     </a>
                 </div>

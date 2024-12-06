@@ -11,6 +11,7 @@ import LoginModal from "./components/modals/LoginModal.jsx";
 import CustomSignIn from './components/registration/CustomSignIn.jsx'
 import CustomFooter from './components/footer/CustomFooter.jsx'
 import DogListWithFilters from './components/filters/DogListWithFilters .jsx'
+import DogDetail from './components/detailPages/dogDetail.jsx'
 
 function App() {
 
@@ -39,6 +40,10 @@ function App() {
             </Route>
             <Route path="/dogs" element={
               <DogListWithFilters></DogListWithFilters>
+            }>
+            </Route>
+            <Route path="/dog/:id" element={
+              <DogDetail></DogDetail>
             }>
             </Route>
             <Route path="*" element={<NotFoundPage />}></Route>

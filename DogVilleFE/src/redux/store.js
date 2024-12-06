@@ -4,6 +4,7 @@ import { loginToggleReducer } from "./loginToggleSlice"
 import { loginFetchReducer } from "./loginFetchSlice"
 import { dogsFetchReducer } from "./dogsListFetchSlice"
 import { meFetchReducer } from "./meSlice"
+import { dogFetchReducer } from "./singleDogFetch"
 
 export default configureStore({
     reducer: {
@@ -12,6 +13,7 @@ export default configureStore({
         loginFetches: loginFetchReducer,
         dogsFetch: dogsFetchReducer,
         meFetch: meFetchReducer,
+        dogFetch:dogFetchReducer
     }
 })
 

@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { changeSidebarState } from '../../redux/sidebarSlice';
 import { changeModalState } from "../../redux/loginToggleSlice";
 import "./sidebar.css"
+import logo from "../../assets/dogvilleLogo-removebg.png"
 
 function CustomSidebar() {
   const [openMenu, setOpenMenu] = useState(null);
@@ -41,7 +42,7 @@ function CustomSidebar() {
       id="sidenav"
     >
       <img
-        src="src/assets/dogvilleLogo-removebg.png"
+        src={logo}
         alt="Logo del sito"
         style={{
           width: '100%',

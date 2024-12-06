@@ -11,7 +11,6 @@ import { useRef, useState } from "react";
 import './registration.css'
 import { executeRegisterFetch } from "../../redux/loginFetchSlice";
 import { useNavigate } from 'react-router-dom';
-import Terms from "../modals/Terms";
 
 
 function CustomSignIn() {
@@ -135,7 +134,6 @@ function CustomSignIn() {
                                 <a
                                     href="#"
                                     className="font-medium transition-colors hover:text-g !mr-10"
-                                    data-dialog-target="dialog"
                                 >
                                     &nbsp;Termini e Condizioni
                                 </a>
@@ -156,7 +154,6 @@ function CustomSignIn() {
             </Card>
 
             <img src="src/assets/pastoreTedesco.png" alt="pt2" className="block md:hidden lg:w-2/4" />
-            <Terms></Terms>
         </div>
 
     )

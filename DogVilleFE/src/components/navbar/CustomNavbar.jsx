@@ -2,6 +2,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Button } from "@material-tailwind/react";
 import "./navbar.css";
 import { changeModalState } from "../../redux/loginToggleSlice";
+import logo from "../../assets/dogvilleLogo-removebg.png"
 
 function CustomNavbar() {
     const toggleState = useSelector((state) => state.sidebarToggle.value);
@@ -25,7 +26,7 @@ function CustomNavbar() {
                     {/* Logo */}
                     <a href="/" className="items-center w-full sm:w-auto justify-center sm:justify-start hidden sm:flex invisible">
                         <img
-                            src="src/assets/dogvilleLogo-removebg.png"
+                            src={logo}
                             className="w-32"
                             alt="dogville Logo"
                         />
@@ -63,7 +64,7 @@ function CustomNavbar() {
                     {/* Logo */}
                     <a href="/" className="items-center w-full sm:w-auto justify-center sm:justify-start hidden sm:flex">
                         <img
-                            src="src/assets/dogvilleLogo-removebg.png"
+                            src={logo}
                             className="w-32"
                             alt="dogville Logo"
                         />
