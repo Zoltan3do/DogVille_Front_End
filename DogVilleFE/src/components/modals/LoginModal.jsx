@@ -34,6 +34,7 @@ function LoginModal() {
             if (result == true) {
                 resetFields();
                 handleOpen();
+                location.reload()
             } else {
                 console.error("Login fallito");
             }
@@ -41,7 +42,7 @@ function LoginModal() {
             console.error("Errore inatteso durante il login:", error);
         }
     };
-    
+
 
     const resetFields = () => {
         setEmail('');
@@ -71,12 +72,12 @@ function LoginModal() {
                             La tua e-mail
                         </Typography>
                         <Input placeholder="Email" size="lg" value={email}
-                                    onChange={(e) => setEmail(e.target.value)} type="email" className="noBlu"/>
+                            onChange={(e) => setEmail(e.target.value)} type="email" className="noBlu" />
                         <Typography className="-mb-2 text-primary-color noBlu" variant="h6" required>
                             La tua password
                         </Typography>
                         <Input placeholder="Password" size="lg" value={password}
-                                    onChange={(e) => setPassword(e.target.value)} type="password" required className="noBlu"/>
+                            onChange={(e) => setPassword(e.target.value)} type="password" required className="noBlu" />
                         <div className="-ml-2.5 -mt-3">
                             <Checkbox label="Ricordami" className="text-primary-color focus:ring-0 focus:outline-none border-primary-color border-1 focus:border-1" />
                         </div>

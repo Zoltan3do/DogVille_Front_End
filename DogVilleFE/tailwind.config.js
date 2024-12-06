@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+import lineClamp from '@tailwindcss/line-clamp';
 export default {
   content: [
     "./index.html",
@@ -6,14 +7,16 @@ export default {
   ],
   theme: {
     extend: {
-      colors:{
+      colors: {
         'primary-color': ' #111C20',
-        'whiteino':'#E0E2E2',
-        'reddino':'#AF9A9B',
-        'grigino':'#262626'
+        'whiteino': '#E0E2E2',
+        'reddino': '#AF9A9B',
+        'grigino': '#262626'
       }
     },
   },
-  plugins: [],
+  plugins: [
+    lineClamp
+  ],
 }
 

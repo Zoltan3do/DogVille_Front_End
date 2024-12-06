@@ -3,10 +3,19 @@ import { Button } from "@material-tailwind/react";
 import "./navbar.css";
 import { changeModalState } from "../../redux/loginToggleSlice";
 import logo from "../../assets/dogvilleLogo-removebg.png"
+import { useEffect } from "react";
+import { executemefetch } from "../../redux/meSlice";
+import Avatar12 from "../Avatar12";
+import { Link } from "react-router-dom";
 
 function CustomNavbar() {
     const toggleState = useSelector((state) => state.sidebarToggle.value);
+    const meData = useSelector((state) => state.meFetch.value);
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(executemefetch())
+    }, [dispatch, meData])
 
     return (
         <nav
@@ -16,12 +25,14 @@ function CustomNavbar() {
             {toggleState && (
                 <div className="max-w-screen-xl flex flex-wrap items-center justify-between px-4 sm:px-6 lg:px-8 mx-3">
                     {/* Testo "Adotta un amico" */}
-                    <div className="sm:block md:w-auto">
-                        <p className="text-lg font-medium">
-                            Adotta un amico &nbsp;
-                            <i className="fa fa-solid fa-arrow-right-long align-middle freccetta"></i>
-                        </p>
-                    </div>
+                    <Link to={"/dogs"}>
+                        <div className="sm:block md:w-auto">
+                            <p className="text-lg font-medium">
+                                Adotta un amico &nbsp;
+                                <i className="fa fa-solid fa-arrow-right-long align-middle freccetta"></i>
+                            </p>
+                        </div>
+                    </Link>
 
                     {/* Logo */}
                     <a href="/" className="items-center w-full sm:w-auto justify-center sm:justify-start hidden sm:flex invisible">
@@ -43,9 +54,12 @@ function CustomNavbar() {
                             <li className="flex items-center cursor-pointer">
                                 <Button onClick={() => dispatch(changeModalState(true))} className="bg-transparent border-0 text-lg text-whiteino transNone">Accedi</Button>
                             </li>
-                            <li className="flex items-center cursor-pointer">
-                                <p>Registrati</p>
-                            </li>
+                            <Link to={"/register"} className="flex items-center cursor-pointer">
+                                <li >
+                                    <p>Registrati</p>
+                                </li>
+                            </Link>
+
                         </ul>
                     </div>
                 </div>
@@ -54,12 +68,14 @@ function CustomNavbar() {
             {!toggleState && (
                 <div className="max-w-screen-xl flex flex-wrap items-center justify-between  px-4 sm:px-6 lg:px-8 mx-auto">
                     {/* Testo "Adotta un amico" */}
-                    <div className="sm:block md:w-auto">
-                        <p className="text-lg font-medium">
-                            Adotta un amico &nbsp;
-                            <i className="fa fa-solid fa-arrow-right-long align-middle freccetta"></i>
-                        </p>
-                    </div>
+                    <Link to={"/dogs"}>
+                        <div className="sm:block md:w-auto">
+                            <p className="text-lg font-medium">
+                                Adotta un amico &nbsp;
+                                <i className="fa fa-solid fa-arrow-right-long align-middle freccetta"></i>
+                            </p>
+                        </div>
+                    </Link>
 
                     {/* Logo */}
                     <a href="/" className="items-center w-full sm:w-auto justify-center sm:justify-start hidden sm:flex">
@@ -78,12 +94,24 @@ function CustomNavbar() {
                                     <i className="fa-solid fa-phone align-middle"></i>
                                 </a>
                             </li>
-                            <li className="flex items-center cursor-pointer">
-                                <Button onClick={() => dispatch(changeModalState(true))} className="bg-transparent border-0 text-lg text-whiteino transNone">Accedi</Button>
-                            </li>
-                            <li className="flex items-center cursor-pointer">
-                                <p>Registrati</p>
-                            </li>
+                            {
+                                meData ? (
+                                    <Avatar12></Avatar12>
+                                ) : (
+                                    <>
+                                        <li className="flex items-center cursor-pointer">
+                                            <Button onClick={() => dispatch(changeModalState(true))} className="bg-transparent border-0 text-lg text-whiteino transNone font-semibold">Accedi</Button>
+                                        </li>
+                                        <Link to={"/register"} className="flex items-center cursor-pointer">
+                                            <li>
+                                                <p>Registrati</p>
+                                            </li>
+                                        </Link>
+                                    </>
+                                )
+
+                            }
+
                         </ul>
                     </div>
                 </div>

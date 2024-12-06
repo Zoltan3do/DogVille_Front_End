@@ -19,3 +19,20 @@
   cursor:pointer
 }
 
+#ava::-webkit-scrollbar {
+  width: 2px;
+}
+
+#ava::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 10px;
+}
+
+#ava::-webkit-scrollbar-thumb:hover {
+  background-color: #555; 
+}
+
+#ava::-webkit-scrollbar-track {
+  background-color: #222;
+}
+

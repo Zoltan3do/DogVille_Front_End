@@ -4,7 +4,7 @@ export const meSlice = createSlice({
     name: "meFetch",
 
     initialState: {
-        value: []
+        value: null
     },
 
     reducers: {
@@ -16,8 +16,7 @@ export const meSlice = createSlice({
 
 export const executemefetch = () => async (dispatch) => {
     try {
-        const url = "http://locahost:3001/utenti/me";
-
+        const url = "http://localhost:3001/utenti/me";
         const response = await fetch(url, {
             method: "GET",
             headers: {
@@ -28,18 +27,20 @@ export const executemefetch = () => async (dispatch) => {
 
         if (!response.ok) {
             const errorData = await response.json();
-            alert(errorData.message);
+
+            dispatch(setMeData(null)); 
+            return;
         }
 
         const data = await response.json();
-        console.log('Dati ricevuti dal backend:', data);
+        dispatch(setMeData(data)); 
 
-        dispatch(setMeData(data));
-        return { success: true };
     } catch (error) {
         console.error("Errore durante la fetch:", error);
+        dispatch(setMeData(null));
     }
 };
+
 
 export const { setMeData } = meSlice.actions;
 export const meFetchReducer = meSlice.reducer;

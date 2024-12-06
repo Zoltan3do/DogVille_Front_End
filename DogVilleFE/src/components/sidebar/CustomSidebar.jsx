@@ -6,11 +6,13 @@ import { changeSidebarState } from '../../redux/sidebarSlice';
 import { changeModalState } from "../../redux/loginToggleSlice";
 import "./sidebar.css"
 import logo from "../../assets/dogvilleLogo-removebg.png"
+import { Link } from 'react-router-dom';
 
 function CustomSidebar() {
   const [openMenu, setOpenMenu] = useState(null);
   const [isExpanded, setIsExpanded] = useState(false);
   const toggleState = useSelector((state) => state.sidebarToggle.value);
+  const meData = useSelector((state) => state.meFetch.value);
 
   const dispatch = useDispatch();
 
@@ -23,6 +25,11 @@ function CustomSidebar() {
     dispatch(changeSidebarState(expanded));
     if (!expanded) setOpenMenu(null);
   };
+
+  function handleExit() {
+    localStorage.removeItem("Access Token")
+    location.reload()
+  }
 
   return (
     <SideNav
@@ -54,11 +61,17 @@ function CustomSidebar() {
       <Toggle />
       <div style={{ flex: 1 }} className="mt-5 mb-5">
         <SideNav.Nav defaultSelected="home">
+
           <NavItem eventKey="home">
             <NavIcon>
-              <i className="fa fa-fw fa-home" style={{ fontSize: 15 }}></i>
+              <Link to={"/"}>
+                <i className="fa fa-fw fa-home" style={{ fontSize: 15 }}></i></Link>
             </NavIcon>
-            <NavText>Home</NavText>
+            <NavText>
+              <Link to={"/"}>
+                <p>Home</p>
+              </Link>
+            </NavText>
           </NavItem>
 
           <NavItem eventKey="about">
@@ -70,9 +83,15 @@ function CustomSidebar() {
 
           <NavItem eventKey="dogs">
             <NavIcon>
-              <i className="fa fa-fw fa-dog" style={{ fontSize: 15 }}></i>
+              <Link to={"/dogs"}>
+                <i className="fa fa-fw fa-dog" style={{ fontSize: 15 }}></i>
+              </Link>
             </NavIcon>
-            <NavText>Cani</NavText>
+            <NavText>
+              <Link to={"/dogs"}>
+                <p>Cani</p>
+              </Link>
+            </NavText>
           </NavItem>
 
           <NavItem eventKey="services" onClick={() => toggleMenu('services')}>
@@ -85,7 +104,11 @@ function CustomSidebar() {
           {openMenu === 'services' && (
             <>
               <NavItem className="text-start mx-5">
-                <NavText>Adotta un cane</NavText>
+                <NavText>
+                  <Link>
+                    <p>Adotta un cane</p>
+                  </Link>
+                </NavText>
               </NavItem>
               <NavItem className="text-start mx-5">
                 <NavText>Consegna un cane</NavText>
@@ -141,7 +164,7 @@ function CustomSidebar() {
         </SideNav.Nav>
       </div>
 
-      <hr className={toggleState?`block`:'hidden'}/>
+      <hr className={toggleState ? `block` : 'hidden'} />
       {/* Sezione inferiore per Login, Sign In e Contattaci */}
       <div className="pt-10 pb-5 text-reddino " >
         <div data-event-key="likes" className={` text-sm ${!toggleState ? "text-center" : ""} flex items-center p-3 pl-6 w-full sideElement cursor-pointer hover:text-white`}>
@@ -152,20 +175,42 @@ function CustomSidebar() {
           <i className="fa fa-solid fa-bag-shopping mr-4" style={{ fontSize: 15 }}></i>
           <p className={`${!toggleState ? "hidden" : ""}`}>Shop</p>
         </div>
-        <div onClick={() => dispatch(changeModalState(true))} data-event-key="login" className={`mt-3 text-sm  ${!toggleState ? "sm:hidden text-center" : ""} flex items-center p-3 pl-6 w-full sideElement cursor-pointer hover:text-white`}>
-          <i className='fa fa-solid fa-right-to-bracket mr-4' style={{ fontSize: 15 }}></i>
-          <p className={`${!toggleState ? "hidden" : ""}`}>Accedi</p>
-        </div>
-        <div data-event-key="register" className={`mt-3 text-sm  ${!toggleState ? "sm:hidden text-center" : ""} flex items-center p-3 pl-6 w-full sideElement cursor-pointer hover:text-white`}>
-          <i className='fa fa-solid fa-address-card mr-4' style={{ fontSize: 15 }}></i>
-          <p className={`${!toggleState ? "hidden" : ""}`}>Registrati</p>
-        </div>
+
         <a href="tel:+393517416230">
           <div data-event-key="callme" className={`mt-3 text-sm  ${!toggleState ? "sm:hidden text-center" : ""} flex items-center p-3 pl-6 w-full sideElement cursor-pointer hover:text-white`}>
             <i className="fa-solid fa-phone mr-4" style={{ fontSize: 15 }}></i>
             <p className={`${!toggleState ? "hidden" : ""}`}>Chiamaci</p>
           </div>
         </a>
+
+        {
+          meData ? (
+            <>
+              <div data-event-key="register" className={`mt-3 text-sm  ${!toggleState ? "sm:hidden text-center" : ""} flex items-center p-3 pl-6 w-full sideElement cursor-pointer hover:text-white`}>
+                <i className='fa fa-solid fa-user mr-4' style={{ fontSize: 15 }}></i>
+                <p className={`${!toggleState ? "hidden" : ""}`}>Profilo</p>
+              </div>
+              <div onClick={handleExit} data-event-key="register" className={`mt-3 text-sm  ${!toggleState ? "sm:hidden text-center" : ""} flex items-center p-3 pl-6 w-full sideElement cursor-pointer hover:text-white`}>
+                <i className='fa fa-solid fa-right-from-bracket mr-4' style={{ fontSize: 15 }}></i>
+                <p className={`${!toggleState ? "hidden" : ""}`}>Esci</p>
+              </div>
+
+            </>
+          ) : (
+            <>
+              <div onClick={() => dispatch(changeModalState(true))} data-event-key="login" className={`mt-3 text-sm  ${!toggleState ? "sm:hidden text-center" : ""} flex items-center p-3 pl-6 w-full sideElement cursor-pointer hover:text-white`}>
+                <i className='fa fa-solid fa-right-to-bracket mr-4' style={{ fontSize: 15 }}></i>
+                <p className={`${!toggleState ? "hidden" : ""}`}>Accedi</p>
+              </div>
+              <Link to={"/register"}>
+                <div data-event-key="register" className={`mt-3 text-sm  ${!toggleState ? "sm:hidden text-center" : ""} flex items-center p-3 pl-6 w-full sideElement cursor-pointer hover:text-white`}>
+                  <i className='fa fa-solid fa-address-card mr-4' style={{ fontSize: 15 }}></i>
+                  <p className={`${!toggleState ? "hidden" : ""}`}>Registrati</p>
+                </div>
+              </Link>
+            </>
+          )
+        }
       </div>
     </SideNav>
   );

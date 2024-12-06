@@ -25,13 +25,11 @@ export const executeLoginFetch = (email, password) => async () => {
 
         if (!response.ok) {
             const errorData = await response.json();
-            alert(errorData.message);
             return false;
         }
 
         const data = await response.json();
         localStorage.setItem("Access Token", data.accessToken);
-        alert("Login avvenuto con successo!");
         return true;
     } catch (error) {
         console.error("Errore durante la fetch:", error);

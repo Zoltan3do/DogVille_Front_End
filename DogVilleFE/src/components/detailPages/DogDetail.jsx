@@ -3,7 +3,6 @@ import TooltipItem from "../TooltipItem";
 import { useEffect } from "react";
 import { executedogfetch } from "../../redux/singleDogFetch";
 import { useParams } from "react-router-dom";
-import { executemefetch } from "../../redux/meSlice";
 
 function DogDetail() {
 
@@ -13,14 +12,12 @@ function DogDetail() {
     const user = useSelector((state) => state.meFetch?.value)
     const profiloPsicologico = dog.dogsPsycologicalProfiles?.join("-")
 
-    console.log(JSON.stringify(dog))
-
     useEffect(() => {
-        dispatch(executedogfetch(id))
-        dispatch(executemefetch())
+            dispatch(executedogfetch(id))
     }, [dispatch, id]);
 
     const toggleState = useSelector((state) => state.sidebarToggle.value);
+
     return (
         <>
             <div className={`bg-transparent ${toggleState ? "!ml-64 " : "!ml-24"} transition-all duration-300 grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-8 mr-7 mb-48 mt-20`} >
@@ -79,8 +76,8 @@ function DogDetail() {
                                 </svg>
                             </span>
                             <span
-                                className="absolute flex items-center text-base font-semibold justify-center w-full h-full text-primary-color transition-all duration-300 transform group-hover:translate-x-full ease"> {user.role == "ADMIN" ? "MODIFICA CARATTERISTICHE" : `DAI UNA CASA A ${dog.name}`} </span>
-                            <span className="relative text-base font-semibold invisible"> {user.role == "ADMIN" ? "MODIFICA CARATTERISTICHE" : `DAI UNA CASA A ${dog.name}`}</span>
+                                className="absolute flex items-center text-base font-semibold justify-center w-full h-full text-primary-color transition-all duration-300 transform group-hover:translate-x-full ease"> {user?.role == "ADMIN" ? "MODIFICA CARATTERISTICHE" : `DAI UNA CASA A ${dog.name.toUpperCase()}`} </span>
+                            <span className="relative text-base font-semibold invisible"> {user?.role == "ADMIN" ? "MODIFICA CARATTERISTICHE" : `DAI UNA CASA A ${dog.name.toUpperCase()}`}</span>
                         </button>
 
 

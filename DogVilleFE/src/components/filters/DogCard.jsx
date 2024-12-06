@@ -43,42 +43,45 @@ export function DogCard({
   }, [likesList, id]);
 
   return (
-    <Card className="max-w-[24rem] overflow-hidden cursor-pointer hover:shadow-lg hover:shadow-gray-400 transition-all duration-300">
-      <CardHeader floated={false} shadow={false} color="transparent" className="m-0 rounded-none max-h-40">
-        <img src={profileImage} alt="ui/ux review check"  />
-      </CardHeader>
-      <CardBody>
-        <Typography variant="h4" color="blue-gray">
-          {name} - [{race}]
-        </Typography> 
-        <Typography variant="lead" color="gray" className="mt-2">
-          {description}
-        </Typography>
-        <Typography variant="lead" color="gray" className="mt-5 text-base font-semibold">
-          Taglia: <span className="italic font-normal">{dogSize}</span>
-        </Typography>
-        <Typography variant="lead" color="gray" className="text-base font-semibold">
-          Età: <span className="italic font-normal">{age} anni</span>
-        </Typography>
-        <Typography variant="lead" color="gray" className="text-base font-semibold">
-          Genere: <span className="italic font-normal">{gender}</span>
-        </Typography>
-      </CardBody>
-      <CardFooter className="flex items-center justify-between">
-        <div className="flex items-center">
-          <button onClick={toggleLike} className="flex items-center space-x-2">
-            {isLiked ? (
-              <SolidHeartIcon className="w-6 h-6 text-red-500" />
-            ) : (
-              <OutlineHeartIcon className="w-6 h-6 text-gray-500" />
-            )}
-            <Typography variant="small" color="gray" className="font-medium">
-              {localLikeCount}
-            </Typography>
-          </button>
-        </div>
-        <Typography className="font-normal">{insertionDate}</Typography>
-      </CardFooter>
-    </Card>
+    <Link to={`/dog/${id}`}>
+      <Card className="max-w-[24rem] overflow-hidden cursor-pointer hover:shadow-lg hover:shadow-gray-400 transition-all duration-300 ">
+        <CardHeader floated={false} shadow={false} color="transparent" className="m-0 rounded-none max-h-36 ">
+          <img src={profileImage} alt="ui/ux review check" className="w-full " />
+        </CardHeader>
+        <CardBody className="mb-12">
+          <Typography variant="h4" color="gray" className="font-bold truncate">
+            {name} - [{race}]
+          </Typography>
+          <Typography variant="lead" color="gray" className="mt-2 text-lg ">
+            <p className="line-clamp-3"> {description}</p>
+          </Typography>
+          <Typography variant="lead" color="gray" className="mt-5 text-base font-semibold">
+            Taglia: <span className="italic font-normal">{dogSize}</span>
+          </Typography>
+          <Typography variant="lead" color="gray" className="text-base font-semibold">
+            Età: <span className="italic font-normal">{age} anni</span>
+          </Typography>
+          <Typography variant="lead" color="gray" className="text-base font-semibold">
+            Genere: <span className="italic font-normal">{gender}</span>
+          </Typography>
+        </CardBody>
+        <CardFooter className="flex items-center justify-between bottom-0 absolute">
+          <div className="flex items-center mr-40">
+            <button onClick={toggleLike} className="flex items-center space-x-2">
+              {isLiked ? (
+                <SolidHeartIcon className="w-6 h-6 text-red-500" />
+              ) : (
+                <OutlineHeartIcon className="w-6 h-6 text-gray-500" />
+              )}
+              <Typography variant="small" color="gray" className="font-medium">
+                {localLikeCount}
+              </Typography>
+            </button>
+          </div>
+          <Typography className="font-normal">{insertionDate}</Typography>
+        </CardFooter>
+      </Card>
+    </Link>
+
   );
 }
