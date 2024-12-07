@@ -90,7 +90,7 @@ function CustomProfile() {
             <UserNavbar />
             <div className={`bg-transparent ${toggleState ? "!ml-64" : "!ml-24"} transition-all duration-300 mt-20 !z-10  relative`}>
                 <div className="absolute left-10
-                 -bottom-20 p-0 pointer-events-none
+                 -bottom-20 p-0 pointer-events-none select-none
             ">
                     <img src={shitsu} alt="shitsu" className="w-2/3" />
                 </div>
