@@ -4,7 +4,7 @@ export const singleDogFetchSlice = createSlice({
     name: "dogFetch",
 
     initialState: {
-        value: []
+        value: null
     },
 
     reducers: {
@@ -16,7 +16,7 @@ export const singleDogFetchSlice = createSlice({
 
 export const executedogfetch = (id) => async (dispatch) => {
     try {
-        const url = `http://locahost:3001/cani/${id}`;
+        const url = `http://localhost:3001/cani/${id}`;
 
         const response = await fetch(url, {
             method: "GET",

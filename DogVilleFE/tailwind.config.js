@@ -11,7 +11,8 @@ export default {
         'primary-color': ' #111C20',
         'whiteino': '#E0E2E2',
         'reddino': '#AF9A9B',
-        'grigino': '#262626'
+        'grigino': '#262626',
+        "grigiastro":"#94A3B8"
       }
     },
   },
