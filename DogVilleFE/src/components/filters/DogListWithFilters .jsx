@@ -52,9 +52,9 @@ const DogListWithFilters = () => {
   return (
     <div className={`p-4 bg-transparent ${toggleState ? "pl-72" : "pl-24"} transition-all duration-300 min-h-screen`}>
       {/* Filtri */}
-      <div className="p-4 rounded shadow mb-4">
+      <div className="p-4 rounded shadow mb-4 mt-12">
         <h2 className="text-xl font-bold mb-4">Filtra Cani</h2>
-        <div className="grid grid-cols-6 gap-4">
+        <div className="flex justify-between mb-5">
           {/* Dropdown Taglia */}
           <div>
             <label className="block mb-1 text-sm font-medium">Taglia</label>

@@ -105,7 +105,7 @@ function CustomSidebar() {
             <>
               <NavItem className="text-start mx-5">
                 <NavText>
-                  <Link>
+                  <Link to={"/dogs"}>
                     <p>Adotta un cane</p>
                   </Link>
                 </NavText>

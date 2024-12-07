@@ -6,9 +6,9 @@ import logo from "../../assets/dogvilleLogo-removebg.png"
 function CustomFooter() {
     const toggleState = useSelector((state) => state.sidebarToggle.value);
     return (
-        <footer className={` transition-all duration-300 p-4 bg-white sm:p-6 dark:bg-black  ${toggleState ? "!pl-72 " : "!pl-24"} w-full `}>
+        <footer className={` transition-all duration-300 p-4 bg-white sm:p-6 dark:bg-black  ${toggleState ? "!pl-72 " : "!pl-24"} w-full mt-5`}>
             <div className="md:flex md:justify-between">
-                <div className={`mb-6 md:mb-0 ${toggleState?'hidden':'block'}`}>
+                <div className={`mb-6 md:mb-0 ${toggleState ? 'hidden' : 'block'}`}>
                     <a href="javascript:void(0)" className="flex items-center">
                         <img className="self-center text-4xl font-semibold whitespace-nowrap dark:text-white w-1/3"
                             src={logo} alt="logo" />
@@ -136,8 +136,9 @@ function CustomFooter() {
                         </svg>
                     </a>
                     <a
-                        href="javascript:void(0)"
+                        href="https://github.com/Zoltan3do"
                         className="text-gray-500 hover:text-gray-900 dark:hover:text-white"
+                        target="_blank"
                     >
                         <svg
                             className="w-5 h-5"

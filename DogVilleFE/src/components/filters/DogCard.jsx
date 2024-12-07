@@ -43,8 +43,9 @@ export function DogCard({
   }, [likesList, id]);
 
   return (
-    <Link to={`/dog/${id}`}>
-      <Card className="max-w-[24rem] overflow-hidden cursor-pointer hover:shadow-lg hover:shadow-gray-400 transition-all duration-300 ">
+
+    <Card className="max-w-[24rem] overflow-hidden cursor-pointer hover:shadow-lg hover:shadow-gray-400 transition-all duration-300 ">
+      <Link to={`/dog/${id}`}>
         <CardHeader floated={false} shadow={false} color="transparent" className="m-0 rounded-none max-h-36 ">
           <img src={profileImage} alt="ui/ux review check" className="w-full " />
         </CardHeader>
@@ -65,23 +66,24 @@ export function DogCard({
             Genere: <span className="italic font-normal">{gender}</span>
           </Typography>
         </CardBody>
-        <CardFooter className="flex items-center justify-between bottom-0 absolute">
-          <div className="flex items-center mr-40">
-            <button onClick={toggleLike} className="flex items-center space-x-2">
-              {isLiked ? (
-                <SolidHeartIcon className="w-6 h-6 text-red-500" />
-              ) : (
-                <OutlineHeartIcon className="w-6 h-6 text-gray-500" />
-              )}
-              <Typography variant="small" color="gray" className="font-medium">
-                {localLikeCount}
-              </Typography>
-            </button>
-          </div>
-          <Typography className="font-normal">{insertionDate}</Typography>
-        </CardFooter>
-      </Card>
-    </Link>
+      </Link>
+      <CardFooter className="flex items-center justify-between bottom-0 absolute">
+        <div className="flex items-center mr-40">
+          <button onClick={toggleLike} className="flex items-center space-x-2">
+            {isLiked ? (
+              <SolidHeartIcon className="w-6 h-6 text-red-500" />
+            ) : (
+              <OutlineHeartIcon className="w-6 h-6 text-gray-500" />
+            )}
+            <Typography variant="small" color="gray" className="font-medium">
+              {localLikeCount}
+            </Typography>
+          </button>
+        </div>
+        <Typography className="font-normal">{insertionDate}</Typography>
+      </CardFooter>
+    </Card>
+
 
   );
 }

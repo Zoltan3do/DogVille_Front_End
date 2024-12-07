@@ -76,8 +76,8 @@ function DogDetail() {
                                 </svg>
                             </span>
                             <span
-                                className="absolute flex items-center text-base font-semibold justify-center w-full h-full text-primary-color transition-all duration-300 transform group-hover:translate-x-full ease"> {user?.role == "ADMIN" ? "MODIFICA CARATTERISTICHE" : `DAI UNA CASA A ${dog.name.toUpperCase()}`} </span>
-                            <span className="relative text-base font-semibold invisible"> {user?.role == "ADMIN" ? "MODIFICA CARATTERISTICHE" : `DAI UNA CASA A ${dog.name.toUpperCase()}`}</span>
+                                className="absolute flex items-center text-base font-semibold justify-center w-full h-full text-primary-color transition-all duration-300 transform group-hover:translate-x-full ease"> {user?.role == "ADMIN" ? "MODIFICA CARATTERISTICHE" : `DAI UNA CASA A ${dog?.name?.toUpperCase()}`} </span>
+                            <span className="relative text-base font-semibold invisible"> {user?.role == "ADMIN" ? "MODIFICA CARATTERISTICHE" : `DAI UNA CASA A ${dog?.name?.toUpperCase()}`}</span>
                         </button>
 
 
