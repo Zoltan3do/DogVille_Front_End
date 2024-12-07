@@ -38,7 +38,7 @@ function CustomSignIn() {
 
     const toggleState = useSelector((state) => state.sidebarToggle.value);
     return (
-        <div className={`bg-transparent ${toggleState ? "pl-72" : "pl-24"} transition-all duration-300 flex-grow p-4 sm:relative lg:flex flex-row-reverse mt-5 `}>
+        <div className={`bg-transparent ${toggleState ? "pl-72" : "pl-24"} transition-all duration-300 flex-grow p-4 sm:relative lg:flex flex-row-reverse mt-16 `}>
             <img src="src/assets/pastoreTedesco.png" alt="pt" className="md:block hidden  lg:w-2/4" />
             <Card color="transparent" shadow={false} className="">
                 <Typography variant="h4" color="white">
@@ -48,7 +48,7 @@ function CustomSignIn() {
                     Felice di conoscerti! Inserisci i tuoi dettagli per registrarti
                 </Typography>
                 <form className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96" ref={formRef}>
-                    <div className="mb-1 flex flex-col gap-6">
+                    <div className="mb-1 flex flex-col gap-4">
                         <Typography variant="h6" color="white" className="-mb-3">
                             Il tuo nome
                         </Typography>

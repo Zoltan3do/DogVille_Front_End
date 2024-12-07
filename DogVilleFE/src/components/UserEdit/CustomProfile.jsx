@@ -2,6 +2,7 @@ import UserNavbar from "./UserNavbar";
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import { executemefetch, updateMeDataFetch, uploadAvatar } from "../../redux/meSlice";
+import shitsu from "../../assets/shitsu.png"
 
 function CustomProfile() {
     const dispatch = useDispatch();
@@ -87,7 +88,13 @@ function CustomProfile() {
     return (
         <>
             <UserNavbar />
-            <div className={`bg-transparent ${toggleState ? "!ml-64" : "!ml-24"} transition-all duration-300 mt-20 z-30`}>
+            <div className={`bg-transparent ${toggleState ? "!ml-64" : "!ml-24"} transition-all duration-300 mt-20 !z-10  relative`}>
+                <div className="absolute left-10
+                 -bottom-20 p-0 pointer-events-none
+            ">
+                    <img src={shitsu} alt="shitsu" className="w-2/3" />
+                </div>
+
                 <div className="flex justify-center items-center">
                     <div className="flex flex-col items-center my-6 bg-reddino p-10 rounded-2xl">
                         {/* Form update immagine profilo */}
@@ -218,7 +225,7 @@ function CustomProfile() {
                             <div className="flex justify-center mt-6">
                                 <button
                                     type="submit"
-                                    className="bg-primary-color text-whiteino font-bold py-2 px-4 rounded hover:bg-black transition duration-300"
+                                    className="bg-primary-color text-whiteino font-bold py-2 px-4 rounded-full hover:bg-black transition duration-300"
                                 >
                                     Aggiorna Profilo
                                 </button>
