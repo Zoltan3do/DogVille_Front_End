@@ -25,6 +25,7 @@ export const executeLoginFetch = (email, password) => async () => {
 
         if (!response.ok) {
             const errorData = await response.json();
+            alert(errorData)
             return false;
         }
 
