@@ -218,7 +218,7 @@ function CustomProfile() {
                             <div className="flex justify-center mt-6">
                                 <button
                                     type="submit"
-                                    className="bg-primary-color text-white font-bold py-2 px-4 rounded hover:bg-black transition duration-300"
+                                    className="bg-primary-color text-whiteino font-bold py-2 px-4 rounded hover:bg-black transition duration-300"
                                 >
                                     Aggiorna Profilo
                                 </button>
