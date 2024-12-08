@@ -4,18 +4,21 @@ import { useEffect, useState, useCallback } from "react";
 import { executedogfetch } from "../../redux/singleDogFetch";
 import { useParams } from "react-router-dom";
 import ProgressBar2 from "../ProgressBar2";
+import { calculateCompatibility } from "../../Utils";
+import { fetchPsicologicalProfiles } from "../../redux/psicologicalProfilesSlice";
 
 function DogDetail() {
     const dispatch = useDispatch();
     const { id } = useParams();
 
-    const dog = useSelector(
-        (state) => state.dogFetch?.value,
-        (prev, next) => JSON.stringify(prev) === JSON.stringify(next)
-    );
+    const dog = useSelector((state) => state.dogFetch?.value);
     const user = useSelector((state) => state.meFetch?.value);
     const toggleState = useSelector((state) => state.sidebarToggle.value);
+    const profiles = useSelector((state) => state.psicologicalProfiles.value);
+
     const [psy, setPsy] = useState("");
+    const [compatibility, setCompatibility] = useState(null);
+
 
     const psyStructuration = useCallback(() => {
         if (dog?.dogsPsycologicalProfiles) {
@@ -27,6 +30,17 @@ function DogDetail() {
     }, [dog]);
 
 
+    const calculateAffinity = useCallback(() => {
+        if (dog && user) {
+            const dogProfile = dog.dogsPsycologicalProfiles?.[0]?.type;
+            const userProfile = user.usersPsycologicalProfiles?.[0]?.type;
+            if (dogProfile && userProfile && profiles.length > 0) {
+                const level = calculateCompatibility(profiles, userProfile, dogProfile);
+                setCompatibility(level);
+            }
+        }
+    }, [dog, user, profiles]);
+
     useEffect(() => {
         dispatch(executedogfetch(id));
     }, [dispatch, id]);
@@ -35,22 +49,27 @@ function DogDetail() {
         psyStructuration();
     }, [psyStructuration]);
 
-    if (!dog) {
+    useEffect(() => {
+        dispatch(fetchPsicologicalProfiles());
+    }, [dispatch]);
+
+
+    useEffect(() => {
+        calculateAffinity();
+    }, [dog, user, profiles, calculateAffinity]);
+
+    if (!dog || !user) {
         return <div className={`bg-transparent ${toggleState ? "!ml-64" : "!ml-24"} transition-all duration-300`}>Caricamento...</div>;
     }
 
     return (
-        <div
-            className={`bg-transparent ${toggleState ? "!ml-64" : "!ml-24"} transition-all duration-300 grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-8 mr-7 mb-48 mt-20`}
-        >
+        <div className={`bg-transparent ${toggleState ? "!ml-64 mb-10" : "!ml-24"} transition-all duration-300 grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-8 mr-7 mt-20`}>
             <div className="rounded-lg bg-gray-200 overflow-hidden bg-cover">
                 <img src={dog.profileImage} alt="dogo" className="h-full object-cover" />
             </div>
 
             <div className="rounded-lg bg-gray-200 lg:col-span-2 p-5">
-                <h2 className="text-center text-primary-color text-4xl font-semibold mb-5">
-                    {dog.name}
-                </h2>
+                <h2 className="text-center text-primary-color text-4xl font-semibold mb-5">{dog.name}</h2>
                 <p className="text-primary-color text-xl italic">{dog.description}</p>
 
                 <section className="bg-gray-2 dark:bg-dark">
@@ -80,12 +99,11 @@ function DogDetail() {
                     </div>
                 </section>
 
-                <div className="flex justify-between align-middle items-center flex-col sm:flex-row">
+                <div className="flex justify-between items-end flex-col sm:flex-row">
                     <div className="w-2/4">
                         <h2 className="text-primary-color text-center font-semibold mb-2 text-lg">Livello di Affinità:</h2>
-                        <ProgressBar2></ProgressBar2>
+                        <ProgressBar2 value={compatibility} max={3} />
                     </div>
-
 
                     <div className="flex justify-end mb-2 mt-10 mr-10">
                         <button
@@ -121,10 +139,7 @@ function DogDetail() {
                             </span>
                         </button>
                     </div>
-
                 </div>
-
-
             </div>
         </div>
     );

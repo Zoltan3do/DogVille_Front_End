@@ -39,8 +39,6 @@ export const executeLoginFetch = (email, password) => async () => {
 };
 
 
-
-
 export const executeRegisterFetch = (param1, param2, param3, param4, param5, param6) => async () => {
     try {
         const url = "http://locahost:3001/auth/register";

@@ -1,10 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit"
-import { sidebarReducer } from "./sidebarSlice" 
-import { loginToggleReducer } from "./loginToggleSlice" 
-import { loginFetchReducer } from "./loginFetchSlice" 
-import { dogsFetchReducer } from "./dogsListFetchSlice" 
-import meFetchReducer from "./meSlice"  
+import { sidebarReducer } from "./sidebarSlice"
+import { loginToggleReducer } from "./loginToggleSlice"
+import { loginFetchReducer } from "./loginFetchSlice"
+import { dogsFetchReducer } from "./dogsListFetchSlice"
+import meFetchReducer from "./meSlice"
 import { dogFetchReducer } from "./singleDogFetch"
+import psicologicalProfilesReducer from "./psicologicalProfilesSlice";
 
 export default configureStore({
     reducer: {
@@ -13,6 +14,7 @@ export default configureStore({
         loginFetches: loginFetchReducer,
         dogsFetch: dogsFetchReducer,
         meFetch: meFetchReducer,
-        dogFetch: dogFetchReducer
+        dogFetch: dogFetchReducer,
+        psicologicalProfiles: psicologicalProfilesReducer
     }
 })

@@ -4,7 +4,7 @@ export function formatNumber(num, decimals) {
 }
 
 export function animateCount(element, start, end, duration, decimals = 0) {
-    const easingFunction = t => t * (2 - t); 
+    const easingFunction = t => t * (2 - t);
     const startTime = performance.now();
 
     function animate(currentTime) {
@@ -39,6 +39,19 @@ export function determinaProfiloPadrone(risposte) {
         if (risposte[3] === 1 && risposte[5] === 1) {
             return "Indipendente";
         }
-        return "Tranquillo"; 
+        return "Tranquillo";
     }
+}
+
+export function calculateCompatibility(profiles, profile1, profile2) {
+    const profileData = profiles.find(p => p.type === profile1);
+    if (!profileData) {
+        return 0;
+    }
+    if (profile1 === profile2) {
+        return 3;
+    } else if (profileData.compatibleProfiles.includes(profile2)) {
+        return 2;
+    }
+    return 1;
 }
