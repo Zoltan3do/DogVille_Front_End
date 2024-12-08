@@ -6,7 +6,7 @@ import logo from "../../assets/dogvilleLogo-removebg.png"
 function CustomFooter() {
     const toggleState = useSelector((state) => state.sidebarToggle.value);
     return (
-        <footer className={` transition-all duration-300 p-4 bg-white sm:p-6 dark:bg-black  ${toggleState ? "!pl-72 " : "!pl-24"} w-full mt-5`}>
+        <footer className={` transition-all duration-300 p-4 bg-white sm:p-6 dark:bg-black  ${toggleState ? "!pl-72 " : "!pl-24"} w-full mt-12`}>
             <div className="md:flex md:justify-between">
                 <div className={`mb-6 md:mb-0 ${toggleState ? 'hidden' : 'block'}`}>
                     <a href="javascript:void(0)" className="flex items-center">

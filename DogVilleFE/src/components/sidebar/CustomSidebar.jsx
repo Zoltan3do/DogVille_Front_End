@@ -186,10 +186,13 @@ function CustomSidebar() {
         {
           meData ? (
             <>
-              <div data-event-key="register" className={`mt-3 text-sm  ${!toggleState ? "sm:hidden text-center" : ""} flex items-center p-3 pl-6 w-full sideElement cursor-pointer hover:text-white`}>
-                <i className='fa fa-solid fa-user mr-4' style={{ fontSize: 15 }}></i>
-                <p className={`${!toggleState ? "hidden" : ""}`}>Profilo</p>
-              </div>
+              <Link to={"/profilo"}>
+                <div data-event-key="register" className={`mt-3 text-sm  ${!toggleState ? "sm:hidden text-center" : ""} flex items-center p-3 pl-6 w-full sideElement cursor-pointer hover:text-white`}>
+                  <i className='fa fa-solid fa-user mr-4' style={{ fontSize: 15 }}></i>
+                  <p className={`${!toggleState ? "hidden" : ""}`}>Profilo</p>
+                </div>
+              </Link>
+
               <div onClick={handleExit} data-event-key="register" className={`mt-3 text-sm  ${!toggleState ? "sm:hidden text-center" : ""} flex items-center p-3 pl-6 w-full sideElement cursor-pointer hover:text-white`}>
                 <i className='fa fa-solid fa-right-from-bracket mr-4' style={{ fontSize: 15 }}></i>
                 <p className={`${!toggleState ? "hidden" : ""}`}>Esci</p>

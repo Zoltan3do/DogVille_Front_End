@@ -25,3 +25,20 @@ export function animateCount(element, start, end, duration, decimals = 0) {
     requestAnimationFrame(animate);
 }
 
+export function determinaProfiloPadrone(risposte) {
+    const punteggioTotale = risposte.reduce((acc, punteggio) => acc + punteggio, 0);
+    if (punteggioTotale >= 15) {
+        return "Energico";
+    } else if (punteggioTotale >= 11 && punteggioTotale <= 14) {
+        return "Curioso";
+    } else if (punteggioTotale >= 9 && punteggioTotale <= 10) {
+        return "Affettuoso";
+    } else if (punteggioTotale >= 5 && punteggioTotale <= 8) {
+        return "Tranquillo";
+    } else {
+        if (risposte[3] === 1 && risposte[5] === 1) {
+            return "Indipendente";
+        }
+        return "Tranquillo"; 
+    }
+}
