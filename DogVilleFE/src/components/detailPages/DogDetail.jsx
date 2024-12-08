@@ -32,14 +32,14 @@ function DogDetail() {
 
     const calculateAffinity = useCallback(() => {
         if (dog && user) {
-            const dogProfile = dog.dogsPsycologicalProfiles?.[0]?.type;
-            const userProfile = user.usersPsycologicalProfiles?.[0]?.type;
+            const dogProfile = dog.dogsPsycologicalProfiles?.[dog.dogsPsycologicalProfiles.length]?.type;
+            const userProfile = user.usersPsycologicalProfiles?.[dog.dogsPsycologicalProfiles.length]?.type;
             if (dogProfile && userProfile && profiles.length > 0) {
                 const level = calculateCompatibility(profiles, userProfile, dogProfile);
                 setCompatibility(level);
             }
         }
-    }, [dog, user, profiles]);
+    }, [dog]);
 
     useEffect(() => {
         dispatch(executedogfetch(id));
@@ -56,7 +56,7 @@ function DogDetail() {
 
     useEffect(() => {
         calculateAffinity();
-    }, [dog, user, profiles, calculateAffinity]);
+    }, [dog, profiles, calculateAffinity]);
 
     if (!dog || !user) {
         return <div className={`bg-transparent ${toggleState ? "!ml-64" : "!ml-24"} transition-all duration-300`}>Caricamento...</div>;

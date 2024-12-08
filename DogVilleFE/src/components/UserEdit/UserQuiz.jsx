@@ -5,6 +5,7 @@ import { Button, Card, CardBody, CardFooter, CardHeader } from "@material-tailwi
 import { addProfileToUser } from "../../redux/meSlice"
 import dalmata from "../../assets/dalmata.png"
 import { Link } from "react-router-dom";
+import { determinaProfiloPadrone } from "../../Utils";
 
 function UserQuiz() {
     const toggleState = useSelector((state) => state.sidebarToggle.value);
@@ -75,23 +76,23 @@ function UserQuiz() {
     const [isQuizComplete, setIsQuizComplete] = useState(false);
     const [psy, setPsy] = useState("");
 
-    const determinaProfiloPadrone = (risposte) => {
-        const punteggioTotale = risposte.reduce((acc, punteggio) => acc + punteggio, 0);
-        if (punteggioTotale >= 15) {
-            return "Energico";
-        } else if (punteggioTotale >= 11 && punteggioTotale <= 14) {
-            return "Curioso";
-        } else if (punteggioTotale >= 9 && punteggioTotale <= 10) {
-            return "Affettuoso";
-        } else if (punteggioTotale >= 5 && punteggioTotale <= 8) {
-            return "Tranquillo";
-        } else {
-            if (risposte[3] === 1 && risposte[5] === 1) {
-                return "Indipendente";
-            }
-            return "Tranquillo";
-        }
-    };
+    // const determinaProfiloPadrone = (risposte) => {
+    //     const punteggioTotale = risposte.reduce((acc, punteggio) => acc + punteggio, 0);
+    //     if (punteggioTotale >= 15) {
+    //         return "Energico";
+    //     } else if (punteggioTotale >= 11 && punteggioTotale <= 14) {
+    //         return "Curioso";
+    //     } else if (punteggioTotale >= 9 && punteggioTotale <= 10) {
+    //         return "Affettuoso";
+    //     } else if (punteggioTotale >= 5 && punteggioTotale <= 8) {
+    //         return "Tranquillo";
+    //     } else {
+    //         if (risposte[3] === 1 && risposte[5] === 1) {
+    //             return "Indipendente";
+    //         }
+    //         return "Tranquillo";
+    //     }
+    // };
 
     const psyStructuration = useCallback(() => {
         if (meData?.usersPsycologicalProfiles) {
