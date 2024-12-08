@@ -77,10 +77,11 @@ export default function Avatar12() {
                 ref={dropdown}
                 onFocus={() => setDropdownOpen(true)}
                 onBlur={() => setDropdownOpen(false)}
-                className={` absolute right-0 top-full z-50 w-[200px] max-h-[200px] overflow-y-auto scrollbar-hide space-y-1 rounded p-2 shadow-card dark:bg-dark-2 dark:shadow-box-dark ${dropdownOpen ? "block" : "hidden"}`}
+                className={` absolute right-0 top-full z-50 w-[200px] max-h-[200px] overflow-y-auto scrollbar-hide space-y-1 rounded p-2 shadow-card dark:bg-dark-2 dark:shadow-box-dark ${dropdownOpen ? "block" : "hidden"} `}
+
               >
                 <Link to={"/profilo"}
-                  className="block w-full rounded px-3 py-2 text-sm text-body-color hover:bg-gray-2 dark:text-dark-6 dark:hover:bg-dark-3 text-right hover:text-white"
+                  className= " bg-grigino block w-full rounded px-3 py-2 text-sm text-body-color hover:bg-gray-2 dark:text-dark-6 dark:hover:bg-dark-3 text-right hover:text-white"
                 >
                   Profilo
                 </Link>
