@@ -59,7 +59,7 @@ function CustomProfile() {
 
 
     useEffect(() => {
-        if (updateStatus === 'succeeded') {
+        if (updateStatus === 'succeeded'&& !meData?.profileUpdated) {
             setIsModalOpen(true);
         }
     }, [updateStatus]);
