@@ -1,19 +1,19 @@
 import UserNavbar from "../UserNavbar";
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { fetchAdoptionsByUser } from "../../../redux/adoptionsSlice";
 import SingleAdoption from "./SingleAdoption";
 
 function UserAdoptions() {
     const dispatch = useDispatch();
-
     const toggleState = useSelector((state) => state.sidebarToggle.value);
     const meData = useSelector((state) => state.meFetch.value);
     const { data: adoptions, status, error } = useSelector((state) => state.adoptions);
     const [userEmail, setUserEmail] = useState(null);
+    const containerRef = useRef(null); // Ref per il contenitore principale
 
     useEffect(() => {
-        if (meData?.email ) {
+        if (meData?.email) {
             setUserEmail(meData.email);
         }
     }, [meData?.email]);
@@ -23,6 +23,11 @@ function UserAdoptions() {
             dispatch(fetchAdoptionsByUser({ email: userEmail, page: 0, size: 10 }));
         }
     }, [dispatch, userEmail]);
+
+    useEffect(() => {
+        // Scorri solo la finestra (document) verso l'alto, non interferendo con il carousel
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    }, [adoptions]); // Trigger sul cambio di adozioni
 
     if (status === "loading") {
         return (
@@ -48,10 +53,11 @@ function UserAdoptions() {
         <>
             <UserNavbar />
             <div
-                className={`bg-transparent ${toggleState ? "!ml-64" : "!ml-24"} transition-all duration-300 mt-28 !z-10`}
+                ref={containerRef} // Aggiunto il ref
+                className={`bg-transparent ${toggleState ? "!ml-64" : "!ml-24"} transition-all duration-300 mt-20 !z-10`}
             >
                 {adoptions && adoptions.length === 0 ? (
-                    <div className="flex justify-center items-center  rounded-lg p-4 shadow-lg">
+                    <div className="flex justify-center items-center rounded-lg p-4 shadow-lg">
                         <p className="text-blue-800 font-bold text-lg">
                             Non ci sono adozioni al momento. Inizia subito la tua ricerca!
                         </p>
@@ -66,7 +72,6 @@ function UserAdoptions() {
                                         id={`item${index + 1}`}
                                         className="carousel-item w-full justify-center"
                                     >
-                                        {/* Passa i dati dell'adozione */}
                                         <SingleAdoption adoption={adoption} />
                                     </div>
                                 ))}
@@ -76,8 +81,8 @@ function UserAdoptions() {
                                 adoptions.map((_, index) => (
                                     <a
                                         key={index}
-                                        className="btn btn-xs bg-reddino text-primary-color hover:text-whiteino border-whiteino hover:border-whiteino
-                                        "
+                                        className="btn btn-xs bg-reddino text-primary-color hover:text-whiteino border-whiteino hover:border-whiteino"
+                                        href={`#item${index + 1}`}
                                     >
                                         {index + 1}
                                     </a>
