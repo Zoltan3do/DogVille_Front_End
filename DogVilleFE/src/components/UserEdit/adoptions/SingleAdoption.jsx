@@ -71,16 +71,19 @@ function SingleAdoption({ adoption }) {
 
     return (
         <div className="card lg:card-side bg-reddino shadow-xl overflow-hidden rounded-2xl">
-            <div className="w-1/3 ">
-                <img
-                    src={adoption.dog.profileImage}
-                    alt={`Foto di ${adoption.dog.name}`}
-                    className=" h-full  rounded-2xl object-cover"
-                />
-            </div>
+
 
             <div className="card-body text-primary-color ">
-                <h2 className="font-semibold text-7xl mb-3">{adoption.dog.name}</h2>
+                <div className="flex items-center gap-3 justify-center mb-5">
+                    <img
+                        src={adoption.dog.profileImage}
+                        alt={`Foto di ${adoption.dog.name}`}
+                        className=" w-1/6  rounded-2xl object-cover"
+                    /> 
+                    <h2 className="font-semibold text-7xl mb-3">{adoption.dog.name}</h2>
+
+                </div>
+
                 <div className="flex justify-center my-3">
                     <p className="text-center">
                         <span className="font-semibold">Età: </span>{adoption.dog.age} anni

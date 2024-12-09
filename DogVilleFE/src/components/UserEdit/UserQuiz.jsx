@@ -171,7 +171,7 @@ function UserQuiz() {
                                 </h2>
                             </CardHeader>
                             <CardBody>
-                                <div className="space-y-4 " >
+                                <div className="space-y-4 " id="ava">
                                     <h2 className="text-xl font-semibold text-center text-primary-color">
                                         Grazie per aver completato il quiz!
                                     </h2>
