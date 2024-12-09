@@ -6,6 +6,7 @@ import { dogsFetchReducer } from "./dogsListFetchSlice"
 import meFetchReducer from "./meSlice"
 import { dogFetchReducer } from "./singleDogFetch"
 import psicologicalProfilesReducer from "./psicologicalProfilesSlice";
+import adoptionsReducer from "./adoptionsSlice";
 
 export default configureStore({
     reducer: {
@@ -15,6 +16,7 @@ export default configureStore({
         dogsFetch: dogsFetchReducer,
         meFetch: meFetchReducer,
         dogFetch: dogFetchReducer,
-        psicologicalProfiles: psicologicalProfilesReducer
+        psicologicalProfiles: psicologicalProfilesReducer,
+        adoptions: adoptionsReducer,
     }
 })
