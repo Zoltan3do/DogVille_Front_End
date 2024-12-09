@@ -1,24 +1,29 @@
 import AdoptionsProgressBar from "./AdoptionsProgressBar";
 import { Button } from "@material-tailwind/react";
+import { useCallback, useEffect } from "react";
 
 /* eslint-disable react/prop-types */
 function SingleAdoption({ adoption }) {
-    console.log(adoption);
 
-    // Funzioni placeholder per azioni specifiche
-    const handleUploadDocument = () => {
+
+    const handleUploadDocument = useCallback(() => {
         console.log("Uploading document...");
-    };
+    }, []);
 
-    const handleCompleteAdoption = () => {
+    const handleCompleteAdoption = useCallback(() => {
         console.log("Completing adoption...");
-    };
+    }, []);
 
-    const handleDownloadCertificate = () => {
+    const handleDownloadCertificate = useCallback(() => {
         console.log("Downloading certificate...");
-    };
+    }, []);
 
-    // Determina il contenuto del pulsante in base allo stato dell'adozione
+
+    useEffect(() => {
+        console.log(adoption)
+
+    }, [])
+
     const renderButtonContent = () => {
         switch (adoption.state) {
             case "IN_ATTESA_DOCUMENTI":
@@ -79,7 +84,7 @@ function SingleAdoption({ adoption }) {
                         src={adoption.dog.profileImage}
                         alt={`Foto di ${adoption.dog.name}`}
                         className=" w-1/6  rounded-2xl object-cover"
-                    /> 
+                    />
                     <h2 className="font-semibold text-7xl mb-3">{adoption.dog.name}</h2>
 
                 </div>

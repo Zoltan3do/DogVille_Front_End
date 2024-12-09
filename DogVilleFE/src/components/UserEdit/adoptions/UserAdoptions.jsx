@@ -13,10 +13,10 @@ function UserAdoptions() {
     const [userEmail, setUserEmail] = useState(null);
 
     useEffect(() => {
-        if (meData?.email) {
+        if (meData?.email ) {
             setUserEmail(meData.email);
         }
-    }, [meData]);
+    }, [meData?.email]);
 
     useEffect(() => {
         if (userEmail) {

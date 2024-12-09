@@ -29,10 +29,10 @@
 }
 
 #ava::-webkit-scrollbar-thumb:hover {
-  background-color: 555; 
+  background-color: #555; 
 }
 
 #ava::-webkit-scrollbar-track {
-  background-color: #555
+  background-color: #222
 }
 

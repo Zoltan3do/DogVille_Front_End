@@ -171,11 +171,11 @@ function UserQuiz() {
                                 </h2>
                             </CardHeader>
                             <CardBody>
-                                <div className="space-y-4 " id="ava">
+                                <div className="space-y-4 " id="sidenav">
                                     <h2 className="text-xl font-semibold text-center text-primary-color">
                                         Grazie per aver completato il quiz!
                                     </h2>
-                                    <div className="max-h-60 overflow-y-auto" id="ava">
+                                    <div className="max-h-60 overflow-y-auto" id="sidenav">
                                         {responses.map((resp, index) => (
                                             <div
                                                 key={index}
