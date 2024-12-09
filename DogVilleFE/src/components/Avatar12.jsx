@@ -89,7 +89,7 @@ export default function Avatar12() {
                 <a
                   href="javascript:void(0)"
                   onClick={handleExit}
-                  className="block w-full rounded px-3 text-sm text-body-color hover:bg-gray-2 dark:text-dark-6 dark:hover:bg-dark-3  text-right hover:text-white"
+                  className=" bg-grigino  block w-full rounded px-3 text-sm text-body-color hover:bg-gray-2 dark:text-dark-6 dark:hover:bg-dark-3  text-right hover:text-white"
                 >
                   Esci
                 </a>

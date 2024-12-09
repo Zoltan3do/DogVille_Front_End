@@ -32,14 +32,14 @@ function DogDetail() {
 
     const calculateAffinity = useCallback(() => {
         if (dog && user) {
-            const dogProfile = dog.dogsPsycologicalProfiles?.[dog.dogsPsycologicalProfiles.length]?.type;
-            const userProfile = user.usersPsycologicalProfiles?.[dog.dogsPsycologicalProfiles.length]?.type;
+            const dogProfile = dog.dogsPsycologicalProfiles[dog.dogsPsycologicalProfiles.length - 1]?.type;
+            const userProfile = user.usersPsycologicalProfiles[dog.dogsPsycologicalProfiles.length - 1]?.type;
             if (dogProfile && userProfile && profiles.length > 0) {
                 const level = calculateCompatibility(profiles, userProfile, dogProfile);
                 setCompatibility(level);
             }
         }
-    }, [dog]);
+    }, [dog, user]);
 
     useEffect(() => {
         dispatch(executedogfetch(id));

@@ -12,7 +12,7 @@ import CustomFooter from './components/footer/CustomFooter.jsx';
 import DogListWithFilters from './components/filters/DogListWithFilters .jsx';
 import DogDetail from './components/detailPages/dogDetail.jsx';
 import CustomProfile from './components/UserEdit/CustomProfile';
-import UserAdoptions from './components/UserEdit/UserAdoptions';
+import UserAdoptions from './components/UserEdit/adoptions/UserAdoptions';
 import UserQuiz from './components/UserEdit/UserQuiz';
 
 function App() {
