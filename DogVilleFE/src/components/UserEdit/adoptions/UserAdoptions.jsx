@@ -3,9 +3,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { fetchAdoptionsByUser } from "../../../redux/adoptionsSlice";
 import SingleAdoption from "./SingleAdoption";
-import { Button } from "@material-tailwind/react";
-import { Link } from "react-router-dom";
-
 
 function UserAdoptions() {
     const dispatch = useDispatch();
@@ -51,33 +48,25 @@ function UserAdoptions() {
         <>
             <UserNavbar />
             <div
-                className={`bg-transparent ${toggleState ? "!ml-64" : "!ml-24"} transition-all duration-300 mt-20 !z-10 flex justify-center`}
+                className={`bg-transparent ${toggleState ? "!ml-64" : "!ml-24"} transition-all duration-300 mt-28 !z-10`}
             >
                 {adoptions && adoptions.length === 0 ? (
-                    <div className="flex justify-center items-center bg-reddino rounded-2xl p-4 shadow-lg flex-col w-2/3">
-                        <p className="text-primary-color font-bold text-lg mb-3">
-                            Non ci sono adozioni al momento.
+                    <div className="flex justify-center items-center  rounded-lg p-4 shadow-lg">
+                        <p className="text-blue-800 font-bold text-lg">
+                            Non ci sono adozioni al momento. Inizia subito la tua ricerca!
                         </p>
-                        <div className="flex justify-center gap-4">
-                            <Link to={"/dogs"}>
-                                <Button
-                                    className="bg-primary-color hover:bg-black text-whiteino rounded-full"
-                                >
-                                    Inizia subito la tua ricerca!
-                                </Button>
-                            </Link>
-                        </div>
                     </div>
                 ) : (
                     <>
-                        <div className="carousel w-full">
+                        <div className="carousel bg-transparent ">
                             {adoptions &&
                                 adoptions.map((adoption, index) => (
                                     <div
                                         key={adoption.id}
                                         id={`item${index + 1}`}
-                                        className="carousel-item w-full"
+                                        className="carousel-item w-full justify-center"
                                     >
+                                        {/* Passa i dati dell'adozione */}
                                         <SingleAdoption adoption={adoption} />
                                     </div>
                                 ))}
@@ -87,8 +76,8 @@ function UserAdoptions() {
                                 adoptions.map((_, index) => (
                                     <a
                                         key={index}
-                                        href={`#item${index + 1}`}
-                                        className="btn btn-xs"
+                                        className="btn btn-xs bg-reddino text-primary-color hover:text-whiteino border-whiteino hover:border-whiteino
+                                        "
                                     >
                                         {index + 1}
                                     </a>
