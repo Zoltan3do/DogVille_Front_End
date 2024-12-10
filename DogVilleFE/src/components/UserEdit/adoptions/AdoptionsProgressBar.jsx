@@ -20,7 +20,7 @@ function AdoptionsProgressBar({ adoption }) {
                             activeStep >= 1 ? "bg-primary-color text-whiteino" : "bg-grigiastro text-primary-color"
                         }`}
                     >
-                        In attesa documenti
+                        In attesa validazione documento
                     </div>
                     <div className="timeline-middle">
                         <svg
@@ -63,7 +63,7 @@ function AdoptionsProgressBar({ adoption }) {
                             activeStep >= 2 ? "bg-primary-color text-whiteino" : "bg-grigiastro text-primary-color"
                         }`}
                     >
-                        In attesa visita
+                        In attesa data visita
                     </div>
                     <hr className={`${activeStep >= 3 ? "bg-primary-color" : "bg-whiteino"}`} />
                 </li>

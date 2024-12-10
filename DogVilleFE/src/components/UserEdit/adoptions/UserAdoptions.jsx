@@ -1,8 +1,11 @@
-import UserNavbar from "../UserNavbar";
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { fetchAdoptionsByUser } from "../../../redux/adoptionsSlice";
+import UserNavbar from "../UserNavbar";
 import SingleAdoption from "./SingleAdoption";
+import { Button } from "@material-tailwind/react";
+import golden from "../../../assets/goldenretriever.png"
+import { Link } from "react-router-dom";
 
 function UserAdoptions() {
     const dispatch = useDispatch();
@@ -10,7 +13,7 @@ function UserAdoptions() {
     const meData = useSelector((state) => state.meFetch.value);
     const { data: adoptions, status, error } = useSelector((state) => state.adoptions);
     const [userEmail, setUserEmail] = useState(null);
-    const containerRef = useRef(null); // Ref per il contenitore principale
+    const [activeIndex, setActiveIndex] = useState(0);
 
     useEffect(() => {
         if (meData?.email) {
@@ -24,10 +27,18 @@ function UserAdoptions() {
         }
     }, [dispatch, userEmail]);
 
-    useEffect(() => {
-        // Scorri solo la finestra (document) verso l'alto, non interferendo con il carousel
-        window.scrollTo({ top: 0, behavior: "smooth" });
-    }, [adoptions]); // Trigger sul cambio di adozioni
+    const handleAnchorClick = (e, index) => {
+        e.preventDefault();
+
+        const targetId = `#item${index + 1}`;
+        const targetElement = document.querySelector(targetId);
+
+        if (targetElement) {
+            targetElement.scrollIntoView({ behavior: "smooth", block: "nearest" });
+        }
+
+        setActiveIndex(index);
+    };
 
     if (status === "loading") {
         return (
@@ -53,14 +64,28 @@ function UserAdoptions() {
         <>
             <UserNavbar />
             <div
-                ref={containerRef} // Aggiunto il ref
-                className={`bg-transparent ${toggleState ? "!ml-64" : "!ml-24"} transition-all duration-300 mt-20 !z-10`}
+                className={`bg-transparent ${toggleState ? "!ml-64" : "!ml-24"} transition-all duration-300 mt-20 !z-10 flex justify-center rounded-2xl relative flex-col items-center`}
             >
+                <div className="absolute -left-44
+                 -bottom-24 p-0 pointer-events-none select-none
+            ">
+                    <img src={golden} alt="golden" className="w-1/2" />
+                </div>
+
                 {adoptions && adoptions.length === 0 ? (
-                    <div className="flex justify-center items-center rounded-lg p-4 shadow-lg">
-                        <p className="text-blue-800 font-bold text-lg">
-                            Non ci sono adozioni al momento. Inizia subito la tua ricerca!
+                    <div className="flex justify-center items-center rounded-lg p-4 shadow-lg flex-col bg-reddino w-1/3 mb-96">
+                        <p className="text-whiteino font-bold text-lg mb-3">
+                            Non ci sono adozioni al momento.
                         </p>
+                        <Link to={"/dogs"}>
+                            <Button
+
+                                className="bg-black hover:bg-grigino text-whiteino rounded-full"
+                            >
+                                Inizia subito la tua ricerca!
+                            </Button>
+                        </Link>
+
                     </div>
                 ) : (
                     <>
@@ -74,15 +99,19 @@ function UserAdoptions() {
                                     >
                                         <SingleAdoption adoption={adoption} />
                                     </div>
-                                ))}
+                                )).reverse()}
                         </div>
                         <div className="flex w-full justify-center gap-2 py-2">
                             {adoptions &&
                                 adoptions.map((_, index) => (
                                     <a
                                         key={index}
-                                        className="btn btn-xs bg-reddino text-primary-color hover:text-whiteino border-whiteino hover:border-whiteino"
+                                        className={`btn btn-xs text-whiteino ${index === activeIndex
+                                            ? "bg-reddino text-whiteino border-whiteino"
+                                            : "bg-transparent text-primary-color border-whiteino hover:text-whiteino"
+                                            }`}
                                         href={`#item${index + 1}`}
+                                        onClick={(e) => handleAnchorClick(e, index)}
                                     >
                                         {index + 1}
                                     </a>
