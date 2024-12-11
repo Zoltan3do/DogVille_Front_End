@@ -1,24 +1,27 @@
-import { useSelector, useDispatch } from "react-redux";
-import TooltipItem from "../TooltipItem";
 import { useEffect, useState, useCallback } from "react";
-import { executedogfetch } from "../../redux/singleDogFetch";
-import { useParams } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { useParams, useNavigate } from "react-router-dom";
+import TooltipItem from "../TooltipItem";
 import ProgressBar2 from "../ProgressBar2";
-import { calculateCompatibility } from "../../Utils";
+import { executedogfetch } from "../../redux/singleDogFetch";
 import { fetchPsicologicalProfiles } from "../../redux/psicologicalProfilesSlice";
+import { createAdoption } from "../../redux/adoptionsSlice";
+import { calculateCompatibility } from "../../Utils";
 
 function DogDetail() {
     const dispatch = useDispatch();
     const { id } = useParams();
+    const navigate = useNavigate();
 
     const dog = useSelector((state) => state.dogFetch?.value);
     const user = useSelector((state) => state.meFetch?.value);
     const toggleState = useSelector((state) => state.sidebarToggle.value);
     const profiles = useSelector((state) => state.psicologicalProfiles.value);
+    const adoptionStatus = useSelector((state) => state.adoptions.status);
 
     const [psy, setPsy] = useState("");
     const [compatibility, setCompatibility] = useState(null);
-
+    const [showModal, setShowModal] = useState(false);
 
     const psyStructuration = useCallback(() => {
         if (dog?.dogsPsycologicalProfiles) {
@@ -29,41 +32,85 @@ function DogDetail() {
         }
     }, [dog]);
 
-
     const calculateAffinity = useCallback(() => {
         if (dog && user) {
-            const dogProfile = dog.dogsPsycologicalProfiles[dog?.dogsPsycologicalProfiles.length-1]?.type;
-            const userProfile = user.usersPsycologicalProfiles?.[dog?.dogsPsycologicalProfiles.length-1]?.type;
+            const dogProfile = dog.dogsPsycologicalProfiles[dog?.dogsPsycologicalProfiles.length - 1]?.type;
+            const userProfile = user.usersPsycologicalProfiles?.[dog?.dogsPsycologicalProfiles.length - 1]?.type;
             if (dogProfile && userProfile && profiles.length > 0) {
                 const level = calculateCompatibility(profiles, userProfile, dogProfile);
                 setCompatibility(level);
             }
         }
-    }, [dog,user]);
+    }, [dog, user, profiles]);
+
 
     useEffect(() => {
         dispatch(executedogfetch(id));
+        dispatch(fetchPsicologicalProfiles());
     }, [dispatch, id]);
 
     useEffect(() => {
-        psyStructuration();
-    }, [psyStructuration]);
-
-    useEffect(() => {
-        dispatch(fetchPsicologicalProfiles());
-    }, [dispatch]);
-
-
-    useEffect(() => {
+        setCompatibility(null); 
         calculateAffinity();
-    }, [dog, profiles, calculateAffinity]);
+    }, [dog?.id, user, profiles, calculateAffinity]);
+
+    useEffect(() => {
+        psyStructuration();
+    }, [dog, psyStructuration]);
 
     if (!dog || !user) {
         return <div className={`bg-transparent ${toggleState ? "!ml-64" : "!ml-24"} transition-all duration-300`}>Caricamento...</div>;
     }
 
+    if (!dog || !user) {
+        return <div className={`bg-transparent ${toggleState ? "!ml-64" : "!ml-24"} transition-all duration-300`}>Caricamento...</div>;
+    }
+
+    const handleAdoptionClick = () => {
+        setShowModal(true);
+    };
+
+    const confirmAdoption = () => {
+        setShowModal(false);
+        if (user?.role !== "ADMIN" && dog) {
+            const adoptionData = {
+                caneId: dog?.id,
+                userEmail: user?.email,
+            };
+
+            dispatch(createAdoption(adoptionData)).then((response) => {
+                if (response.meta.requestStatus === 'fulfilled') {
+                    navigate('/adozioni');
+                }
+            });
+        }
+    };
+
     return (
-        <div className={`bg-transparent ${toggleState ? "!ml-64 mb-10" : "!ml-24"} transition-all duration-300 grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-8 mr-7 mt-20`}>
+        <div className={`bg-transparent ${toggleState ? "!ml-64 mb-10" : "!ml-24"} transition-all duration-300 grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-3 mr-7 mt-20`}>
+            {showModal && (
+                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+                    <div className="bg-white rounded-lg p-6 shadow-lg w-11/12 sm:w-1/2">
+                        <h3 className="text-2xl font-semibold text-gray-800 mb-4">Conferma Adozione</h3>
+                        <p className="text-gray-600 mb-6">Sei sicuro di voler richiedere l&apos;adozione per {dog.name}?</p>
+                        <div className="flex justify-end space-x-4">
+                            <button
+                                onClick={() => setShowModal(false)}
+                                className="px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300"
+                            >
+                                Annulla
+                            </button>
+                            <button
+                                onClick={confirmAdoption}
+                                className="px-4 py-2 bg-primary-color text-white rounded-lg hover:bg-primary-dark"
+                            >
+                                Conferma
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
             <div className="rounded-lg bg-gray-200 overflow-hidden bg-cover">
                 <img src={dog.profileImage} alt="dogo" className="h-full object-cover" />
             </div>
@@ -106,38 +153,52 @@ function DogDetail() {
                     </div>
 
                     <div className="flex justify-end mb-2 mt-10 mr-10">
-                        <button
-                            className="relative inline-flex items-center justify-center px-3.5 py-2.5 overflow-hidden font-medium text-primary-color transition duration-300 ease-out border-2 border-primary-color rounded-lg shadow-md group"
-                        >
-                            <span
-                                className="absolute inset-0 flex items-center justify-center w-full h-full text-white transition duration-300 -translate-x-full bg-primary-color group-hover:translate-x-0 ease"
+                        {dog.adoption !== null ? (
+                            <button
+                                disabled
+                                className="cursor-not-allowed inline-flex items-center justify-center px-3.5 py-2.5 font-medium text-gray-400 border-2 border-gray-400 rounded-lg shadow-md"
                             >
-                                <svg
-                                    className="w-6 h-6"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    viewBox="0 0 24 24"
-                                    xmlns="http://www.w3.org/2000/svg"
+                                <span className="text-base font-semibold">
+                                    ADOZIONE NON DISPONIBILE
+                                </span>
+                            </button>
+                        ) : (
+                            <button
+                                onClick={handleAdoptionClick}
+                                disabled={user?.role === "ADMIN" || adoptionStatus === 'loading'}
+                                className="relative inline-flex items-center justify-center px-3.5 py-2.5 overflow-hidden font-medium text-primary-color transition duration-300 ease-out border-2 border-primary-color rounded-lg shadow-md group"
+                            >
+                                <span
+                                    className="absolute inset-0 flex items-center justify-center w-full h-full text-white transition duration-300 -translate-x-full bg-primary-color group-hover:translate-x-0 ease"
                                 >
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth="2"
-                                        d="M14 5l7 7m0 0l-7 7m7-7H3"
-                                    ></path>
-                                </svg>
-                            </span>
-                            <span className="absolute flex items-center text-base font-semibold justify-center w-full h-full text-primary-color transition-all duration-300 transform group-hover:translate-x-full ease">
-                                {user?.role === "ADMIN"
-                                    ? "MODIFICA CARATTERISTICHE"
-                                    : `DAI UNA CASA A ${dog?.name?.toUpperCase()}`}
-                            </span>
-                            <span className="relative text-base font-semibold invisible">
-                                {user?.role === "ADMIN"
-                                    ? "MODIFICA CARATTERISTICHE"
-                                    : `DAI UNA CASA A ${dog?.name?.toUpperCase()}`}
-                            </span>
-                        </button>
+                                    <svg
+                                        className="w-6 h-6"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth="2"
+                                            d="M14 5l7 7m0 0l-7 7m7-7H3"
+                                        ></path>
+                                    </svg>
+                                </span>
+                                <span className="absolute flex items-center text-base font-semibold justify-center w-full h-full text-primary-color transition-all duration-300 transform group-hover:translate-x-full ease">
+                                    {user?.role === "ADMIN"
+                                        ? "MODIFICA CARATTERISTICHE"
+                                        : `DAI UNA CASA A ${dog?.name?.toUpperCase()}`}
+                                </span>
+                                <span className="relative text-base font-semibold invisible">
+                                    {user?.role === "ADMIN"
+                                        ? "MODIFICA CARATTERISTICHE"
+                                        : `DAI UNA CASA A ${dog?.name?.toUpperCase()}`}
+                                </span>
+                            </button>
+                        )}
+
                     </div>
                 </div>
             </div>

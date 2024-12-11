@@ -1,13 +1,14 @@
-import AdoptionsProgressBar from "./AdoptionsProgressBar";
-import { Button } from "@material-tailwind/react";
-import { useCallback, useState } from "react";
+import { useState, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { deleteAdoption, addAdoptionDocument } from "../../../redux/adoptionsSlice";
+import { Button } from "@material-tailwind/react";
+import AdoptionsProgressBar from "./AdoptionsProgressBar";
 
 /* eslint-disable react/prop-types */
 function SingleAdoption({ adoption }) {
     const dispatch = useDispatch();
     const [selectedFile, setSelectedFile] = useState(null);
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
 
     const handleFileChange = (event) => {
         setSelectedFile(event.target.files[0]);
@@ -22,13 +23,6 @@ function SingleAdoption({ adoption }) {
         dispatch(addAdoptionDocument({ adoptionId: adoption.id, file: selectedFile }));
     };
 
-    const handleDeleteAdoption = useCallback(() => {
-        const confirmDelete = window.confirm("Sei sicuro di voler eliminare questa adozione?");
-        if (confirmDelete) {
-            dispatch(deleteAdoption(adoption.id));
-        }
-    }, [dispatch, adoption.id]);
-
     const handleCompleteAdoption = useCallback(() => {
         console.log("Completing adoption...");
     }, []);
@@ -37,7 +31,19 @@ function SingleAdoption({ adoption }) {
         console.log("Downloading certificate...");
     }, []);
 
+    // Gestione della conferma di eliminazione
+    const handleDeleteAdoption = () => {
+        setShowDeleteModal(true);
+    };
 
+    const confirmDeleteAdoption = () => {
+        dispatch(deleteAdoption(adoption.id));
+        setShowDeleteModal(false);
+    };
+
+    const cancelDeleteAdoption = () => {
+        setShowDeleteModal(false);
+    };
 
     const renderButtonContent = () => {
         switch (adoption.state) {
@@ -171,6 +177,30 @@ function SingleAdoption({ adoption }) {
                 {/* Pulsanti dinamici */}
                 <div className="justify-end w-full flex mt-10">{renderButtonContent()}</div>
             </div>
+
+            {/* Modal di conferma eliminazione */}
+            {showDeleteModal && (
+                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+                    <div className="bg-white rounded-lg p-6 shadow-lg w-11/12 sm:w-1/2">
+                        <h3 className="text-2xl font-semibold text-gray-800 mb-4">Conferma Eliminazione</h3>
+                        <p className="text-gray-600 mb-6">Sei sicuro di voler eliminare questa adozione per {adoption.dog.name}?</p>
+                        <div className="flex justify-end space-x-4">
+                            <button
+                                onClick={cancelDeleteAdoption}
+                                className="px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300"
+                            >
+                                Annulla
+                            </button>
+                            <button
+                                onClick={confirmDeleteAdoption}
+                                className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700"
+                            >
+                                Conferma
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }

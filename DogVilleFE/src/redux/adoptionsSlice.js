@@ -1,5 +1,31 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
+export const createAdoption = createAsyncThunk(
+    'adoptions/createAdoption',
+    async (adoptionData, { rejectWithValue }) => {
+        try {
+            const response = await fetch("http://localhost:3001/adozioni", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${localStorage.getItem("Access Token")}`,
+                },
+                body: JSON.stringify(adoptionData),
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                return rejectWithValue(errorData.message || "Errore durante la creazione dell'adozione");
+            }
+
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            return rejectWithValue("Errore durante la creazione dell'adozione: " + error.message);
+        }
+    }
+);
+
 export const fetchAdoptionsByUser = createAsyncThunk(
     'adoptions/fetchAdoptionsByUser',
     async ({ email, page, size }, { rejectWithValue }) => {
@@ -116,6 +142,19 @@ export const adoptionsSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder
+            .addCase(createAdoption.pending, (state) => {
+                state.status = 'loading';
+                state.error = null;
+            })
+            .addCase(createAdoption.fulfilled, (state, action) => {
+                state.status = 'succeeded';
+                state.data = [...(state.data || []), action.payload];
+                state.totalElements += 1;
+            })
+            .addCase(createAdoption.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.payload;
+            })
             .addCase(fetchAdoptionsByUser.pending, (state) => {
                 state.status = 'loading';
                 state.error = null;
@@ -165,7 +204,7 @@ export const adoptionsSlice = createSlice({
             })
             .addCase(fetchAdoptionState.fulfilled, (state, action) => {
                 state.status = 'succeeded';
-                state.adoptionState = action.payload;  
+                state.adoptionState = action.payload;
             })
             .addCase(fetchAdoptionState.rejected, (state, action) => {
                 state.status = 'failed';
