@@ -16,20 +16,17 @@ function AdoptionsProgressBar({ adoption }) {
             <ul className="timeline text-whiteino">
                 <li>
                     <div
-                        className={`timeline-start timeline-box ${
-                            activeStep >= 1 ? "bg-primary-color text-whiteino" : "bg-grigiastro text-primary-color"
-                        }`}
+                        className={`timeline-start timeline-box ${activeStep >= 1 ? "bg-primary-color text-whiteino" : "bg-grigiastro text-primary-color"
+                            }`}
                     >
-                        In attesa validazione documento
+                        {activeStep >= 2 ? "Documento validato" : "In attesa validazione documento"}
                     </div>
                     <div className="timeline-middle">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 20 20"
                             fill="currentColor"
-                            className={`h-5 w-5 ${
-                                activeStep >= 1 ? "text-primary-color" : "text-whiteino"
-                            }`}
+                            className={`h-5 w-5 ${activeStep >= 1 ? "text-primary-color" : "text-whiteino"} ${activeStep === 1 ? "scale-150" : ""}`}
                         >
                             <path
                                 fillRule="evenodd"
@@ -47,9 +44,7 @@ function AdoptionsProgressBar({ adoption }) {
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 20 20"
                             fill="currentColor"
-                            className={`h-5 w-5 ${
-                                activeStep >= 2 ? "text-primary-color" : "text-whiteino"
-                            }`}
+                            className={`h-5 w-5 ${activeStep >= 2 ? "text-primary-color" : "text-whiteino"} ${activeStep === 2 ? "scale-150" : ""}`}
                         >
                             <path
                                 fillRule="evenodd"
@@ -59,31 +54,27 @@ function AdoptionsProgressBar({ adoption }) {
                         </svg>
                     </div>
                     <div
-                        className={`timeline-end timeline-box ${
-                            activeStep >= 2 ? "bg-primary-color text-whiteino" : "bg-grigiastro text-primary-color"
-                        }`}
+                        className={`timeline-end timeline-box ${activeStep >= 2 ? "bg-primary-color text-whiteino" : "bg-grigiastro text-primary-color"
+                            }`}
                     >
-                        In attesa data visita
+                        {activeStep >= 3 ? "Data visita programmata" : "In attesa data visita"}
                     </div>
                     <hr className={`${activeStep >= 3 ? "bg-primary-color" : "bg-whiteino"}`} />
                 </li>
                 <li>
                     <hr className={`${activeStep >= 3 ? "bg-primary-color" : "bg-whiteino"}`} />
                     <div
-                        className={`timeline-start timeline-box ${
-                            activeStep >= 3 ? "bg-primary-color text-whiteino" : "bg-grigiastro text-primary-color"
-                        }`}
+                        className={`timeline-start timeline-box ${activeStep >= 3 ? "bg-primary-color text-whiteino" : "bg-grigiastro text-primary-color"
+                            }`}
                     >
-                        Visita superata
+                        {activeStep >= 4 ? "Visita superata" : "In attesa visita"}
                     </div>
                     <div className="timeline-middle">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 20 20"
                             fill="currentColor"
-                            className={`h-5 w-5 ${
-                                activeStep >= 3 ? "text-primary-color" : "text-whiteino"
-                            }`}
+                            className={`h-5 w-5 ${activeStep >= 3 ? "text-primary-color" : "text-whiteino"} ${activeStep === 3 ? "scale-150" : ""}`}
                         >
                             <path
                                 fillRule="evenodd"
@@ -101,9 +92,7 @@ function AdoptionsProgressBar({ adoption }) {
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 20 20"
                             fill="currentColor"
-                            className={`h-5 w-5 ${
-                                activeStep >= 4 ? "text-primary-color" : "text-whiteino"
-                            }`}
+                            className={`h-5 w-5 ${activeStep >= 4 ? "text-primary-color" : "text-whiteino"} ${activeStep === 4 ? "scale-150" : ""}`}
                         >
                             <path
                                 fillRule="evenodd"
@@ -113,11 +102,10 @@ function AdoptionsProgressBar({ adoption }) {
                         </svg>
                     </div>
                     <div
-                        className={`timeline-end timeline-box ${
-                            activeStep >= 4 ? "bg-primary-color text-whiteino" : "bg-grigiastro text-primary-color"
-                        }`}
+                        className={`timeline-end timeline-box ${activeStep >= 4 ? "bg-primary-color text-whiteino" : "bg-grigiastro text-primary-color"
+                            }`}
                     >
-                        Adozione completata
+                        {activeStep >= 4 ? "Adozione completata" : "In attesa firma"}
                     </div>
                 </li>
             </ul>
