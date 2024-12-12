@@ -7,7 +7,6 @@ function DigitalSign({ name }) {
     useEffect(() => {
         const fontSize = 96;
         const font = 'https://cdn.jsdelivr.net/npm/@fontsource/caveat/files/caveat-latin-400-normal.woff';
-        const pathData = '';
         opentype.load(font, (err, font) => {
             if (err) {
                 console.error('Font loading error:', err);

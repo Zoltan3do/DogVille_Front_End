@@ -15,7 +15,6 @@ function SingleAdoption({ adoption }) {
     const meData = useSelector((state) => state.meFetch.value);
 
     const openSignatureModal = () => setShowSignatureModal(true);
-    const closeSignatureModal = () => setShowSignatureModal(false);
 
     const handleFileChange = (event) => {
         setSelectedFile(event.target.files[0]);
@@ -29,10 +28,6 @@ function SingleAdoption({ adoption }) {
         }
         dispatch(addAdoptionDocument({ adoptionId: adoption.id, file: selectedFile }));
     };
-
-    const handleCompleteAdoption = useCallback(() => {
-        console.log("Completing adoption...");
-    }, []);
 
     const handleDownloadCertificate = useCallback(() => {
         console.log("Downloading certificate...");
