@@ -4,7 +4,7 @@ import { fetchAdoptionsByUser } from "../../../redux/adoptionsSlice";
 import UserNavbar from "../UserNavbar";
 import SingleAdoption from "./SingleAdoption";
 import { Button } from "@material-tailwind/react";
-import golden from "../../../assets/goldenretriever.png"
+import golden from "../../../assets/goldenretriever.png";
 import { Link } from "react-router-dom";
 
 function UserAdoptions() {
@@ -28,6 +28,25 @@ function UserAdoptions() {
         }
     }, [dispatch, userEmail]);
 
+    useEffect(() => {
+        // Recupera l'indice attivo dal local storage al caricamento
+        const savedIndex = localStorage.getItem("activeAdoptionIndex");
+        if (savedIndex !== null) {
+            setActiveIndex(parseInt(savedIndex, 10));
+        }
+    }, []);
+
+    useEffect(() => {
+        // Scroll al caricamento dopo che le adozioni sono state caricate
+        if (adoptions && adoptions.length > 0 && activeIndex !== null) {
+            const targetId = `#item${activeIndex + 1}`;
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                targetElement.scrollIntoView({ behavior: "smooth", block: "nearest" });
+            }
+        }
+    }, [adoptions, activeIndex]);
+
     const handleAnchorClick = (e, index) => {
         e.preventDefault();
 
@@ -39,6 +58,7 @@ function UserAdoptions() {
         }
 
         setActiveIndex(index);
+        localStorage.setItem("activeAdoptionIndex", index); 
     };
 
     const toggleNavbarVisibility = (isModalOpen) => {

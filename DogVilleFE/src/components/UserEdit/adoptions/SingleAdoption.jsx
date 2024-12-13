@@ -23,7 +23,7 @@ function SingleAdoption({ adoption, toggleNavbarVisibility }) {
         setSelectedFile(event.target.files[0]);
     };
 
-    const handleModalPreview = () =>  {
+    const handleModalPreview = () => {
         setShowCertificateModal(true)
         toggleNavbarVisibility(showCertificateModal);
     }
@@ -57,12 +57,12 @@ function SingleAdoption({ adoption, toggleNavbarVisibility }) {
     const cancelDeleteAdoption = () => {
         setShowDeleteModal(false);
     };
-
     const handleDownloadCertificate = useCallback(() => {
         if (!adoption || !meData) {
             alert("Errore nella generazione del certificato. Riprova.");
             return;
         }
+
         const doc = new jsPDF();
         doc.setFontSize(20);
         doc.text("Certificato di Adozione", 10, 20);
@@ -71,8 +71,25 @@ function SingleAdoption({ adoption, toggleNavbarVisibility }) {
         doc.text(`Nome cane: ${adoption.dog.name}`, 10, 50);
         doc.text(`Data adozione: ${new Date(adoption.creationDate).toLocaleDateString()}`, 10, 60);
         doc.text("Grazie per aver dato una casa amorevole al tuo nuovo amico!", 10, 80);
+        doc.setFontSize(16);
+        doc.text("DOGVILLE ringrazia per l'adozione di...", 10, 100);
+        doc.setFontSize(18);
+        doc.text(adoption.dog.name.toUpperCase(), 10, 120);
+        doc.setFontSize(14);
+        const description = adoption.dog.description;
+        const maxWidth = 180; 
+        const wrappedText = doc.splitTextToSize(description, maxWidth);
+        doc.text(wrappedText, 10, 130); 
+        const image = adoption.dog.profileImage; 
+        const imageWidth = 100; 
+        const imageHeight = 100; 
+        const xPosition = 50; 
+        const yPosition = 150; 
+        doc.addImage(image, 'JPEG', xPosition, yPosition, imageWidth, imageHeight);
         doc.save(`Certificato_Adozione_${adoption.dog.name}.pdf`);
     }, [adoption, meData]);
+
+
 
     const renderButtonContent = () => {
         switch (adoption.state) {
@@ -103,7 +120,7 @@ function SingleAdoption({ adoption, toggleNavbarVisibility }) {
                     </Button>
                 );
             case "VISITA_SUPERATA":
-                return isSigned ? ( // Se firmato, mostra il pulsante disabilitato
+                return isSigned ? ( 
                     <Button
                         className="bg-gray-400 text-white rounded-full cursor-not-allowed"
                         disabled>
@@ -235,7 +252,7 @@ function SingleAdoption({ adoption, toggleNavbarVisibility }) {
                             <button
                                 onClick={() => {
                                     console.log("Adoption signed!");
-                                    setIsSigned(true); // Aggiorna lo stato a true quando firmato
+                                    setIsSigned(true);
                                     setShowSignatureModal(false);
                                 }}
                                 className="px-4 py-2 bg-primary-color text-white rounded-lg hover:bg-black"

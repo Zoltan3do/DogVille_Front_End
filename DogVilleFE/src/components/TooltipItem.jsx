@@ -4,7 +4,7 @@ function TooltipItem({ children, tooltipsText }) {
         <div className="w-full sm:w-1/2 lg:w-1/4">
             <div className="mb-5">
                 <div className="group relative inline-block">
-                    <button className="inline-flex rounded bg-primary px-[18px] py-2 text-base font-semibold text-primary-color bg-slate-400">
+                    <button className="inline-flex rounded px-[18px] py-2 text-base font-semibold text-primary-color bg-slate-400">
                         {children}
                     </button>
                     <div
