@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import logo from "../../assets/dogvilleLogo-removebg.png"
+import { Link } from "react-router-dom";
 
 
 
@@ -22,17 +23,17 @@ function CustomFooter() {
                         </h2>
                         <ul className="text-gray-600 dark:text-gray-400">
                             <li className="mb-4">
-                                <a href="javascript:void(0)" className="hover:underline">
+                                <Link to={"/"} className="hover:underline">
                                     Home
-                                </a>
+                                </Link>
                             </li>
                             <li>
-                                <a
-                                    href="javascript:void(0)"
+                                <Link
+                                    to={"/dogs"}
                                     className="hover:underline"
                                 >
                                     Adotta un amico
-                                </a>
+                                </Link>
                             </li>
                         </ul>
                     </div>
@@ -43,7 +44,7 @@ function CustomFooter() {
                         <ul className="text-gray-600 dark:text-gray-400">
                             <li className="mb-4">
                                 <a
-                                    href="javascript:void(0)"
+                                    href="https://github.com/Zoltan3do"
                                     className="hover:underline "
                                 >
                                     Github
@@ -81,7 +82,7 @@ function CustomFooter() {
             <hr className="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
             <div className="sm:flex sm:items-center sm:justify-between">
                 <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">
-                    © 2022{" "}
+                    © 2024{" "}
                     <a href="javascript:void(0)" className="hover:underline">
                         DogVille™
                     </a>

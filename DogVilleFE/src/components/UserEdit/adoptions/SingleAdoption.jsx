@@ -1,24 +1,36 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteAdoption, addAdoptionDocument } from "../../../redux/adoptionsSlice";
 import { Button } from "@material-tailwind/react";
 import AdoptionsProgressBar from "./AdoptionsProgressBar";
 import DigitalSign from "./DigitalSign";
+import { jsPDF } from "jspdf";
+import logo from "../../../assets/dogvilleLogo.jpg"
 
 /* eslint-disable react/prop-types */
-function SingleAdoption({ adoption }) {
+function SingleAdoption({ adoption, toggleNavbarVisibility }) {
     const dispatch = useDispatch();
     const [selectedFile, setSelectedFile] = useState(null);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [showSignatureModal, setShowSignatureModal] = useState(false);
     const [isSigned, setIsSigned] = useState(false);
     const meData = useSelector((state) => state.meFetch.value);
+    const [showCertificateModal, setShowCertificateModal] = useState(false);
 
     const openSignatureModal = () => setShowSignatureModal(true);
 
     const handleFileChange = (event) => {
         setSelectedFile(event.target.files[0]);
     };
+
+    const handleModalPreview = () =>  {
+        setShowCertificateModal(true)
+        toggleNavbarVisibility(showCertificateModal);
+    }
+
+    useEffect(() => {
+        toggleNavbarVisibility(!showCertificateModal);
+    }, [showCertificateModal, toggleNavbarVisibility]);
 
     const handleUploadDocument = async (event) => {
         event.preventDefault();
@@ -28,10 +40,6 @@ function SingleAdoption({ adoption }) {
         }
         dispatch(addAdoptionDocument({ adoptionId: adoption.id, file: selectedFile }));
     };
-
-    const handleDownloadCertificate = useCallback(() => {
-        console.log("Downloading certificate...");
-    }, []);
 
     const handleDeleteAdoption = () => {
         if (adoption.state === "ADOZIONE_COMPLETATA") {
@@ -49,6 +57,22 @@ function SingleAdoption({ adoption }) {
     const cancelDeleteAdoption = () => {
         setShowDeleteModal(false);
     };
+
+    const handleDownloadCertificate = useCallback(() => {
+        if (!adoption || !meData) {
+            alert("Errore nella generazione del certificato. Riprova.");
+            return;
+        }
+        const doc = new jsPDF();
+        doc.setFontSize(20);
+        doc.text("Certificato di Adozione", 10, 20);
+        doc.setFontSize(14);
+        doc.text(`Nome adottante: ${meData.name} ${meData.surname}`, 10, 40);
+        doc.text(`Nome cane: ${adoption.dog.name}`, 10, 50);
+        doc.text(`Data adozione: ${new Date(adoption.creationDate).toLocaleDateString()}`, 10, 60);
+        doc.text("Grazie per aver dato una casa amorevole al tuo nuovo amico!", 10, 80);
+        doc.save(`Certificato_Adozione_${adoption.dog.name}.pdf`);
+    }, [adoption, meData]);
 
     const renderButtonContent = () => {
         switch (adoption.state) {
@@ -94,11 +118,14 @@ function SingleAdoption({ adoption }) {
                 );
             case "ADOZIONE_COMPLETATA":
                 return (
-                    <Button
-                        onClick={handleDownloadCertificate}
-                        className="bg-primary-color hover:bg-black text-white rounded-full">
-                        Scarica certificato di adozione
-                    </Button>
+                    <>
+                        <Button
+                            onClick={handleModalPreview}
+                            className="bg-primary-color hover:bg-black text-white rounded-full"
+                        >
+                            Scarica certificato di adozione
+                        </Button>
+                    </>
                 );
             default:
                 return null;
@@ -238,6 +265,42 @@ function SingleAdoption({ adoption }) {
                                 className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700"
                             >
                                 Conferma
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {showCertificateModal && (
+                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+                    <div className="bg-white rounded-lg p-6 shadow-lg w-11/12 sm:w-1/2">
+                        <h3 className="text-2xl font-semibold text-gray-800 mb-4">Certificato di Adozione</h3>
+                        <p className="mb-2">Anteprima del certificato</p>
+                        <div className="text-primary-color mb-5">
+                            <h1 className="text-4xl font-semibold text-center mb-2">CERTIFICATO DI ADOZIONE</h1>
+                            <p className="text-center text-xl font-medium">DOGVILLE ringrazia</p>
+                            <p className="text-center text-xl font-medium">per l&apos;adozione di...</p>
+                        </div>
+                        <div className="flex gap-2">
+                            <img src={adoption.dog.profileImage} alt="dog" className="w-1/3 rounded-xl" />
+                            <div>
+                                <p className="text-primary-color mb-4 text-2xl font-bold ">{adoption.dog.name.toUpperCase()}</p>
+                                <p className="text-primary-color">{adoption.dog.description}</p>
+                            </div>
+                        </div>
+
+                        <div className="flex justify-end space-x-4">
+                            <button
+                                onClick={() => setShowCertificateModal(false)}
+                                className="px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300"
+                            >
+                                Chiudi
+                            </button>
+                            <button
+                                onClick={handleDownloadCertificate}
+                                className="px-4 py-2 bg-primary-color text-white rounded-lg hover:bg-black"
+                            >
+                                Scarica PDF
                             </button>
                         </div>
                     </div>

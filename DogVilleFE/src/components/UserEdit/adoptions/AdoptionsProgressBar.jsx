@@ -1,7 +1,8 @@
 /* eslint-disable react/prop-types */
 
+import { useEffect } from "react";
+
 function AdoptionsProgressBar({ adoption }) {
-    // Mappa degli stati per determinare quale passo è attivo
     const stateSteps = {
         IN_ATTESA_DOCUMENTI: 1,
         IN_ATTESA_VISITA: 2,
@@ -10,6 +11,10 @@ function AdoptionsProgressBar({ adoption }) {
     };
 
     const activeStep = stateSteps[adoption.state] || 0;
+
+    useEffect(() => {
+        console.log(adoption.visitDate)
+    }, [])
 
     return (
         <>
@@ -57,7 +62,7 @@ function AdoptionsProgressBar({ adoption }) {
                         className={`timeline-end timeline-box ${activeStep >= 2 ? "bg-primary-color text-whiteino" : "bg-grigiastro text-primary-color"
                             }`}
                     >
-                        {activeStep >= 3 ? "Data visita programmata" : "In attesa data visita"}
+                        {activeStep >= 3 || adoption?.visitDate != null ? "Data visita programmata" : "In attesa data visita"}
                     </div>
                     <hr className={`${activeStep >= 3 ? "bg-primary-color" : "bg-whiteino"}`} />
                 </li>
@@ -67,7 +72,7 @@ function AdoptionsProgressBar({ adoption }) {
                         className={`timeline-start timeline-box ${activeStep >= 3 ? "bg-primary-color text-whiteino" : "bg-grigiastro text-primary-color"
                             }`}
                     >
-                        {activeStep >= 4 ? "Visita superata" : "In attesa visita"}
+                        {activeStep >= 4 || adoption.state == "VISITA_SUPERATA" ? "Visita superata" : "In attesa visita"}
                     </div>
                     <div className="timeline-middle">
                         <svg
