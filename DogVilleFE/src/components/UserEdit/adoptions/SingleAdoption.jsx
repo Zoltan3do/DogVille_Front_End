@@ -5,7 +5,7 @@ import { Button } from "@material-tailwind/react";
 import AdoptionsProgressBar from "./AdoptionsProgressBar";
 import DigitalSign from "./DigitalSign";
 import { jsPDF } from "jspdf";
-import logo from "../../../assets/dogvilleLogo.jpg"
+// import logo from "../../../assets/dogvilleLogo.jpg"
 
 /* eslint-disable react/prop-types */
 function SingleAdoption({ adoption, toggleNavbarVisibility }) {

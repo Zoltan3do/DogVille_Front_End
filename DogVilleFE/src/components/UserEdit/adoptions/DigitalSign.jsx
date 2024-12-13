@@ -16,14 +16,30 @@ function DigitalSign({ name }) {
             const pathData = textPath.toPathData();
             const path = document.querySelector('#signature-path');
             path.setAttribute('d', pathData);
+            path.setAttribute('fill', 'transparent');
+            path.setAttribute('stroke', 'black');
+            path.setAttribute('stroke-width', '1');
+            path.style.filter = 'drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.5))';
+
             const length = path.getTotalLength();
             path.style.strokeDasharray = length;
             path.style.strokeDashoffset = length;
+
+            // Animazione per tracciare il contorno
             anime({
                 targets: path,
                 strokeDashoffset: [length, 0],
                 duration: 2000,
                 easing: 'easeInOutSine',
+                complete: () => {
+                    // Animazione per riempire il testo con colore nero dopo che è stato tracciato
+                    anime({
+                        targets: path,
+                        fill: ['transparent', 'black'],
+                        duration: 500,
+                        easing: 'easeInOutSine'
+                    });
+                }
             });
         });
     }, [name]);
@@ -33,13 +49,9 @@ function DigitalSign({ name }) {
             <svg width="500" height="200" xmlns="http://www.w3.org/2000/svg">
                 <path
                     id="signature-path"
-                    fill="black"
-                    stroke="black"
-                    strokeWidth="2"
                 />
             </svg>
         </div>
-
     );
 }
 
