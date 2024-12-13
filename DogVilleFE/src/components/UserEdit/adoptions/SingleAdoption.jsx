@@ -317,7 +317,7 @@ function SingleAdoption({ adoption, toggleNavbarVisibility }) {
                                 onClick={handleDownloadCertificate}
                                 className="px-4 py-2 bg-primary-color text-white rounded-lg hover:bg-black"
                             >
-                                Scarica PDF
+                                Scarica certificato
                             </button>
                         </div>
                     </div>
