@@ -24,15 +24,12 @@ function DigitalSign({ name }) {
             const length = path.getTotalLength();
             path.style.strokeDasharray = length;
             path.style.strokeDashoffset = length;
-
-            // Animazione per tracciare il contorno
             anime({
                 targets: path,
                 strokeDashoffset: [length, 0],
                 duration: 2000,
                 easing: 'easeInOutSine',
                 complete: () => {
-                    // Animazione per riempire il testo con colore nero dopo che è stato tracciato
                     anime({
                         targets: path,
                         fill: ['transparent', 'black'],
