@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 function CustomFooter() {
     const toggleState = useSelector((state) => state.sidebarToggle.value);
     return (
-        <footer className={` transition-all duration-300 p-4 bg-white sm:p-6 dark:bg-black  ${toggleState ? "!pl-72 " : "!pl-24"} w-full mt-12`}>
+        <footer className={` transition-all duration-300 bg-white sm:p-6 dark:bg-black  ${toggleState ? "!ml-60 mt-16" : "!ml-16 mt-5"} `}>
             <div className="md:flex md:justify-between">
                 <div className={`mb-6 md:mb-0 ${toggleState ? 'hidden' : 'block'}`}>
                     <a href="javascript:void(0)" className="flex items-center">

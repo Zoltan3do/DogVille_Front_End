@@ -93,7 +93,7 @@ function DogDetail() {
     };
 
     return (
-        <div className={`bg-transparent ${toggleState ? "!ml-64 mb-10" : "!ml-24"} transition-all duration-300 grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-3 mr-7 mt-20`}>
+        <div className={`bg-transparent ${toggleState ? "!ml-64 mb-10" : "!ml-24"} transition-all duration-300 grid grid-cols-2 gap-2 lg:grid-cols-3 lg:gap-2 mr-7 mt-20`}>
             {showModal && (
                 <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
                     <div className="bg-white rounded-lg p-6 shadow-lg w-11/12 sm:w-1/2">
@@ -116,10 +116,14 @@ function DogDetail() {
                     </div>
                 </div>
             )}
-
-            <div className="rounded-lg bg-gray-200 overflow-hidden bg-cover">
-                <img src={dog.profileImage} alt="dogo" className="h-full object-cover" />
+            <div className="rounded-lg bg-gray-200 overflow-hidden bg-cover w-full h-full relative">
+                <img
+                    src={dog.profileImage}
+                    alt="dogo"
+                    className="w-full h-full object-cover absolute top-0 left-0"
+                />
             </div>
+
 
             <div className="rounded-lg bg-gray-200 lg:col-span-2 p-5">
                 <h2 className="text-center text-primary-color text-4xl font-semibold mb-5">{dog.name}</h2>

@@ -11,6 +11,7 @@ import { useRef, useState } from "react";
 import './registration.css'
 import { executeRegisterFetch } from "../../redux/loginFetchSlice";
 import { useNavigate } from 'react-router-dom';
+import { changeModalState } from "../../redux/loginToggleSlice";
 
 
 function CustomSignIn() {
@@ -29,17 +30,20 @@ function CustomSignIn() {
     const handleRegister = (e) => {
         e.preventDefault()
         dispatch(executeRegisterFetch(name, surname, address, telephoneNumber, email, password))
-        .then(() => {
-            navigate('/');  
-        })
+            .then(() => {
+                navigate('/');
+            })
         formRef.current.reset()
     }
 
 
     const toggleState = useSelector((state) => state.sidebarToggle.value);
     return (
-        <div className={`bg-transparent ${toggleState ? "pl-72" : "pl-24"} transition-all duration-300 flex-grow p-4 sm:relative lg:flex flex-row-reverse mt-16 `}>
-            <img src="src/assets/pastoreTedesco.png" alt="pt" className="md:block hidden  lg:w-2/4" />
+        <div className={`bg-transparent ${toggleState ? "ml-72" : "ml-24"} transition-all duration-300 flex-grow sm:relative lg:flex flex-row-reverse mt-16 `}>
+            <div className="">
+                <img src="src/assets/pastoreTedesco.png" alt="pt" className="h-full" />
+            </div>
+
             <Card color="transparent" shadow={false} className="">
                 <Typography variant="h4" color="white">
                     Registrati
@@ -144,18 +148,15 @@ function CustomSignIn() {
                     <Button className="mt-6 bg-grigino text-whiteino " fullWidth onClick={handleRegister}>
                         Registrati
                     </Button>
-                    <Typography className="mt-4 text-center font-normal text-whiteino ">
+                    <Typography className="mt-4 text-center font-normal text-whiteino " >
                         Hai già un account?{" "}
-                        <a href="#" className="font-medium text-white">
+                        <a href="#" className="font-medium text-white" onClick={() => dispatch(changeModalState(true))} data-event-key="login">
                             Accedi
                         </a>
                     </Typography>
                 </form>
             </Card>
-
-            <img src="src/assets/pastoreTedesco.png" alt="pt2" className="block md:hidden lg:w-2/4" />
         </div>
-
     )
 }
 export default CustomSignIn; 

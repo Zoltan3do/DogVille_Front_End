@@ -100,7 +100,7 @@ function UserAdoptions() {
             <div
                 className={`bg-transparent ${toggleState ? "!ml-64" : "!ml-24"} transition-all duration-300 mt-20 !z-10 flex justify-center rounded-2xl relative flex-col items-center`}
             >
-                <div className="absolute -left-44 -bottom-24 p-0 pointer-events-none select-none">
+                <div className="absolute -left-44 -bottom-16 p-0 pointer-events-none select-none">
                     <img src={golden} alt="golden" className="w-1/2" />
                 </div>
 

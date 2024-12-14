@@ -243,7 +243,7 @@ function UserQuiz() {
 
 
                 <img src={dalmata} alt="shitsu" className="w-1/4 absolute right-60
-                 -bottom-80  p-0 pointer-events-none select-none" />
+                 -bottom-72  p-0 pointer-events-none select-none" />
             </div>
         </>
     );

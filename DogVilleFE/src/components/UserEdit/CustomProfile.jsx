@@ -93,7 +93,7 @@ function CustomProfile() {
             >
                 <div
                     className="absolute left-10
-                 -bottom-28 p-0 pointer-events-none select-none
+                 -bottom-20 p-0 pointer-events-none select-none
             "
                 >
                     <img src={shitsu} alt="shitsu" className="w-2/3" />
