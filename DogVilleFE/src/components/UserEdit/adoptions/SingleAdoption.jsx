@@ -289,7 +289,7 @@ function SingleAdoption({ adoption, toggleNavbarVisibility }) {
             )}
 
             {showCertificateModal && (
-                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 !z-50">
                     <div className="bg-white rounded-lg p-6 shadow-lg w-11/12 sm:w-1/2">
                         <h3 className="text-2xl font-semibold text-gray-800 mb-4">Certificato di Adozione</h3>
                         <p className="mb-2">Anteprima del certificato</p>
