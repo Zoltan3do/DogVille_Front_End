@@ -14,8 +14,11 @@ import DogDetail from './components/detailPages/dogDetail.jsx';
 import CustomProfile from './components/UserEdit/CustomProfile';
 import UserAdoptions from './components/UserEdit/adoptions/UserAdoptions';
 import UserQuiz from './components/UserEdit/UserQuiz';
+import { useSelector } from 'react-redux';
 
 function App() {
+  const user = useSelector((state) => state.meFetch.value);
+
   return (
     <Provider store={store}>
       <BrowserRouter>
@@ -29,7 +32,7 @@ function App() {
           <div className="flex-grow">
             <Routes>
               <Route path="/" element={<HomepageCustom />} />
-              <Route path="/register" element={<CustomSignIn />} />
+              {!user && <Route path="/register" element={<CustomSignIn />} />}
               <Route path="/dogs" element={<DogListWithFilters />} />
               <Route path="/dog/:id" element={<DogDetail />} />
               <Route path="/profilo" element={<CustomProfile />} />
