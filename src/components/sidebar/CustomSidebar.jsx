@@ -39,14 +39,13 @@ function CustomSidebar() {
         position: "fixed",
         backgroundColor: '#000',
         color: '#fff',
-        display: 'flex',
         flexDirection: 'column',
         width: isExpanded ? '250px' : '50px',
         transition: 'all 0.3s ease',
         overflowY: 'auto',
         overflowX: 'hidden',
       }}
-      className="sm:w-16 md:w-64"
+      className="hidden md:w-64 lg:flex"
       onToggle={handleToggle}
       id="sidenav"
     >

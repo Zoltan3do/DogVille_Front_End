@@ -19,7 +19,7 @@ function HomepageCustom() {
 
     return (
         <>
-            <div className={`bg-transparent ${toggleState ? "!ml-64 " : "!ml-24"} transition-all duration-300 flex-grow p-4 justify-center sm:relative mt-10`}>
+            <div className={`bg-transparent ${toggleState ? "lg:ml-64 " : "lg:ml-24"} transition-all duration-300 flex-grow p-4 justify-center sm:relative lg:mt-15`}>
                 <div className="select-none planning text-xl sm:text-2xl transition-all duration-300 sm:absolute right-16 top-24 lg:top-36 lg:right-1/3 sm:top-6 md:right-6
                     ">
                     <p>Stai pensando di</p><p> adottare un cane?</p>

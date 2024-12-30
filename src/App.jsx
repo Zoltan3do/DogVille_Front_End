@@ -15,6 +15,7 @@ import CustomProfile from './components/UserEdit/CustomProfile';
 import UserAdoptions from './components/UserEdit/adoptions/UserAdoptions';
 import UserQuiz from './components/UserEdit/UserQuiz';
 import { useSelector } from 'react-redux';
+import BottomBar from './components/bottombar/BottomBar.jsx';
 
 function App() {
   const user = useSelector((state) => state.meFetch.value);
@@ -22,14 +23,14 @@ function App() {
   return (
     <Provider store={store}>
       <BrowserRouter>
-        <div className="flex flex-col mb-32">
+        <div className="flex flex-col lg:mb-32 main-content">
           <CustomNavbar />
         </div>
 
-        <div className="flex flex-grow">
+        <div className="flex flex-grow -mt-32  lg:-mt-16">
           <CustomSidebar />
 
-          <div className="flex-grow">
+          <div className="flex-grow ">
             <Routes>
               <Route path="/" element={<HomepageCustom />} />
               {!user && <Route path="/register" element={<CustomSignIn />} />}
@@ -42,8 +43,8 @@ function App() {
             </Routes>
           </div>
         </div>
-
         <CustomFooter />
+        <BottomBar></BottomBar>
         <LoginModal />
       </BrowserRouter>
 

@@ -1,19 +1,23 @@
+
 import { useSelector } from "react-redux";
-import logo from "../../assets/dogvilleLogo-removebg.png"
+import logo from "../../assets/dogvilleLogo-removebg.png";
 import { Link } from "react-router-dom";
-
-
 
 function CustomFooter() {
     const toggleState = useSelector((state) => state.sidebarToggle.value);
     return (
-        <footer className={` transition-all duration-300 bg-white sm:p-6 dark:bg-black  ${toggleState ? "!ml-60 mt-16" : "!ml-16 mt-5"} `}>
-            <div className="md:flex md:justify-between">
-                <div className={`mb-6 md:mb-0 ${toggleState ? 'hidden' : 'block'}`}>
+        <footer
+            className={`transition-all duration-300 bg-white sm:p-6 dark:bg-black ${toggleState ? "lg:ml-60 mt-16" : "lg:ml-16 mt-5"
+                } mb-16 lg:mb-0 pb-3`}
+        >
+            <div className="md:flex md:justify-between pl-5">
+                <div className={`mb-6 md:mb-0 ${toggleState ? "hidden" : "block"}`}>
                     <a href="javascript:void(0)" className="flex items-center">
-                        <img className="self-center text-4xl font-semibold whitespace-nowrap dark:text-white w-1/3"
-                            src={logo} alt="logo" />
-
+                        <img
+                            className="self-center text-4xl font-semibold whitespace-nowrap dark:text-white w-1/3"
+                            src={logo}
+                            alt="logo"
+                        />
                     </a>
                 </div>
                 <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
@@ -28,10 +32,7 @@ function CustomFooter() {
                                 </Link>
                             </li>
                             <li>
-                                <Link
-                                    to={"/dogs"}
-                                    className="hover:underline"
-                                >
+                                <Link to={"/dogs"} className="hover:underline">
                                     Adotta un amico
                                 </Link>
                             </li>
@@ -51,10 +52,7 @@ function CustomFooter() {
                                 </a>
                             </li>
                             <li>
-                                <a
-                                    href="javascript:void(0)"
-                                    className="hover:underline"
-                                >
+                                <a href="javascript:void(0)" className="hover:underline">
                                     Discord
                                 </a>
                             </li>
@@ -80,7 +78,7 @@ function CustomFooter() {
                 </div>
             </div>
             <hr className="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
-            <div className="sm:flex sm:items-center sm:justify-between">
+            <div className="sm:flex sm:items-center sm:justify-between pl-5">
                 <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">
                     © 2024{" "}
                     <a href="javascript:void(0)" className="hover:underline">
@@ -174,7 +172,7 @@ function CustomFooter() {
                 </div>
             </div>
         </footer>
-
-    )
+    );
 }
+
 export default CustomFooter;
