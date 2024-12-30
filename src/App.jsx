@@ -27,7 +27,7 @@ function App() {
           <CustomNavbar />
         </div>
 
-        <div className="flex flex-grow -mt-32  lg:-mt-16">
+        <div className="flex flex-grow -mt-32 lg:-mt-16">
           <CustomSidebar />
 
           <div className="flex-grow ">

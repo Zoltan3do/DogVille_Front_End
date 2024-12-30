@@ -7,8 +7,8 @@ function CustomFooter() {
     const toggleState = useSelector((state) => state.sidebarToggle.value);
     return (
         <footer
-            className={`transition-all duration-300 bg-white sm:p-6 dark:bg-black ${toggleState ? "lg:ml-60 mt-16" : "lg:ml-16 mt-5"
-                } mb-16 lg:mb-0 pb-3`}
+            className={`transition-all duration-300 bg-white sm:p-6 dark:bg-black ${toggleState ? "lg:ml-60 mt-16" : "lg:ml-16 "
+                } mb-16 md:mb-0 pb-3 mt-5`}
         >
             <div className="md:flex md:justify-between pl-5">
                 <div className={`mb-6 md:mb-0 ${toggleState ? "hidden" : "block"}`}>
