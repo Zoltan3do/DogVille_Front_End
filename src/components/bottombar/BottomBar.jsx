@@ -20,7 +20,7 @@ function BottomBar() {
                     <Link to={"/"} className="inline-flex flex-col items-center justify-center hover:bg-gray-50 dark:hover:bg-grigino group">
                         <button
                             type="button"
-                            className="inline-flex flex-col items-center justify-center  hover:bg-gray-50 dark:hover:bg-grigino group"
+                            className="inline-flex flex-col items-center justify-center group"
                         >
                             <i className="mb-1 fa fa-fw fa-home text-gray-500 dark:text-gray-400 group-hover:text-grigino dark:group-hover:text-whiteino" style={{ fontSize: 15 }}></i>
                             <span className="text-sm text-gray-500 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-whiteino">
@@ -29,7 +29,7 @@ function BottomBar() {
                         </button>
                     </Link>
                     <Link to={"/dogs"} className="inline-flex flex-col items-center justify-center hover:bg-gray-50 dark:hover:bg-grigino group">
-                        <button type="button" className="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-grigino group">
+                        <button type="button" className="inline-flex flex-col items-center justify-center px-5  group">
                             <i className="mb-1 fa fa-fw fa-dog" style={{ fontSize: 15 }}></i>
                             <span className="text-sm text-gray-500 dark:text-gray-400 group-hover:text-whiteino dark:group-hover:text-whiteino">Cani</span>
                         </button>
@@ -37,7 +37,7 @@ function BottomBar() {
                     {meData ? (
                         <>
                             <Link to={"/profilo"} className="inline-flex flex-col items-center justify-center hover:bg-gray-50 dark:hover:bg-grigino group">
-                                <button type="button" className="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-grigino group">
+                                <button type="button" className="inline-flex flex-col items-center justify-center px-5  group">
                                     <i className='fa fa-solid fa-right-to-bracket' style={{ fontSize: 15 }}></i>
                                     <span className="text-sm text-gray-500 dark:text-gray-400 group-hover:text-whiteino dark:group-hover:text-whiteino">Profilo</span>
                                 </button>
@@ -55,7 +55,7 @@ function BottomBar() {
                                 <span className="text-sm text-gray-500 dark:text-gray-400 group-hover:text-whiteino dark:group-hover:text-whiteino">Accedi</span>
                             </button>
                             <Link to={"/register"} className="inline-flex flex-col items-center justify-center hover:bg-gray-50 dark:hover:bg-grigino group">
-                                <button type="button" className="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-grigino group">
+                                <button type="button" className="inline-flex flex-col items-center justify-center px-5  group">
                                     <i className='fa fa-solid fa-address-card' style={{ fontSize: 15 }}></i>
                                     <span className="text-sm text-gray-500 dark:text-gray-400 group-hover:text-whiteino dark:group-hover:text-whiteino">Registrati</span>
                                 </button>

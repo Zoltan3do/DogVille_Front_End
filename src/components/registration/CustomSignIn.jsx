@@ -33,7 +33,6 @@ function CustomSignIn() {
     const toggleState = useSelector((state) => state.sidebarToggle.value);
 
     useEffect(() => {
-        // Pulisce gli errori quando il componente viene smontato
         return () => {
             dispatch(clearError());
         };
@@ -86,7 +85,6 @@ function CustomSignIn() {
             ...prev,
             [name]: value
         }));
-        // Rimuove l'errore quando l'utente inizia a digitare
         if (errors[name]) {
             setErrors(prev => ({
                 ...prev,
@@ -115,27 +113,26 @@ function CustomSignIn() {
             formRef.current.reset();
             navigate('/');
         } catch (err) {
-            // Gli errori del server vengono gestiti automaticamente dallo slice
             console.error('Errore durante la registrazione:', err);
         }
     };
 
     return (
-        <div className={`bg-transparent ${toggleState ? "ml-72" : "ml-24"} transition-all duration-300 flex-grow sm:relative lg:flex flex-row-reverse mt-16`}>
-            <div className="">
+        <div className={`bg-transparent ${toggleState ? "lg:ml-72" : "lg:ml-24"} transition-all duration-300 flex-grow sm:relative lg:flex flex-row-reverse  flex justify-center `}>
+            <div className="hidden lg:block">
                 <img src="src/assets/pastoreTedesco.png" alt="pt" className="h-full" />
             </div>
 
-            <Card color="transparent" shadow={false} className="">
+            <Card color="transparent" shadow={false} className="flex justify-center px-3 items-center">
                 <Typography variant="h4" color="white">
                     Registrati
                 </Typography>
-                <Typography color="white" className="mt-1 font-normal">
+                <Typography color="white" className="mt-1 font-normal text-center">
                     Felice di conoscerti! Inserisci i tuoi dettagli per registrarti
                 </Typography>
-                <form className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96" ref={formRef} onSubmit={handleRegister}>
-                    <div className="mb-1 flex flex-col gap-4">
-                        <div>
+                <form className="mt-5 mb-2 w-80 max-w-screen-lg sm:w-96 flex-col items-center" ref={formRef} onSubmit={handleRegister}>
+                    <div className="mb-1 flex flex-col gap-4 items-center justify-center">
+                        <div className="w-full">
                             <Typography variant="h6" color="white" className="mb-1">
                                 Il tuo nome
                             </Typography>
@@ -143,7 +140,7 @@ function CustomSignIn() {
                                 name="name"
                                 size="lg"
                                 placeholder="Manuel"
-                                className="!border-t-white focus:!border-t-gray-900 text-whiteino !mr-10"
+                                className="!border-t-white focus:!border-t-gray-900 text-whiteino"
                                 labelProps={{
                                     className: "before:content-none after:content-none",
                                 }}
@@ -158,7 +155,7 @@ function CustomSignIn() {
                             )}
                         </div>
 
-                        <div>
+                        <div className="w-full">
                             <Typography variant="h6" color="white" className="mb-1">
                                 Il tuo cognome
                             </Typography>
@@ -166,7 +163,7 @@ function CustomSignIn() {
                                 name="surname"
                                 size="lg"
                                 placeholder="Barone"
-                                className="!mr-10 text-whiteino"
+                                className=" text-whiteino"
                                 labelProps={{
                                     className: "before:content-none after:content-none",
                                 }}
@@ -181,7 +178,7 @@ function CustomSignIn() {
                             )}
                         </div>
 
-                        <div>
+                        <div className="w-full">
                             <Typography variant="h6" color="white" className="mb-1">
                                 Il tuo indirizzo
                             </Typography>
@@ -189,7 +186,7 @@ function CustomSignIn() {
                                 name="address"
                                 size="lg"
                                 placeholder="Via Vialetto 76, Napoli"
-                                className="!mr-10 text-whiteino"
+                                className=" text-whiteino"
                                 labelProps={{
                                     className: "before:content-none after:content-none",
                                 }}
@@ -204,7 +201,7 @@ function CustomSignIn() {
                             )}
                         </div>
 
-                        <div>
+                        <div className="w-full">
                             <Typography variant="h6" color="white" className="mb-1">
                                 Il tuo numero di telefono
                             </Typography>
@@ -212,7 +209,7 @@ function CustomSignIn() {
                                 name="telephoneNumber"
                                 size="lg"
                                 placeholder="+393573893483"
-                                className="!mr-10 text-whiteino"
+                                className=" text-whiteino"
                                 labelProps={{
                                     className: "before:content-none after:content-none",
                                 }}
@@ -227,7 +224,7 @@ function CustomSignIn() {
                             )}
                         </div>
 
-                        <div>
+                        <div className="w-full">
                             <Typography variant="h6" color="white" className="mb-1">
                                 La tua email
                             </Typography>
@@ -235,7 +232,7 @@ function CustomSignIn() {
                                 name="email"
                                 size="lg"
                                 placeholder="name@mail.com"
-                                className="!mr-10 text-whiteino"
+                                className=" text-whiteino"
                                 labelProps={{
                                     className: "before:content-none after:content-none",
                                 }}
@@ -250,7 +247,7 @@ function CustomSignIn() {
                             )}
                         </div>
 
-                        <div>
+                        <div className="w-full">
                             <Typography variant="h6" color="white" className="mb-1">
                                 Password
                             </Typography>
@@ -259,7 +256,7 @@ function CustomSignIn() {
                                 type="password"
                                 size="lg"
                                 placeholder="********"
-                                className="!mr-10 noBlu text-whiteino !border-white"
+                                className="noBlu text-whiteino !border-white"
                                 labelProps={{
                                     className: "before:content-none after:content-none",
                                 }}
@@ -287,12 +284,12 @@ function CustomSignIn() {
                             label={
                                 <Typography variant="small" className="flex items-center font-normal text-whiteino">
                                     Accetto i
-                                    <a href="#" className="font-medium transition-colors hover:text-g !mr-10">
+                                    <a href="#" className="font-medium transition-colors hover:text-g ">
                                         &nbsp;Termini e Condizioni
                                     </a>
                                 </Typography>
                             }
-                            containerProps={{ className: "-ml-2.5 checkbox-label" }}
+                            containerProps={{ className: "checkbox-label" }}
                             onChange={(e) => setTermsAccepted(e.target.checked)}
                         />
                         {errors.terms && (
