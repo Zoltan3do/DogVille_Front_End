@@ -44,7 +44,7 @@ export function DogCard({
 
   return (
 
-    <Card className="max-w-[24rem] overflow-hidden cursor-pointer hover:shadow-lg hover:shadow-gray-400 transition-all duration-300 ">
+    <Card className="overflow-hidden cursor-pointer hover:shadow-lg hover:shadow-gray-400 transition-all duration-300 ">
       <Link to={`/dog/${id}`}>
         <CardHeader floated={false} shadow={false} color="transparent" className="m-0 rounded-none max-h-36 ">
           <img src={profileImage} alt="ui/ux review check" className="m-0 rounded-none w-full flex items-center justify-center" />
@@ -67,8 +67,8 @@ export function DogCard({
           </Typography>
         </CardBody>
       </Link>
-      <CardFooter className="flex items-center justify-between bottom-0 absolute">
-        <div className="flex items-center mr-40">
+      <CardFooter className="flex items-center w-full bottom-0 absolute justify-between">
+        <div className="flex items-center">
           <button onClick={toggleLike} className="flex items-center space-x-2">
             {isLiked ? (
               <SolidHeartIcon className="w-6 h-6 text-red-500" />

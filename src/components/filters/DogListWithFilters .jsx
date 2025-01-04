@@ -17,7 +17,6 @@ const DogListWithFilters = () => {
   const [page, setPage] = useState(0);
   const dogs = useSelector((state) => state.dogsFetch.value.content);
   const totPages = useSelector((state) => state.dogsFetch.value?.page?.totalPages);
-  console.log(totPages)
 
   useEffect(() => {
     dispatch(executemefetch())
@@ -50,19 +49,19 @@ const DogListWithFilters = () => {
   }) : [];
 
   return (
-    <div className={`p-4 bg-transparent ${toggleState ? "pl-72" : "pl-24"} transition-all duration-300 min-h-screen`}>
+    <div className={`px-4 bg-transparent ${toggleState ? "lg:ml-72" : "lg:ml-24"} transition-all duration-300 min-h-screen`}>
       {/* Filtri */}
-      <div className="p-4 rounded shadow mb-4 mt-12">
+      <div className=" rounded shadow mb-4 flex flex-col " >
         <h2 className="text-xl font-bold mb-4">Filtra Cani</h2>
-        <div className="flex justify-between mb-5">
+        <div className="flex justify-between mb-5 sm:flex-row flex-col flex-wrap gap-5">
           {/* Dropdown Taglia */}
-          <div>
+          <div >
             <label className="block mb-1 text-sm font-medium">Taglia</label>
             <select
               name="dogSize"
               value={filters.dogSize}
               onChange={handleFilterChange}
-              className="border p-2 rounded text-black"
+              className="border p-2 rounded text-black "
             >
               <option value="" >Tutte</option>
               <option value="NANA">Nana</option>
@@ -201,7 +200,7 @@ const DogListWithFilters = () => {
 
       {/* Lista dei cani */}
       {filteredDogs.length > 0 ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-center w-full">
           {filteredDogs.map((dog) => (
             <DogCard key={dog.id} {...dog} />
           ))}
