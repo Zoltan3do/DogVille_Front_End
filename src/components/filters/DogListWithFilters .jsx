@@ -49,11 +49,11 @@ const DogListWithFilters = () => {
   }) : [];
 
   return (
-    <div className={`px-4 bg-transparent ${toggleState ? "lg:ml-72" : "lg:ml-24"} transition-all duration-300 min-h-screen`}>
+    <div className={`px-4 bg-transparent ${toggleState ? "lg:ml-72" : "lg:ml-24"} transition-all duration-300 min-h-screen mt-3`}>
       {/* Filtri */}
-      <div className=" rounded shadow mb-4 flex flex-col" >
+      <div className=" rounded shadow mb-4 flex flex-col items-center" >
         <h2 className="text-xl font-bold mb-4">Filtra Cani</h2>
-        <div className="flex justify-between mb-5 sm:flex-row flex-wrap gap-5">
+        <div className="flex mb-5 sm:flex-row flex-wrap gap-5 justify-center">
           
           <div className="min-w-44">
             <label className="block mb-1 text-sm font-medium ">Taglia</label>
