@@ -60,7 +60,7 @@ function DogDetail() {
 
     if (!dog || !user) {
         return <p
-            className={`bg-transparent ${toggleState ? "!ml-64" : "!ml-24"} transition-all duration-300 mt-20 !z-10`}
+            className={`bg-transparent ${toggleState ? "lg:ml-64" : "lg:ml-24"} transition-all duration-300 mt-20 !z-10`}
         >
             <div role="status" className="min-h-screen flex justify-center">
                 <svg aria-hidden="true" className="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-primary-color" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -93,7 +93,7 @@ function DogDetail() {
     };
 
     return (
-        <div className={`bg-transparent ${toggleState ? "!ml-64 mb-10" : "!ml-24"} transition-all duration-300 grid grid-cols-2 gap-2 lg:grid-cols-3 lg:gap-2 mr-7 mt-20`}>
+        <div className={`bg-transparent ${toggleState ? "lg:ml-64 mb-10" : "lg:ml-24"} transition-all duration-300 grid grid-cols-1 md:grid-cols-2 gap-2 lg:grid-cols-3 lg:gap-2 lg:mt-20 mx-10`}>
             {showModal && (
                 <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
                     <div className="bg-white rounded-lg p-6 shadow-lg w-11/12 sm:w-1/2">
@@ -120,7 +120,7 @@ function DogDetail() {
                 <img
                     src={dog.profileImage}
                     alt="dogo"
-                    className="w-full h-full object-cover absolute top-0 left-0"
+                    className="w-full h-full object-cover top-0 left-0"
                 />
             </div>
 
@@ -156,13 +156,13 @@ function DogDetail() {
                     </div>
                 </section>
 
-                <div className="flex justify-between items-end flex-col sm:flex-row">
+                <div className="flex justify-between md:items-end flex-col sm:flex-row items-center">
                     <div className="w-2/4">
                         <h2 className="text-primary-color text-center font-semibold mb-2 text-lg">Livello di Affinità:</h2>
                         <ProgressBar2 value={compatibility} max={3} />
                     </div>
 
-                    <div className="flex justify-end mb-2 mt-10 mr-10">
+                    <div className="flex justify-end  md:mt-10 ">
                         {dog.adoption !== null ? (
                             <button
                                 disabled
