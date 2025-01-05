@@ -51,17 +51,17 @@ const DogListWithFilters = () => {
   return (
     <div className={`px-4 bg-transparent ${toggleState ? "lg:ml-72" : "lg:ml-24"} transition-all duration-300 min-h-screen`}>
       {/* Filtri */}
-      <div className=" rounded shadow mb-4 flex flex-col " >
+      <div className=" rounded shadow mb-4 flex flex-col" >
         <h2 className="text-xl font-bold mb-4">Filtra Cani</h2>
-        <div className="flex justify-between mb-5 sm:flex-row flex-col flex-wrap gap-5">
-          {/* Dropdown Taglia */}
-          <div >
-            <label className="block mb-1 text-sm font-medium">Taglia</label>
+        <div className="flex justify-between mb-5 sm:flex-row flex-wrap gap-5">
+          
+          <div className="min-w-44">
+            <label className="block mb-1 text-sm font-medium ">Taglia</label>
             <select
               name="dogSize"
               value={filters.dogSize}
               onChange={handleFilterChange}
-              className="border p-2 rounded text-black "
+              className="border p-2 rounded text-black w-full "
             >
               <option value="" >Tutte</option>
               <option value="NANA">Nana</option>
@@ -72,14 +72,14 @@ const DogListWithFilters = () => {
             </select>
           </div>
 
-          {/* Dropdown Genere */}
-          <div>
+          
+          <div className="min-w-44">
             <label className="block mb-1 text-sm font-medium ">Genere</label>
             <select
               name="gender"
               value={filters.gender}
               onChange={handleFilterChange}
-              className="border p-2 rounded text-black"
+              className="border p-2 rounded text-black w-full"
             >
               <option value="">Tutti</option>
               <option value="M">Maschio</option>
@@ -87,8 +87,7 @@ const DogListWithFilters = () => {
             </select>
           </div>
 
-          {/* Input Età */}
-          <div>
+          <div className="max-w-44">
             <label className="block mb-1 text-sm font-medium">Età</label>
             <input
               type="number"
@@ -96,11 +95,11 @@ const DogListWithFilters = () => {
               value={filters.age}
               onChange={handleFilterChange}
               placeholder="Tutte"
-              className="border p-2 rounded text-black"
+              className="border p-2 rounded text-black w-full"
             />
           </div>
 
-          {/* Dropdown Stato di Salute */}
+        
           <div>
             <label className="block mb-1 text-sm font-medium">Stato di Salute</label>
             <select
@@ -120,14 +119,13 @@ const DogListWithFilters = () => {
             </select>
           </div>
 
-          {/* Dropdown Razza */}
-          <div>
+          <div className="max-w-44">
             <label className="block mb-1 text-sm font-medium">Razza</label>
             <select
               name="race"
               value={filters.race}
               onChange={handleFilterChange}
-              className="border p-2 rounded text-black"
+              className="border p-2 rounded text-black w-full"
             >
               <option value="">Tutte</option>
               <option value="Pastore Tedesco">Pastore Tedesco</option>
@@ -200,7 +198,7 @@ const DogListWithFilters = () => {
 
       {/* Lista dei cani */}
       {filteredDogs.length > 0 ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-center w-full">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-center">
           {filteredDogs.map((dog) => (
             <DogCard key={dog.id} {...dog} />
           ))}
