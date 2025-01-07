@@ -13,9 +13,9 @@ function UserNavbar({ showModal = false }) {
     };
 
     return (
-        <div className={`bg-transparent ${toggleState ? "!ml-64" : "!ml-24"} transition-all duration-300 !z-30 ${!showModal ? '' : 'sticky'}`}>
+        <div className={`bg-transparent ${toggleState ? "lg:ml-64" : "lg:ml-24"} transition-all duration-300 !z-30 ${!showModal ? '' : 'sticky'}`}>
             <div className="mb-3 flex justify-center">
-                <ul className="flex justify-center gap-12 fixed py-5 bg-whiteino rounded-full px-10">
+                <ul className="flex justify-center gap-2 fixed py-5 bg-whiteino rounded-full px-10">
                     <li>
                         <Link
                             to="/profilo"
@@ -29,7 +29,7 @@ function UserNavbar({ showModal = false }) {
                             to="/quiz"
                             className={`px-5 py-1 rounded-full cursor-pointer transition-all duration-300 font-medium ${getLinkClass('/quiz')}`}
                         >
-                            QUIZ PSICOLOGICO
+                            QUIZ
                         </Link>
                     </li>
                     <li>

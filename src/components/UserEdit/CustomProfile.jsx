@@ -88,12 +88,12 @@ function CustomProfile() {
         <>
             <UserNavbar />
             <div
-                className={`bg-transparent ${toggleState ? "!ml-64" : "!ml-24"
-                    } transition-all duration-300 mt-20 !z-10  relative`}
+                className={`bg-transparent ${toggleState ? "lg:ml-64" : "lg:ml-24"
+                    } transition-all duration-300 mt-12 !z-10  relative`}
             >
                 <div
-                    className="absolute left-10
-                 -bottom-20 p-0 pointer-events-none select-none
+                    className="absolute -left-20
+                 -bottom-20 p-0 pointer-events-none select-none hidden lg:block
             "
                 >
                     <img src={shitsu} alt="shitsu" className="w-2/3" />
@@ -121,7 +121,7 @@ function CustomProfile() {
                                                 fill="currentFill"
                                             />
                                         </svg>
-                                        <span className="sr-only">Loading...</span>
+                                        <span className="sr-only">Caricamento...</span>
                                     </div>
                                 ) : (
                                     <img
@@ -136,7 +136,7 @@ function CustomProfile() {
                                     type="file"
                                     onChange={handleAvatarChange}
                                     className="block w-full text-sm text-whiteino
-                file:mr-4 file:py-2 file:px-4
+                file:mr-4 file:py-2 file:px-2
                 file:rounded-full file:border-0
                 file:text-sm file:font-semibold
                 file:bg-grigiastro file:text-primary-color

@@ -138,7 +138,7 @@ function UserQuiz() {
         <>
             <UserNavbar />
             <div
-                className={`bg-transparent ${toggleState ? "!ml-64" : "!ml-24"} transition-all duration-300 mt-28 !z-10 relative mb-60`}
+                className={`bg-transparent ${toggleState ? "lg:ml-64" : "lg:ml-24"} transition-all duration-300 mt-28 !z-10 relative mb-72`}
             >
                 {!hasConsented ? (
                     <div className="flex justify-center items-center">
@@ -243,7 +243,7 @@ function UserQuiz() {
 
 
                 <img src={dalmata} alt="shitsu" className="w-1/4 absolute right-60
-                 -bottom-72  p-0 pointer-events-none select-none" />
+                 -bottom-80  p-0 pointer-events-none select-none hidden lg:block" />
             </div>
         </>
     );
