@@ -96,17 +96,17 @@ function SingleAdoption({ adoption, toggleNavbarVisibility }) {
             case "IN_ATTESA_DOCUMENTI":
                 return (
                     <form onSubmit={handleUploadDocument} className="flex items-center w-full justify-between">
-                        <div className="flex flex-col justify-center items-center">
+                        <div className="flex flex-col justify-center items-center w-1/3">
                             <input
                                 type="file"
                                 id="document-upload"
-                                className="p-2"
+                                className="w-full"
                                 onChange={handleFileChange}
                             />
                         </div>
                         <Button
                             type="submit"
-                            className="bg-primary-color hover:bg-black text-white rounded-full">
+                            className="bg-primary-color hover:bg-black text-white rounded-full w-1/4 flex justify-center items-center p-2">
                             {adoption.document ? "Reinvia nuovo documento" : "Invia documento"}
                         </Button>
                     </form>
@@ -164,7 +164,7 @@ function SingleAdoption({ adoption, toggleNavbarVisibility }) {
 
             <div className="card-body text-primary-color">
                 {/* Immagine e nome del cane */}
-                <div className="flex items-center gap-3 justify-center mb-5">
+                <div className="flex items-center gap-3 justify-center mb-5 flex-col lg:flex-row">
                     <img
                         src={adoption.dog.profileImage}
                         alt={`Foto di ${adoption.dog.name}`}
@@ -174,7 +174,7 @@ function SingleAdoption({ adoption, toggleNavbarVisibility }) {
                 </div>
 
                 {/* Dettagli dell'adozione */}
-                <div className="flex justify-center my-3">
+                <div className="flex justify-center gap-5 my-3 flex-wrap">
                     <p className="text-center">
                         <span className="font-semibold">Età: </span>{adoption.dog.age} anni
                     </p>
@@ -224,14 +224,10 @@ function SingleAdoption({ adoption, toggleNavbarVisibility }) {
                             />
                         </div>
                     )}
-                    <div className="w-1/4"></div>
                 </div>
 
                 {/* Barra di progresso */}
-                <div className="card-actions justify-center mt-5 flex items-center">
-                    <h2 className="font-medium text-2xl">Progresso: </h2>
                     <AdoptionsProgressBar adoption={adoption}></AdoptionsProgressBar>
-                </div>
 
                 {/* Pulsanti dinamici */}
                 <div className="justify-end w-full flex mt-10">{renderButtonContent()}</div>
