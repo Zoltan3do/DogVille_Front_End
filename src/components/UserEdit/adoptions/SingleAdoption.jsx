@@ -193,17 +193,17 @@ function SingleAdoption({ adoption, toggleNavbarVisibility }) {
                 </div>
                 <hr className="border-primary-color" />
 
-                <div className="flex justify-between ">
+                <div className="flex justify-between flex-col lg:flex-row">
 
                     {/* Stato e data dell'adozione */}
-                    <div className="mt-5">
+                    <div className="flex flex-col gap-3">
 
                         <p>
                             <span className="font-semibold">Data inizio pratica: </span>
                             {new Date(adoption.creationDate).toLocaleDateString()}
                         </p>
                         {adoption.visitDate && (
-                            <p className="text-center">
+                            <p className="">
                                 <span className="font-semibold">Data visita programmata: </span>{adoption.visitDate}
                             </p>
                         )}
@@ -215,7 +215,7 @@ function SingleAdoption({ adoption, toggleNavbarVisibility }) {
 
                     {/* Anteprima del documento, se presente */}
                     {adoption.document && (
-                        <div className="flex flex-col justify-center items-center">
+                        <div className="flex flex-col justify-center items-center mt-5 lg:mt-0">
                             <p className="font-medium mb-2">Documento caricato:</p>
                             <img
                                 src={adoption?.document}
@@ -294,7 +294,7 @@ function SingleAdoption({ adoption, toggleNavbarVisibility }) {
                             <p className="text-center text-xl font-medium">DOGVILLE ringrazia</p>
                             <p className="text-center text-xl font-medium">per l&apos;adozione di...</p>
                         </div>
-                        <div className="flex gap-2">
+                        <div className="flex gap-2 flex-col lg:flex-row items-center lg:items-start">
                             <img src={adoption.dog.profileImage} alt="dog" className="w-1/3 rounded-xl" />
                             <div>
                                 <p className="text-primary-color mb-4 text-2xl font-bold ">{adoption.dog.name.toUpperCase()}</p>
@@ -302,7 +302,7 @@ function SingleAdoption({ adoption, toggleNavbarVisibility }) {
                             </div>
                         </div>
 
-                        <div className="flex justify-end space-x-4">
+                        <div className="flex justify-end space-x-4 mt-3 lg:mt-0">
                             <button
                                 onClick={() => setShowCertificateModal(false)}
                                 className="px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300"
