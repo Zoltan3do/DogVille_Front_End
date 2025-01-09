@@ -13,7 +13,7 @@ function UserNavbar({ showModal = false }) {
     };
 
     return (
-        <div className={`bg-transparent ${toggleState ? "lg:ml-64" : "lg:ml-24"} transition-all duration-300 !z-30 ${!showModal ? '' : 'sticky'}`}>
+        <div className={`mt-10 bg-transparent ${toggleState ? "lg:ml-64" : "lg:ml-24"} transition-all duration-300 !z-30 ${!showModal ? '' : 'sticky'}`}>
             <div className="mb-3 flex justify-center">
                 <ul className="flex justify-center gap-2 fixed py-5 bg-whiteino rounded-full px-10">
                     <li>

@@ -16,9 +16,15 @@ import UserAdoptions from './components/UserEdit/adoptions/UserAdoptions';
 import UserQuiz from './components/UserEdit/UserQuiz';
 import { useSelector } from 'react-redux';
 import BottomBar from './components/bottombar/BottomBar.jsx';
+import { useEffect } from 'react';
+import Favourites from './components/Likes/Likes.jsx';
+
 
 function App() {
   const user = useSelector((state) => state.meFetch.value);
+  useEffect(() => {
+    console.log(user)
+  }, [user])
 
   return (
     <Provider store={store}>
@@ -40,6 +46,7 @@ function App() {
               <Route path="/quiz" element={<UserQuiz />} />
               <Route path="/adozioni" element={<UserAdoptions />} />
               <Route path="*" element={<NotFoundPage />} />
+              <Route path='/favourites' element={<Favourites />} />
             </Routes>
           </div>
         </div>

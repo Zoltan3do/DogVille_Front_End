@@ -19,8 +19,8 @@ function CustomNavbar() {
 
     return (
         <nav
-            className={`${toggleState ? "lg:ml-64" : "lg:ml-24"} fixed top-0 left-0 w-full z-50 bg-white transition-all duration-300 hidden lg:block`}
-            style={{ height: "9rem" }} // Altezza fissa per la Navbar
+            className={`${toggleState ? "lg:ml-64" : "lg:ml-24"} opacity-90 fixed top-0 left-0 w-full z-50 bg-white transition-all duration-300 hidden lg:block`}
+            style={{ height: "9rem" }} 
             id="navbara"
         >
             <div className="max-w-screen-xl flex flex-wrap items-center justify-between sm:px-6 lg:px-8 mx-auto h-full">

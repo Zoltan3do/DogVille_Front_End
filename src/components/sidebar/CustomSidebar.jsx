@@ -6,7 +6,7 @@ import { changeSidebarState } from '../../redux/sidebarSlice';
 import { changeModalState } from "../../redux/loginToggleSlice";
 import "./sidebar.css"
 import logo from "../../assets/dogvilleLogo-removebg.png"
-import { Link,useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function CustomSidebar() {
   const [openMenu, setOpenMenu] = useState(null);
@@ -168,10 +168,12 @@ function CustomSidebar() {
       <hr className={toggleState ? `block` : 'hidden'} />
       {/* Sezione inferiore per Login, Sign In e Contattaci */}
       <div className="pt-10 pb-5 text-reddino " >
-        <div data-event-key="likes" className={` text-sm ${!toggleState ? "text-center" : ""} flex items-center p-3 pl-6 w-full sideElement cursor-pointer hover:text-white`}>
-          <i className="fa fa-regular fa-heart mr-4" style={{ fontSize: 15 }}></i>
-          <p className={`${!toggleState ? "hidden" : ""}`}>Preferiti</p>
-        </div>
+        <Link to={"/favourites"}>
+          <div data-event-key="likes" className={` text-sm ${!toggleState ? "text-center" : ""} flex items-center p-3 pl-6 w-full sideElement cursor-pointer hover:text-white`}>
+            <i className="fa fa-regular fa-heart mr-4" style={{ fontSize: 15 }}></i>
+            <p className={`${!toggleState ? "hidden" : ""}`}>Preferiti</p>
+          </div>
+        </Link>
         <div data-event-key="shop" className={`mt-3 text-sm ${!toggleState ? "text-center" : ""} flex items-center p-3 pl-6 w-full sideElement cursor-pointer hover:text-white`}>
           <i className="fa fa-solid fa-bag-shopping mr-4" style={{ fontSize: 15 }}></i>
           <p className={`${!toggleState ? "hidden" : ""}`}>Shop</p>
