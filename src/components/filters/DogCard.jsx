@@ -44,12 +44,12 @@ export function DogCard({
 
   return (
 
-    <Card className="overflow-hidden cursor-pointer hover:shadow-lg hover:shadow-gray-400 transition-all duration-300">
+    <Card className="overflow-hidden cursor-pointer hover:shadow-lg hover:shadow-gray-400 transition-all duration-300 h-5/6">
       <Link to={`/dog/${id}`}>
-        <CardHeader floated={false} shadow={false} color="transparent" className="m-0 rounded-none ">
-          <img src={profileImage} alt="ui/ux review check" className="m-0 rounded-none w-full flex items-center justify-center" />
+        <CardHeader floated={false} shadow={false} color="transparent" className="m-0 rounded-none h-1/3">
+          <img src={profileImage} alt="ui/ux review check" className="m-0 rounded-none w-full flex items-center justify-center h-full object-cover aspect-square " />
         </CardHeader>
-        <CardBody className="mb-12">
+        <CardBody>
           <Typography variant="h4" color="gray" className="font-bold truncate">
             {name} - [{race}]
           </Typography>
