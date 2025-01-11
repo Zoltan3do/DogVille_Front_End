@@ -198,7 +198,7 @@ const DogListWithFilters = () => {
 
       {/* Lista dei cani */}
       {filteredDogs.length > 0 ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 justify-center">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 justify-center h-5/6">
           {filteredDogs.map((dog) => (
             <DogCard key={dog.id} {...dog} />
           ))}

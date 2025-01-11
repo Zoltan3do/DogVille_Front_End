@@ -11,6 +11,7 @@ import './registration.css'
 import { executeRegisterFetch, clearError } from "../../redux/loginFetchSlice";
 import { useNavigate } from 'react-router-dom';
 import { changeModalState } from "../../redux/loginToggleSlice";
+import { Link } from "react-router-dom";
 
 function CustomSignIn() {
     const dispatch = useDispatch();
@@ -284,9 +285,9 @@ function CustomSignIn() {
                             label={
                                 <Typography variant="small" className="flex items-center font-normal text-whiteino">
                                     Accetto i
-                                    <a href="#" className="font-medium transition-colors hover:text-g ">
+                                    <Link to={"/terms"} className="font-medium transition-colors hover:text-g ">
                                         &nbsp;Termini e Condizioni
-                                    </a>
+                                    </Link>
                                 </Typography>
                             }
                             containerProps={{ className: "checkbox-label" }}

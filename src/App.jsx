@@ -18,6 +18,8 @@ import { useSelector } from 'react-redux';
 import BottomBar from './components/bottombar/BottomBar.jsx';
 import { useEffect } from 'react';
 import Favourites from './components/Likes/Likes.jsx';
+import PrivacyPolicy from './components/privacyPolicy/PrivacyPolicy.jsx';
+import Terms from './components/privacyPolicy/Terms.jsx';
 
 
 function App() {
@@ -47,6 +49,8 @@ function App() {
               <Route path="/adozioni" element={<UserAdoptions />} />
               <Route path="*" element={<NotFoundPage />} />
               <Route path='/favourites' element={<Favourites />} />
+              <Route path='/policy' element={<PrivacyPolicy />} />
+              <Route path='/terms' element={<Terms />} />
             </Routes>
           </div>
         </div>
