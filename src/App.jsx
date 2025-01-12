@@ -20,12 +20,14 @@ import { useEffect } from 'react';
 import Favourites from './components/Likes/Likes.jsx';
 import PrivacyPolicy from './components/privacyPolicy/PrivacyPolicy.jsx';
 import Terms from './components/privacyPolicy/Terms.jsx';
+import Chisiamo from './components/about/Chisiamo.jsx';
+import Contacts from './components/about/Contacts.jsx';
 
 
 function App() {
   const user = useSelector((state) => state.meFetch.value);
+
   useEffect(() => {
-    console.log(user)
   }, [user])
 
   return (
@@ -51,6 +53,8 @@ function App() {
               <Route path='/favourites' element={<Favourites />} />
               <Route path='/policy' element={<PrivacyPolicy />} />
               <Route path='/terms' element={<Terms />} />
+              <Route path='/about' element={<Chisiamo />} />
+              <Route path='/contacts' element={<Contacts />} />
             </Routes>
           </div>
         </div>

@@ -131,25 +131,27 @@ function CustomProfile() {
                                     />
                                 )}
                             </div>
-                            <label className="block transition-all duration-300">
-                                <input
-                                    type="file"
-                                    onChange={handleAvatarChange}
-                                    className="block w-full text-sm text-whiteino
+                            <div className="flex justify-center items-center">
+                                <label className="block  transition-all duration-300">
+                                    <input
+                                        type="file"
+                                        onChange={handleAvatarChange}
+                                        className="block w-full text-xs text-whiteino
                 file:mr-4 file:py-2 file:px-2
                 file:rounded-full file:border-0
                 file:text-sm file:font-semibold
                 file:bg-grigiastro file:text-primary-color
-                hover:file:bg-grigiastro"
-                                />
-                            </label>
-                            <button
-                                type="button"
-                                onClick={handleAvatarUpload}
-                                className="transition-all duration-300 hover:border bg-primary-color hover:bg-black  text-whiteino font-medium py-2 px-4 border rounded-full text-sm border-none"
-                            >
-                                Cambia Avatar
-                            </button>
+                hover:file:bg-grigiastro "
+                                    />
+                                </label>
+                                <button
+                                    type="button"
+                                    onClick={handleAvatarUpload}
+                                    className="transition-all duration-300 hover:border bg-primary-color hover:bg-black  text-whiteino font-medium py-2 px-4 border rounded-full text-sm border-none"
+                                >
+                                    Cambia Avatar
+                                </button>
+                            </div>
                         </form>
 
                         {meFetchError && (

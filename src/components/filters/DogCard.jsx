@@ -47,7 +47,7 @@ export function DogCard({
     <Card className="overflow-hidden cursor-pointer hover:shadow-lg hover:shadow-gray-400 transition-all duration-300 h-full">
       <Link to={`/dog/${id}`}>
         <CardHeader floated={false} shadow={false} color="transparent" className="m-0 rounded-none h-1/3">
-          <img src={profileImage} alt="ui/ux review check" className="m-0 rounded-none w-full flex items-center justify-center h-full object-center aspect-square " />
+          <img src={profileImage} alt="ui/ux review check" className="m-0 rounded-none w-full flex items-center justify-center h-full object-cover aspect-square " />
         </CardHeader>
         <CardBody className="!my-0">
           <Typography variant="h4" color="gray" className="font-bold truncate">

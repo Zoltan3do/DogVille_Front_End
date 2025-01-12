@@ -77,9 +77,12 @@ function CustomSidebar() {
 
           <NavItem eventKey="about">
             <NavIcon>
-              <i className="fa fa-fw fa-address-card" style={{ fontSize: 15 }}></i>
+              <Link to={"/about"}>
+                <i className="fa fa-fw fa-address-card" style={{ fontSize: 15 }}></i>
+              </Link>
             </NavIcon>
-            <NavText>Chi siamo</NavText>
+            <NavText>
+              <Link to={"/about"}><p>Chi siamo</p></Link></NavText>
           </NavItem>
 
           <NavItem eventKey="dogs">
@@ -158,9 +161,9 @@ function CustomSidebar() {
 
           <NavItem eventKey="contacts">
             <NavIcon>
-              <i className="fa fa-fw fa-address-book" style={{ fontSize: 15 }}></i>
+              <Link to={"/contacts"}> <i className="fa fa-fw fa-address-book" style={{ fontSize: 15 }}></i></Link>
             </NavIcon>
-            <NavText>Contatti</NavText>
+            <NavText><Link to={"/contacts"}><p>Contatti</p></Link></NavText>
           </NavItem>
         </SideNav.Nav>
       </div>

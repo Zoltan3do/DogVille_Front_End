@@ -15,10 +15,7 @@ function Favourites() {
 
     return (
         <>
-            <div className={`bg-transparent ${toggleState ? "lg:ml-64" : "lg:ml-24"} transition-all duration-300 lg:mt-10 mb-20 xl:gap-52   !z-10 flex flex-col lg:flex-row  items-center justify-start rounded-2xl relative`}>
-                <h1 className='text-whiteino lg:text-9xl text-5xl mb-5 lg:rotate-90  transition-all duration-300 lg:-ml-56'>
-                    PREFERITI
-                </h1>
+            <div className={`bg-transparent ${toggleState ? "lg:ml-64" : "lg:ml-24"} transition-all duration-300 lg:mt-10 mb-20 xl:gap-52   !z-10 flex flex-col lg:flex-row  items-center justify-center rounded-2xl relative`}>
                 <div>
                 <Swiper
                     effect={'cube'}
