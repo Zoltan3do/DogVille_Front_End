@@ -11,6 +11,7 @@ import logo from "../../assets/dogvilleLogo-removebg.png"
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { executedogsfetch } from "../../redux/dogsListFetchSlice";
+import { Link } from "react-router-dom";
 
 function Chisiamo() {
     const dispatch = useDispatch();
@@ -40,8 +41,8 @@ function Chisiamo() {
                     <div className="md:w-1/2 mb-4 md:mb-0">
                         <h1 className="text-grey-700 font-medium text-4xl md:text-5xl leading-tight mb-2">DogVille</h1>
                         <p className="font-regular text-xl mb-8 mt-4">Cura, protezione e amore: tutto per il tuo migliore amico.</p>
-                        <a href="#contactUs"
-                            className="px-6 py-3 bg-primary-color text-white font-medium rounded-full hover:bg-grigino  transition duration-200">Contattaci</a>
+                        <Link to={"/contacts"}
+                            className="px-6 py-3 bg-primary-color text-white font-medium rounded-full hover:bg-grigino  transition duration-200">Contattaci</Link>
                     </div>
                 </div>
             </div>

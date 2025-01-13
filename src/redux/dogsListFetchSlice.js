@@ -15,7 +15,7 @@ export const dogsFetchSlice = createSlice({
 })
 
 
-export const executedogsfetch = (filters, page) => async (dispatch) => {
+export const executedogsfetch = (filters, page, sorting) => async (dispatch) => {
     try {
         const genericUrl = "http://localhost:3001/cani/filter";
 
@@ -24,7 +24,16 @@ export const executedogsfetch = (filters, page) => async (dispatch) => {
             .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
             .join("&");
 
-        const url = filterParams ? `${genericUrl}?${filterParams}&page=${page}` : `${genericUrl}?page=${page}`;
+        // Gestione del parametro di ordinamento
+        let sortParam = "";
+        if (sorting) {
+            const [sortBy, direction] = sorting.split(',');
+            sortParam = `&sortBy=${sortBy}&direction=${direction}`;
+        }
+
+        const url = filterParams
+            ? `${genericUrl}?${filterParams}&page=${page}${sortParam}`
+            : `${genericUrl}?page=${page}${sortParam}`;
 
         const response = await fetch(url, {
             method: "GET",

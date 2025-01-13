@@ -83,3 +83,35 @@
 .swiper-cube-shadow {
   box-shadow: 0 10px 20px rgba(1, 1, 1, 1); 
 }
+
+
+
+@keyframes fade-in {
+  from {
+      opacity: 0;
+      transform: translateY(-10px);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 1s ease-out;
+}
+
+/* Stili personalizzati per il cubo di Swiper */
+.swiper-cube-shadow {
+  height: 100% !important;
+}
+
+.swiper {
+  height: 100% !important;
+  width: 100% !important;
+}
+
+.swiper-slide {
+  height: 100% !important;
+  width: 100% !important;
+}
