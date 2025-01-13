@@ -13,7 +13,6 @@ function Favourites() {
     const user = useSelector((state) => state.meFetch.value);
 
     useEffect(() => {
-        console.log(user);
     }, [user]);
 
     const hasLikes = user?.likes && user.likes.length > 0;
@@ -59,18 +58,22 @@ function Favourites() {
                                 className="h-full w-full rounded-lg"
                             >
                                 {user.likes.map((item, i) => (
-                                    <SwiperSlide key={i} className="w-full h-full">
-                                        <div className="relative w-full h-full group">
-                                            <img
-                                                src={item.profileImage}
-                                                alt={`Cane preferito ${i + 1}`}
-                                                className="w-full h-full object-cover"
-                                            />
-                                            <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                                                <p className="text-white text-xl font-bold">{item.name}</p>
+
+                                    <SwiperSlide className="w-full h-full" key={i}>
+                                        <Link to={`/dog/${item.id}`}>
+                                            <div className="relative w-full h-full group">
+                                                <img
+                                                    src={item.profileImage}
+                                                    alt={`Cane preferito ${i + 1}`}
+                                                    className="w-full h-full object-cover"
+                                                />
+                                                <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                                                    <p className="text-white text-xl font-bold">{item.name}</p>
+                                                </div>
                                             </div>
-                                        </div>
+                                        </Link>
                                     </SwiperSlide>
+
                                 ))}
                             </Swiper>
                         </div>
