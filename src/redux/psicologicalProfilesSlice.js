@@ -3,7 +3,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 export const fetchPsicologicalProfiles = createAsyncThunk(
     "psicologicalProfiles/fetchProfiles",
     async () => {
-        const response = await fetch("http://locahost:3001/api/psycologicalProfiles/all", {
+        const response = await fetch("http://localhost:3001/api/psycologicalProfiles/all", {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",

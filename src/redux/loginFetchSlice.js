@@ -31,7 +31,7 @@ export const executeRegisterFetch = createAsyncThunk(
     'loginFetches/register',
     async ({ name, surname, address, telephoneNumber, email, password }, { rejectWithValue }) => {
         try {
-            const url = "http://locahost:3001/auth/register";
+            const url = "http://localhost:3001/auth/register";
             const response = await fetch(url, {
                 method: "POST",
                 headers: {

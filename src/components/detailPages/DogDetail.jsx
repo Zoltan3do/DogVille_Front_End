@@ -7,6 +7,9 @@ import { executedogfetch } from "../../redux/singleDogFetch";
 import { fetchPsicologicalProfiles } from "../../redux/psicologicalProfilesSlice";
 import { createAdoption } from "../../redux/adoptionsSlice";
 import { calculateCompatibility } from "../../Utils";
+import { addLikefetch, removeLikefetch } from "../../redux/likeSlice";
+import { HeartIcon as SolidHeartIcon } from "@heroicons/react/24/solid";
+import { HeartIcon as OutlineHeartIcon } from "@heroicons/react/24/outline";
 
 function DogDetail() {
     const dispatch = useDispatch();
@@ -16,12 +19,27 @@ function DogDetail() {
     const dog = useSelector((state) => state.dogFetch?.value);
     const user = useSelector((state) => state.meFetch?.value);
     const toggleState = useSelector((state) => state.sidebarToggle.value);
-    const profiles = useSelector((state) => state.psicologicalProfiles.value);
+    const profiles = useSelector((state) => state.psicologicalProfiles?.value);
     const adoptionStatus = useSelector((state) => state.adoptions.status);
+    const likesList = useSelector((state) => state.meFetch.value?.likes);
 
     const [psy, setPsy] = useState("");
     const [compatibility, setCompatibility] = useState(null);
     const [showModal, setShowModal] = useState(false);
+    const [isLiked, setIsLiked] = useState(false);
+    const [localLikeCount, setLocalLikeCount] = useState(0);
+
+    useEffect(() => {
+        dispatch(executedogfetch(id));
+        dispatch(fetchPsicologicalProfiles());
+    }, [dispatch, id]);
+
+    useEffect(() => {
+        if (dog) {
+            setLocalLikeCount(dog.like_count);
+            setIsLiked(likesList.some((like) => like.id === dog.id));
+        }
+    }, [dog, likesList]);
 
     const psyStructuration = useCallback(() => {
         if (dog?.dogsPsycologicalProfiles) {
@@ -34,20 +52,20 @@ function DogDetail() {
 
     const calculateAffinity = useCallback(() => {
         if (dog && user) {
-            const dogProfile = dog.dogsPsycologicalProfiles[dog?.dogsPsycologicalProfiles.length - 1]?.type;
-            const userProfile = user.usersPsycologicalProfiles?.[dog?.dogsPsycologicalProfiles.length - 1]?.type;
+            const dogProfile =
+                dog.dogsPsycologicalProfiles[
+                    dog?.dogsPsycologicalProfiles.length - 1
+                ]?.type;
+            const userProfile =
+                user.usersPsycologicalProfiles?.[
+                    dog?.dogsPsycologicalProfiles.length - 1
+                ]?.type;
             if (dogProfile && userProfile && profiles.length > 0) {
                 const level = calculateCompatibility(profiles, userProfile, dogProfile);
                 setCompatibility(level);
             }
         }
     }, [dog, user, profiles]);
-
-
-    useEffect(() => {
-        dispatch(executedogfetch(id));
-        dispatch(fetchPsicologicalProfiles());
-    }, [dispatch, id]);
 
     useEffect(() => {
         setCompatibility(null);
@@ -57,20 +75,6 @@ function DogDetail() {
     useEffect(() => {
         psyStructuration();
     }, [dog, psyStructuration]);
-
-    if (!dog || !user) {
-        return <p
-            className={`bg-transparent ${toggleState ? "lg:ml-64" : "lg:ml-24"} transition-all duration-300 mt-20 !z-10`}
-        >
-            <div role="status" className="min-h-screen flex justify-center">
-                <svg aria-hidden="true" className="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-primary-color" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor" />
-                    <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill" />
-                </svg>
-                <span className="sr-only">Loading...</span>
-            </div>
-        </p>;
-    }
 
     const handleAdoptionClick = () => {
         setShowModal(true);
@@ -85,20 +89,67 @@ function DogDetail() {
             };
 
             dispatch(createAdoption(adoptionData)).then((response) => {
-                if (response.meta.requestStatus === 'fulfilled') {
-                    navigate('/adozioni');
+                if (response.meta.requestStatus === "fulfilled") {
+                    navigate("/adozioni");
                 }
             });
         }
     };
 
+    const toggleLike = () => {
+        if (isLiked) {
+            dispatch(removeLikefetch(dog.id));
+            setLocalLikeCount((prev) => prev - 1);
+        } else {
+            dispatch(addLikefetch(dog.id));
+            setLocalLikeCount((prev) => prev + 1);
+        }
+        setIsLiked(!isLiked);
+    };
+
+    if (!dog || !user) {
+        return (
+            <p
+                className={`bg-transparent ${toggleState ? "lg:ml-64" : "lg:ml-24"
+                    } transition-all duration-300 mt-20 !z-10`}
+            >
+                <div role="status" className="min-h-screen flex justify-center">
+                    <svg
+                        aria-hidden="true"
+                        className="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-primary-color"
+                        viewBox="0 0 100 101"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <path
+                            d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                            fill="currentColor"
+                        />
+                        <path
+                            d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                            fill="currentFill"
+                        />
+                    </svg>
+                    <span className="sr-only">Caricamento...</span>
+                </div>
+            </p>
+        );
+    }
+
     return (
-        <div className={`bg-transparent ${toggleState ? "lg:ml-64 mb-10" : "lg:ml-24"} transition-all duration-300 grid grid-cols-1 md:grid-cols-2 gap-2 lg:grid-cols-3 lg:gap-2 lg:mt-20 mx-10`}>
+        <div
+            className={`bg-transparent ${toggleState ? "lg:ml-64 mb-10" : "lg:ml-24"
+                } transition-all duration-300 grid grid-cols-1 md:grid-cols-2 gap-2 lg:grid-cols-3 lg:gap-2 lg:mt-20 mx-10`}
+        >
             {showModal && (
                 <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
                     <div className="bg-white rounded-lg p-6 shadow-lg w-11/12 sm:w-1/2">
-                        <h3 className="text-2xl font-semibold text-gray-800 mb-4">Conferma Adozione</h3>
-                        <p className="text-gray-600 mb-6">Sei sicuro di voler richiedere l&apos;adozione per {dog.name}?</p>
+                        <h3 className="text-2xl font-semibold text-gray-800 mb-4">
+                            Conferma Adozione
+                        </h3>
+                        <p className="text-gray-600 mb-6">
+                            Sei sicuro di voler richiedere l&apos;adozione per {dog.name}?
+                        </p>
                         <div className="flex justify-end space-x-4">
                             <button
                                 onClick={() => setShowModal(false)}
@@ -122,19 +173,33 @@ function DogDetail() {
                     alt="dogo"
                     className="w-full h-full object-cover top-0 left-0"
                 />
+                <button
+                    onClick={toggleLike}
+                    className="absolute top-2 left-2 p-2 rounded-full shadow-md"
+                >
+                    {isLiked ? (
+                        <SolidHeartIcon className="w-6 h-6 text-red-500 " />
+                    ) : (
+                        <OutlineHeartIcon className="w-6 h-6 text-gray-500" />
+                    )}
+                </button>
             </div>
-
-
             <div className="rounded-lg bg-gray-200 lg:col-span-2 p-5">
-                <h2 className="text-center text-primary-color text-4xl font-semibold mb-5">{dog.name}</h2>
+                <h2 className="text-center text-primary-color text-4xl font-semibold mb-5">
+                    {dog.name}
+                </h2>
                 <p className="text-primary-color text-xl italic">{dog.description}</p>
 
                 <section className="bg-gray-2 dark:bg-dark">
                     <h3 className="mt-7 text-primary-color text-2xl">Caratteristiche:</h3>
                     <hr className="border-primary-color" />
                     <div className="flex flex-wrap justify-center mt-5">
-                        <TooltipItem tooltipsText="Età" className="text-whiteino">{dog.age} ANNI</TooltipItem>
-                        <TooltipItem tooltipsText="Taglia" className="text-whiteino">{dog.dogSize}</TooltipItem>
+                        <TooltipItem tooltipsText="Età" className="text-whiteino">
+                            {dog.age} ANNI
+                        </TooltipItem>
+                        <TooltipItem tooltipsText="Taglia" className="text-whiteino">
+                            {dog.dogSize}
+                        </TooltipItem>
                         <TooltipItem tooltipsText="Adozione" className="text-whiteino">
                             {dog.adopted ? "ADOTTATO" : "NON ADOTTATO"}
                         </TooltipItem>
@@ -158,7 +223,9 @@ function DogDetail() {
 
                 <div className="flex justify-between md:items-end flex-col sm:flex-row items-center">
                     <div className="w-2/4">
-                        <h2 className="text-primary-color text-center font-semibold mb-2 text-lg">Livello di Affinità:</h2>
+                        <h2 className="text-primary-color text-center font-semibold mb-2 text-lg">
+                            Livello di Affinità:
+                        </h2>
                         <ProgressBar2 value={compatibility} max={3} />
                     </div>
 
@@ -208,7 +275,6 @@ function DogDetail() {
                                 </span>
                             </button>
                         )}
-
                     </div>
                 </div>
             </div>

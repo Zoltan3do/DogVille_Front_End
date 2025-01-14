@@ -89,7 +89,7 @@ export const addProfileToUser = createAsyncThunk(
     'meFetch/addProfileToUser',
     async ({ userId, profileType }, { rejectWithValue }) => {
         try {
-            const response = await fetch(`http://locahost:3001/utenti/${userId}/profiles/${profileType}`, {
+            const response = await fetch(`http://localhost:3001/utenti/${userId}/profiles/${profileType}`, {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem("Access Token")}`,
