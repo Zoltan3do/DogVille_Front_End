@@ -30,12 +30,12 @@ const DogListWithFilters = () => {
       ...prev,
       [name]: value,
     }));
-    setPage(0); // Reset to first page when filters change
+    setPage(0); 
   };
 
   const handleSortChange = (e) => {
     setSortCriteria(e.target.value);
-    setPage(0); // Reset to first page when sorting changes
+    setPage(0); 
   };
 
   const handlePageChange = (newPage) => {

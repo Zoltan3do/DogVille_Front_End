@@ -92,7 +92,7 @@ function UserAdoptions() {
                     </div>
                 ) : (
                     <>
-                        <div className="relative w-full overflow-hidden min-h-[1200px] lg:min-h-[650px]" >
+                        <div className="relative w-full overflow-hidden min-h-[1075px] lg:min-h-[525px]" >
                             {adoptions &&
                                 adoptions.map((adoption, index) => (
                                     <div
@@ -113,7 +113,7 @@ function UserAdoptions() {
                                     </div>
                                 ))}
                         </div>
-                        <div className="flex w-full justify-center gap-2">
+                        <div className="flex w-full justify-center gap-2 ">
                             {adoptions &&
                                 adoptions.map((_, index) => (
                                     <button
@@ -121,7 +121,7 @@ function UserAdoptions() {
                                         className={`btn btn-xs ${index === activeIndex
                                             ? "bg-reddino text-whiteino"
                                             : "bg-transparent border-whiteino hover:text-whiteino"
-                                            }`}
+                                            } px-2 py-0 rounded-full`}
                                         onClick={(e) => handleAnchorClick(e, index)}
                                     >
                                         {index + 1}

@@ -150,7 +150,7 @@ function SingleAdoption({ adoption, toggleNavbarVisibility }) {
     };
 
     return (
-        <div className="card lg:card-side bg-reddino shadow-xl overflow-hidden rounded-2xl">
+        <div className="card lg:card-side bg-reddino shadow-xl overflow-hidden rounded-2xl p-5 relative">
             {/* Bottone per eliminare l'adozione */}
             <button
                 onClick={handleDeleteAdoption}
@@ -220,7 +220,7 @@ function SingleAdoption({ adoption, toggleNavbarVisibility }) {
                             <img
                                 src={adoption?.document}
                                 alt="Documento caricato"
-                                className="w-32 h-auto border rounded"
+                                className="w-24 h-auto border rounded"
                             />
                         </div>
                     )}

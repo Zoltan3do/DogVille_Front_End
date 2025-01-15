@@ -19,17 +19,17 @@ function AdoptionsProgressBar({ adoption }) {
     return (
         <>
             <div className="card-actions justify-center mt-5 flex flex-col items-center w-full">
-                <h2 className="font-medium text-2xl">Progresso:</h2>
+                <h2 className="font-medium text-2xl mb-2">Progresso:</h2>
                 <div className="w-full max-w-screen-lg block lg:hidden">
                     <ul className="timeline w-full max-w-full mx-auto text-whiteino flex flex-col gap-4 px-2">
                         {/* Step 1 */}
                         <li className="flex flex-col lg:flex-row items-center lg:gap-4">
                             <div
-                                className={`timeline-box ${activeStep >= 1 ? "bg-primary-color text-whiteino" : "bg-grigiastro text-primary-color"} w-full text-center break-words px-4 py-2 rounded-md`}
+                                className={` timeline-box ${activeStep >= 1 ? "bg-primary-color text-whiteino" : "bg-grigiastro text-primary-color"} w-full text-center break-words px-4 py-2 rounded-md`}
                             >
                                 {activeStep >= 2 ? "Documento validato" : "In attesa validazione documento"}
                             </div>
-                            <div className="timeline-middle flex items-center">
+                            <div className="timeline-middle flex justify-center items-center">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     viewBox="0 0 20 20"
@@ -49,7 +49,7 @@ function AdoptionsProgressBar({ adoption }) {
                         {/* Step 2 */}
                         <li className="flex flex-col lg:flex-row items-center lg:gap-4">
                             <hr className={`flex-1 ${activeStep >= 2 ? "bg-primary-color" : "bg-whiteino"}`} />
-                            <div className="timeline-middle flex items-center">
+                            <div className="timeline-middle flex justify-center items-center">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     viewBox="0 0 20 20"
@@ -79,7 +79,7 @@ function AdoptionsProgressBar({ adoption }) {
                             >
                                 {activeStep >= 4 || adoption.state === "VISITA_SUPERATA" ? "Visita superata" : "In attesa visita"}
                             </div>
-                            <div className="timeline-middle flex items-center">
+                            <div className="timeline-middle flex justify-center items-center">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     viewBox="0 0 20 20"
@@ -99,7 +99,7 @@ function AdoptionsProgressBar({ adoption }) {
                         {/* Step 4 */}
                         <li className="flex flex-col lg:flex-row items-center lg:gap-4">
                             <hr className={`flex-1 ${activeStep >= 4 ? "bg-primary-color" : "bg-whiteino"}`} />
-                            <div className="timeline-middle flex items-center">
+                            <div className="timeline-middle flex justify-center items-center">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     viewBox="0 0 20 20"
@@ -122,16 +122,17 @@ function AdoptionsProgressBar({ adoption }) {
                     </ul>
                 </div>
 
-                <div className="w-full max-w-screen-lg hidden lg:block">
-                    <ul className="timeline text-whiteino">
+                {/* Layout desktop */}
+                <div className="w-full max-w-screen-lg hidden lg:block ">
+                    <ul className="timeline text-whiteino flex justify-between">
                         <li>
                             <div
-                                className={`timeline-start timeline-box ${activeStep >= 1 ? "bg-primary-color text-whiteino" : "bg-grigiastro text-primary-color"
+                                className={`rounded-full p-1 text-center timeline-start timeline-box ${activeStep >= 1 ? "bg-primary-color text-whiteino" : "bg-grigiastro text-primary-color"
                                     }`}
                             >
                                 {activeStep >= 2 ? "Documento validato" : "In attesa validazione documento"}
                             </div>
-                            <div className="timeline-middle">
+                            <div className="timeline-middle flex justify-center items-center">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     viewBox="0 0 20 20"
@@ -145,11 +146,9 @@ function AdoptionsProgressBar({ adoption }) {
                                     />
                                 </svg>
                             </div>
-                            <hr className={`${activeStep >= 2 ? "bg-primary-color" : "bg-whiteino"}`} />
                         </li>
                         <li>
-                            <hr className={`${activeStep >= 2 ? "bg-primary-color" : "bg-whiteino"}`} />
-                            <div className="timeline-middle">
+                            <div className="timeline-middle flex justify-center items-center">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     viewBox="0 0 20 20"
@@ -164,22 +163,20 @@ function AdoptionsProgressBar({ adoption }) {
                                 </svg>
                             </div>
                             <div
-                                className={`timeline-end timeline-box ${activeStep >= 2 ? "bg-primary-color text-whiteino" : "bg-grigiastro text-primary-color"
+                                className={`rounded-full p-1 text-center timeline-end timeline-box ${activeStep >= 2 ? "bg-primary-color text-whiteino" : "bg-grigiastro text-primary-color"
                                     }`}
                             >
                                 {activeStep >= 3 || adoption?.visitDate != null ? "Data visita programmata" : "In attesa data visita"}
                             </div>
-                            <hr className={`${activeStep >= 3 ? "bg-primary-color" : "bg-whiteino"}`} />
                         </li>
                         <li>
-                            <hr className={`${activeStep >= 3 ? "bg-primary-color" : "bg-whiteino"}`} />
                             <div
-                                className={`timeline-start timeline-box ${activeStep >= 3 ? "bg-primary-color text-whiteino" : "bg-grigiastro text-primary-color"
+                                className={`rounded-full p-1 text-center timeline-start timeline-box ${activeStep >= 3 ? "bg-primary-color text-whiteino" : "bg-grigiastro text-primary-color"
                                     }`}
                             >
-                                {activeStep >= 4 || adoption.state == "VISITA_SUPERATA" ? "Visita superata" : "In attesa visita"}
+                                {activeStep >= 4 || adoption.state === "VISITA_SUPERATA" ? "Visita superata" : "In attesa visita"}
                             </div>
-                            <div className="timeline-middle">
+                            <div className="timeline-middle flex justify-center items-center">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     viewBox="0 0 20 20"
@@ -193,11 +190,9 @@ function AdoptionsProgressBar({ adoption }) {
                                     />
                                 </svg>
                             </div>
-                            <hr className={`${activeStep >= 4 ? "bg-primary-color" : "bg-whiteino"}`} />
                         </li>
                         <li>
-                            <hr className={`${activeStep >= 4 ? "bg-primary-color" : "bg-whiteino"}`} />
-                            <div className="timeline-middle">
+                            <div className="timeline-middle flex justify-center items-center">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     viewBox="0 0 20 20"
@@ -212,7 +207,7 @@ function AdoptionsProgressBar({ adoption }) {
                                 </svg>
                             </div>
                             <div
-                                className={`timeline-end timeline-box ${activeStep >= 4 ? "bg-primary-color text-whiteino" : "bg-grigiastro text-primary-color"
+                                className={`rounded-full p-1 text-center timeline-end timeline-box ${activeStep >= 4 ? "bg-primary-color text-whiteino" : "bg-grigiastro text-primary-color"
                                     }`}
                             >
                                 {activeStep >= 4 ? "Adozione completata" : "In attesa firma"}
@@ -220,8 +215,6 @@ function AdoptionsProgressBar({ adoption }) {
                         </li>
                     </ul>
                 </div>
-
-
             </div>
         </>
     );
