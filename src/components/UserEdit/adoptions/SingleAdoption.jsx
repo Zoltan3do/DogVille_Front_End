@@ -193,7 +193,7 @@ function SingleAdoption({ adoption, toggleNavbarVisibility }) {
                 </div>
                 <hr className="border-primary-color" />
 
-                <div className="flex justify-between flex-col lg:flex-row">
+                <div className="flex justify-between flex-col lg:flex-row mt-3">
 
                     {/* Stato e data dell'adozione */}
                     <div className="flex flex-col gap-3">
