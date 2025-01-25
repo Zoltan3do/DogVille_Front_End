@@ -43,11 +43,23 @@ function App() {
             <Routes>
               <Route path="/" element={<HomepageCustom />} />
               {!user && <Route path="/register" element={<CustomSignIn />} />}
-              <Route path="/dogs" element={<DogListWithFilters />} />
+              <Route
+                path="/dogs"
+                element={user ? <DogListWithFilters /> : <CustomSignIn />}
+              />
               <Route path="/dog/:id" element={<DogDetail />} />
-              <Route path="/profilo" element={<CustomProfile />} />
-              <Route path="/quiz" element={<UserQuiz />} />
-              <Route path="/adozioni" element={<UserAdoptions />} />
+              <Route
+                path="/profilo"
+                element={user ? <CustomProfile /> : <CustomSignIn />}
+              />
+              <Route
+                path="/quiz"
+                element={user ? <UserQuiz /> : <CustomSignIn />}
+              />
+              <Route
+                path="/adozioni"
+                element={user ? <UserAdoptions /> : <CustomSignIn />}
+              />
               <Route path="*" element={<NotFoundPage />} />
               <Route path="/favourites" element={<Favourites />} />
               <Route path="/policy" element={<PrivacyPolicy />} />
