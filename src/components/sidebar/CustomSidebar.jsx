@@ -1,12 +1,17 @@
-import { useState } from 'react';
-import SideNav, { Toggle, NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
-import '@trendmicro/react-sidenav/dist/react-sidenav.css';
-import { useDispatch, useSelector } from 'react-redux';
-import { changeSidebarState } from '../../redux/sidebarSlice';
+import { useState } from "react";
+import SideNav, {
+  Toggle,
+  NavItem,
+  NavIcon,
+  NavText,
+} from "@trendmicro/react-sidenav";
+import "@trendmicro/react-sidenav/dist/react-sidenav.css";
+import { useDispatch, useSelector } from "react-redux";
+import { changeSidebarState } from "../../redux/sidebarSlice";
 import { changeModalState } from "../../redux/loginToggleSlice";
-import "./sidebar.css"
-import logo from "../../assets/dogvilleLogo-removebg.png"
-import { Link, useNavigate } from 'react-router-dom';
+import "./sidebar.css";
+import logo from "../../assets/dogvilleLogo-removebg.png";
+import { Link, useNavigate } from "react-router-dom";
 
 function CustomSidebar() {
   const [openMenu, setOpenMenu] = useState(null);
@@ -18,7 +23,8 @@ function CustomSidebar() {
   const dispatch = useDispatch();
 
   const toggleMenu = (menuName) => {
-    if (isExpanded) setOpenMenu((prevMenu) => (prevMenu === menuName ? null : menuName));
+    if (isExpanded)
+      setOpenMenu((prevMenu) => (prevMenu === menuName ? null : menuName));
   };
 
   const handleToggle = (expanded) => {
@@ -28,22 +34,22 @@ function CustomSidebar() {
   };
 
   function handleExit() {
-    localStorage.removeItem("Access Token")
-    navigate("/")
-    location.reload()
+    localStorage.removeItem("Access Token");
+    navigate("/");
+    location.reload();
   }
 
   return (
     <SideNav
       style={{
         position: "fixed",
-        backgroundColor: '#000',
-        color: '#fff',
-        flexDirection: 'column',
-        width: isExpanded ? '250px' : '50px',
-        transition: 'all 0.3s ease',
-        overflowY: 'auto',
-        overflowX: 'hidden',
+        backgroundColor: "#000",
+        color: "#fff",
+        flexDirection: "column",
+        width: isExpanded ? "250px" : "50px",
+        transition: "all 0.3s ease",
+        overflowY: "auto",
+        overflowX: "hidden",
       }}
       className="hidden md:w-64 lg:flex"
       onToggle={handleToggle}
@@ -53,8 +59,8 @@ function CustomSidebar() {
         src={logo}
         alt="Logo del sito"
         style={{
-          width: '100%',
-          transition: 'all 0.3s ease',
+          width: "100%",
+          transition: "all 0.3s ease",
         }}
         className="mx-1"
       />
@@ -62,11 +68,11 @@ function CustomSidebar() {
       <Toggle />
       <div style={{ flex: 1 }} className="mt-5 mb-5">
         <SideNav.Nav defaultSelected="home">
-
           <NavItem eventKey="home">
             <NavIcon>
               <Link to={"/"}>
-                <i className="fa fa-fw fa-home" style={{ fontSize: 15 }}></i></Link>
+                <i className="fa fa-fw fa-home" style={{ fontSize: 15 }}></i>
+              </Link>
             </NavIcon>
             <NavText>
               <Link to={"/"}>
@@ -78,11 +84,17 @@ function CustomSidebar() {
           <NavItem eventKey="about">
             <NavIcon>
               <Link to={"/about"}>
-                <i className="fa fa-fw fa-address-card" style={{ fontSize: 15 }}></i>
+                <i
+                  className="fa fa-fw fa-address-card"
+                  style={{ fontSize: 15 }}
+                ></i>
               </Link>
             </NavIcon>
             <NavText>
-              <Link to={"/about"}><p>Chi siamo</p></Link></NavText>
+              <Link to={"/about"}>
+                <p>Chi siamo</p>
+              </Link>
+            </NavText>
           </NavItem>
 
           <NavItem eventKey="dogs">
@@ -98,14 +110,18 @@ function CustomSidebar() {
             </NavText>
           </NavItem>
 
-          <NavItem eventKey="services" onClick={() => toggleMenu('services')}>
+          <NavItem eventKey="services" onClick={() => toggleMenu("services")}>
             <NavIcon>
-              <i className="fa fa-fw fa-bell-concierge" style={{ fontSize: 15 }}></i>
+              <Link to={"/about"}></Link>
+              <i
+                className="fa fa-fw fa-bell-concierge"
+                style={{ fontSize: 15 }}
+              ></i>
             </NavIcon>
             <NavText>Servizi</NavText>
           </NavItem>
 
-          {openMenu === 'services' && (
+          {openMenu === "services" && (
             <>
               <NavItem className="text-start mx-5">
                 <NavText>
@@ -115,111 +131,218 @@ function CustomSidebar() {
                 </NavText>
               </NavItem>
               <NavItem className="text-start mx-5">
-                <NavText>Consegna un cane</NavText>
+                <NavText>
+                  <Link to="/coming-soon">
+                    <p>Consegna un cane</p>
+                  </Link>
+                </NavText>
               </NavItem>
               <NavItem className="text-start mx-5">
-                <NavText>Studio veterinario H24</NavText>
+                <NavText>
+                  <Link to="/coming-soon">
+                    <p>Studio veterinario H24</p>
+                  </Link>
+                </NavText>
               </NavItem>
               <NavItem className="text-start mx-5">
-                <NavText>Vitto e alloggio</NavText>
+                <NavText>
+                  <Link to="/coming-soon">
+                    <p>Vitto e alloggio</p>
+                  </Link>
+                </NavText>
               </NavItem>
               <NavItem className="text-start mx-5">
-                <NavText>Microchip identificativo</NavText>
+                <NavText>
+                  <Link to="/coming-soon">
+                    <p>Microchip identificativo</p>
+                  </Link>
+                </NavText>
               </NavItem>
               <NavItem className="text-start mx-5">
-                <NavText>Vaccinazioni e sverminamenti</NavText>
+                <NavText>
+                  <Link to="/coming-soon">
+                    <p>Vaccinazioni e sverminamenti</p>
+                  </Link>
+                </NavText>
               </NavItem>
               <NavItem className="text-start mx-5">
-                <NavText>Parti assistiti</NavText>
+                <NavText>
+                  <Link to="/coming-soon">
+                    <p>Parti assistiti</p>
+                  </Link>
+                </NavText>
               </NavItem>
             </>
           )}
 
-          <NavItem eventKey="cure" onClick={() => toggleMenu('cure')}>
+          <NavItem eventKey="cure" onClick={() => toggleMenu("cure")}>
             <NavIcon>
-              <i className="fa fa-fw fa-virus-slash" style={{ fontSize: 15 }}></i>
+              <i
+                className="fa fa-fw fa-virus-slash"
+                style={{ fontSize: 15 }}
+              ></i>
             </NavIcon>
             <NavText>Cure</NavText>
           </NavItem>
 
-          {openMenu === 'cure' && (
+          {openMenu === "cure" && (
             <>
               <NavItem className="text-start mx-5">
-                <NavText className="">Vaccini avanzati</NavText>
+                <NavText className="">
+                  <Link to="/coming-soon">
+                    <p>Vaccini avanzati</p>
+                  </Link>
+                </NavText>
               </NavItem>
               <NavItem className="text-start mx-5">
-                <NavText>Trattamento antipulci</NavText>
+                <NavText>
+                  <Link to="/coming-soon">
+                    <p>Trattamento antipulci</p>
+                  </Link>
+                </NavText>
               </NavItem>
               <NavItem className="text-start mx-5">
-                <NavText>Sterilizzazione e castrazione</NavText>
+                <NavText>
+                  <Link to="/coming-soon">
+                    <p>Sterilizzazione e castrazione</p>
+                  </Link>
+                </NavText>
               </NavItem>
               <NavItem className="text-start mx-5">
-                <NavText>Pulizia dentale</NavText>
+                <NavText>
+                  <Link to="/coming-soon">
+                    <p>Pulizia dentale</p>
+                  </Link>
+                </NavText>
               </NavItem>
             </>
           )}
 
           <NavItem eventKey="contacts">
             <NavIcon>
-              <Link to={"/contacts"}> <i className="fa fa-fw fa-address-book" style={{ fontSize: 15 }}></i></Link>
+              <Link to={"/contacts"}>
+                {" "}
+                <i
+                  className="fa fa-fw fa-address-book"
+                  style={{ fontSize: 15 }}
+                ></i>
+              </Link>
             </NavIcon>
-            <NavText><Link to={"/contacts"}><p>Contatti</p></Link></NavText>
+            <NavText>
+              <Link to={"/contacts"}>
+                <p>Contatti</p>
+              </Link>
+            </NavText>
           </NavItem>
         </SideNav.Nav>
       </div>
 
-      <hr className={toggleState ? `block` : 'hidden'} />
+      <hr className={toggleState ? `block` : "hidden"} />
       {/* Sezione inferiore per Login, Sign In e Contattaci */}
-      <div className="pt-10 pb-5 text-reddino " >
+      <div className="pt-10 pb-5 text-reddino ">
         <Link to={"/favourites"}>
-          <div data-event-key="likes" className={` text-sm ${!toggleState ? "text-center" : ""} flex items-center p-3 pl-6 w-full sideElement cursor-pointer hover:text-white`}>
-            <i className="fa fa-regular fa-heart mr-4" style={{ fontSize: 15 }}></i>
+          <div
+            data-event-key="likes"
+            className={` text-sm ${
+              !toggleState ? "text-center" : ""
+            } flex items-center p-3 pl-6 w-full sideElement cursor-pointer hover:text-white`}
+          >
+            <i
+              className="fa fa-regular fa-heart mr-4"
+              style={{ fontSize: 15 }}
+            ></i>
             <p className={`${!toggleState ? "hidden" : ""}`}>Preferiti</p>
           </div>
         </Link>
-        <div data-event-key="shop" className={`mt-3 text-sm ${!toggleState ? "text-center" : ""} flex items-center p-3 pl-6 w-full sideElement cursor-pointer hover:text-white`}>
-          <i className="fa fa-solid fa-bag-shopping mr-4" style={{ fontSize: 15 }}></i>
-          <p className={`${!toggleState ? "hidden" : ""}`}>Shop</p>
-        </div>
+        <Link to="/coming-soon">
+          <div
+            data-event-key="shop"
+            className={`mt-3 text-sm ${
+              !toggleState ? "text-center" : ""
+            } flex items-center p-3 pl-6 w-full sideElement cursor-pointer hover:text-white`}
+          >
+            <i
+              className="fa fa-solid fa-bag-shopping mr-4"
+              style={{ fontSize: 15 }}
+            ></i>
+            <p className={`${!toggleState ? "hidden" : ""}`}>Shop</p>
+          </div>
+        </Link>
 
         <a href="tel:+393517416230">
-          <div data-event-key="callme" className={`mt-3 text-sm  ${!toggleState ? "sm:hidden text-center" : ""} flex items-center p-3 pl-6 w-full sideElement cursor-pointer hover:text-white`}>
+          <div
+            data-event-key="callme"
+            className={`mt-3 text-sm  ${
+              !toggleState ? "sm:hidden text-center" : ""
+            } flex items-center p-3 pl-6 w-full sideElement cursor-pointer hover:text-white`}
+          >
             <i className="fa-solid fa-phone mr-4" style={{ fontSize: 15 }}></i>
             <p className={`${!toggleState ? "hidden" : ""}`}>Chiamaci</p>
           </div>
         </a>
 
-        {
-          meData ? (
-            <>
-              <Link to={"/profilo"}>
-                <div data-event-key="register" className={`mt-3 text-sm  ${!toggleState ? "sm:hidden text-center" : ""} flex items-center p-3 pl-6 w-full sideElement cursor-pointer hover:text-white`}>
-                  <i className='fa fa-solid fa-user mr-4' style={{ fontSize: 15 }}></i>
-                  <p className={`${!toggleState ? "hidden" : ""}`}>Profilo</p>
-                </div>
-              </Link>
-
-              <div onClick={handleExit} data-event-key="register" className={`mt-3 text-sm  ${!toggleState ? "sm:hidden text-center" : ""} flex items-center p-3 pl-6 w-full sideElement cursor-pointer hover:text-white`}>
-                <i className='fa fa-solid fa-right-from-bracket mr-4' style={{ fontSize: 15 }}></i>
-                <p className={`${!toggleState ? "hidden" : ""}`}>Esci</p>
+        {meData ? (
+          <>
+            <Link to={"/profilo"}>
+              <div
+                data-event-key="register"
+                className={`mt-3 text-sm  ${
+                  !toggleState ? "sm:hidden text-center" : ""
+                } flex items-center p-3 pl-6 w-full sideElement cursor-pointer hover:text-white`}
+              >
+                <i
+                  className="fa fa-solid fa-user mr-4"
+                  style={{ fontSize: 15 }}
+                ></i>
+                <p className={`${!toggleState ? "hidden" : ""}`}>Profilo</p>
               </div>
+            </Link>
 
-            </>
-          ) : (
-            <>
-              <div onClick={() => dispatch(changeModalState(true))} data-event-key="login" className={`mt-3 text-sm  ${!toggleState ? "sm:hidden text-center" : ""} flex items-center p-3 pl-6 w-full sideElement cursor-pointer hover:text-white`}>
-                <i className='fa fa-solid fa-right-to-bracket mr-4' style={{ fontSize: 15 }}></i>
-                <p className={`${!toggleState ? "hidden" : ""}`}>Accedi</p>
+            <div
+              onClick={handleExit}
+              data-event-key="register"
+              className={`mt-3 text-sm  ${
+                !toggleState ? "sm:hidden text-center" : ""
+              } flex items-center p-3 pl-6 w-full sideElement cursor-pointer hover:text-white`}
+            >
+              <i
+                className="fa fa-solid fa-right-from-bracket mr-4"
+                style={{ fontSize: 15 }}
+              ></i>
+              <p className={`${!toggleState ? "hidden" : ""}`}>Esci</p>
+            </div>
+          </>
+        ) : (
+          <>
+            <div
+              onClick={() => dispatch(changeModalState(true))}
+              data-event-key="login"
+              className={`mt-3 text-sm  ${
+                !toggleState ? "sm:hidden text-center" : ""
+              } flex items-center p-3 pl-6 w-full sideElement cursor-pointer hover:text-white`}
+            >
+              <i
+                className="fa fa-solid fa-right-to-bracket mr-4"
+                style={{ fontSize: 15 }}
+              ></i>
+              <p className={`${!toggleState ? "hidden" : ""}`}>Accedi</p>
+            </div>
+            <Link to={"/register"}>
+              <div
+                data-event-key="register"
+                className={`mt-3 text-sm  ${
+                  !toggleState ? "sm:hidden text-center" : ""
+                } flex items-center p-3 pl-6 w-full sideElement cursor-pointer hover:text-white`}
+              >
+                <i
+                  className="fa fa-solid fa-address-card mr-4"
+                  style={{ fontSize: 15 }}
+                ></i>
+                <p className={`${!toggleState ? "hidden" : ""}`}>Registrati</p>
               </div>
-              <Link to={"/register"}>
-                <div data-event-key="register" className={`mt-3 text-sm  ${!toggleState ? "sm:hidden text-center" : ""} flex items-center p-3 pl-6 w-full sideElement cursor-pointer hover:text-white`}>
-                  <i className='fa fa-solid fa-address-card mr-4' style={{ fontSize: 15 }}></i>
-                  <p className={`${!toggleState ? "hidden" : ""}`}>Registrati</p>
-                </div>
-              </Link>
-            </>
-          )
-        }
+            </Link>
+          </>
+        )}
       </div>
     </SideNav>
   );
