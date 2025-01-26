@@ -10,7 +10,7 @@ import LoginModal from "./components/modals/LoginModal.jsx";
 import CustomSignIn from "./components/registration/CustomSignIn.jsx";
 import CustomFooter from "./components/footer/CustomFooter.jsx";
 import DogListWithFilters from "./components/filters/DogListWithFilters .jsx";
-import DogDetail from "./components/detailPages/dogDetail.jsx";
+import DogDetail from "./components/detailPages/DogDetail.jsx";
 import CustomProfile from "./components/UserEdit/CustomProfile";
 import UserAdoptions from "./components/UserEdit/adoptions/UserAdoptions";
 import UserQuiz from "./components/UserEdit/UserQuiz";
