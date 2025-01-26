@@ -89,7 +89,7 @@ function CustomProfile() {
             <UserNavbar />
             <div
                 className={`bg-transparent ${toggleState ? "lg:ml-64" : "lg:ml-24"
-                    } transition-all duration-300 mt-12 !z-10  relative`}
+                    } transition-all duration-300 mt-16 !z-10  relative`}
             >
                 <div
                     className="absolute -left-20

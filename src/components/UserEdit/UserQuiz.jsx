@@ -138,7 +138,7 @@ function UserQuiz() {
         <>
             <UserNavbar />
             <div
-                className={`bg-transparent ${toggleState ? "lg:ml-64" : "lg:ml-24"} transition-all duration-300 mt-28 !z-10 relative mb-72`}
+                className={`bg-transparent ${toggleState ? "lg:ml-64" : "lg:ml-24"} transition-all duration-300 mt-32 !z-10 relative mb-72`}
             >
                 {!hasConsented ? (
                     <div className="flex justify-center items-center">
