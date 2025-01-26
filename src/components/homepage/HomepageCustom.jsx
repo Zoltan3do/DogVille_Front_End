@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { animateCount } from "../../Utils.js"
 import { useEffect } from "react";
 import "./homepage.css"
+import homedog from "../../assets/caneRimosso.jpeg"
 
 
 function HomepageCustom() {
@@ -25,7 +26,7 @@ function HomepageCustom() {
                     <p>Stai pensando di</p><p> adottare un cane?</p>
                 </div>
                 <div className="immagineCentrale mb-5 sm:mb-0 my-10 select-none">
-                    <img src="src/assets/caneRimosso.png" alt="caniello" className="sm:w-9/12 w-full" />
+                    <img src={homedog} alt="caniello" className="sm:w-9/12 w-full" />
                 </div>
                 <div className="select-none downContainer sm:flex items-center justify-between sm:absolute bottom-0 lg:bottom-10 w-11/12 transition-all duration-300 ">
                     <div className="conteggi">
