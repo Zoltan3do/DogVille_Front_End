@@ -15,7 +15,7 @@ function CustomNavbar() {
 
   useEffect(() => {
     dispatch(executemefetch());
-  }, [localStorage.getItem("Access Token")]);
+  }, []);
 
   return (
     <nav
