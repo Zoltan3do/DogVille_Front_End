@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { animateCount } from "../../Utils.js"
 import { useEffect } from "react";
 import "./homepage.css"
-import homedog from "../../assets/caneRimosso.jpeg"
+import homedog from "../../assets/caneRimosso.png"
 
 
 function HomepageCustom() {
