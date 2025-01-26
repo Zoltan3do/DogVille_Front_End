@@ -15,7 +15,7 @@ function CustomNavbar() {
 
     useEffect(() => {
         dispatch(executemefetch());
-    }, [dispatch, meData]);
+    }, []);
 
     return (
         <nav

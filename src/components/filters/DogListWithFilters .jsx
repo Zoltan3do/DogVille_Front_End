@@ -24,7 +24,7 @@ const DogListWithFilters = () => {
   useEffect(() => {
     dispatch(executemefetch());
     dispatch(executedogsfetch(filters, page, sortCriteria));
-  }, [filters, dispatch, page, sortCriteria]);
+  }, [filters,page, sortCriteria]);
 
   const handleFilterChange = (e) => {
     const { name, value } = e.target;

@@ -13,7 +13,7 @@ function ProgressBar2({ value = 0, max = 3 }) {
         if (id) {
             dispatch(executedogfetch(id));
         }
-    }, [id, dispatch, dog])
+    }, [id])
 
     const percentage = Math.min(Math.max((value / max) * 100, 0), 100);
 
