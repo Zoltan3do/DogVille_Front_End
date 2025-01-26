@@ -17,7 +17,7 @@ export const dogsFetchSlice = createSlice({
 
 export const executedogsfetch = (filters, page, sorting) => async (dispatch) => {
     try {
-        const genericUrl = "http://localhost:3001/cani/filter";
+        const genericUrl = `${import.meta.env.VITE_URL}/cani/filter`;
 
         const filterParams = Object.entries(filters)
             .filter(([key, value]) => value)

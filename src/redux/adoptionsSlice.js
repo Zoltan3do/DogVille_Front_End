@@ -4,7 +4,7 @@ export const createAdoption = createAsyncThunk(
   "adoptions/createAdoption",
   async (adoptionData, { rejectWithValue }) => {
     try {
-      const response = await fetch("http://localhost:3001/adozioni", {
+      const response = await fetch(`${import.meta.env.VITE_URL}/adozioni`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -34,7 +34,7 @@ export const fetchAdoptionsByUser = createAsyncThunk(
   "adoptions/fetchAdoptionsByUser",
   async ({ email, page, size }, { rejectWithValue }) => {
     try {
-      const url = `http://localhost:3001/adozioni/user?email=${email}&page=${page}&size=${size}`;
+      const url = `${import.meta.env.VITE_URL}/adozioni/user?email=${email}&page=${page}&size=${size}`;
       const response = await fetch(url, {
         method: "GET",
         headers: {
@@ -65,7 +65,7 @@ export const deleteAdoption = createAsyncThunk(
   async (adozioneId, { rejectWithValue }) => {
     try {
       const response = await fetch(
-        `http://localhost:3001/adozioni/${adozioneId}`,
+        `${import.meta.env.VITE_URL}/adozioni/${adozioneId}`,
         {
           method: "DELETE",
           headers: {
@@ -99,7 +99,7 @@ export const addAdoptionDocument = createAsyncThunk(
       formData.append("document", file);
 
       const response = await fetch(
-        `http://localhost:3001/adozioni/${adoptionId}/document`,
+        `${import.meta.env.VITE_URL}/adozioni/${adoptionId}/document`,
         {
           method: "PATCH",
           headers: {
@@ -131,7 +131,7 @@ export const addAdoptionSign = createAsyncThunk(
   async ({ adoptionId, file }, { rejectWithValue }) => {
     try {
       const response = await fetch(
-        `http://localhost:3001/adozioni/${adoptionId}/sign`,
+        `${import.meta.env.VITE_URL}/adozioni/${adoptionId}/sign`,
         {
           method: "PATCH",
           headers: {
@@ -163,7 +163,7 @@ export const fetchAdoptionState = createAsyncThunk(
   async (adoptionId, { rejectWithValue }) => {
     try {
       const response = await fetch(
-        `http://localhost:3001/adozioni/${adoptionId}/state`,
+        `${import.meta.env.VITE_URL}/adozioni/${adoptionId}/state`,
         {
           method: "GET",
           headers: {

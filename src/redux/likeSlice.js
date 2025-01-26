@@ -26,7 +26,7 @@ export const likeSlice = createSlice({
 
 export const addLikefetch = (dogId) => async () => {
     try {
-        const url = `http://localhost:3001/likes/dogs/${dogId}`;
+        const url = `${import.meta.env.VITE_URL}/likes/dogs/${dogId}`;
 
         const response = await fetch(url, {
             method: "POST",
@@ -50,7 +50,7 @@ export const addLikefetch = (dogId) => async () => {
 
 export const removeLikefetch = (dogId) => async () => {
     try {
-        const url = `http://localhost:3001/likes/dogs/${dogId}`;
+        const url = `${import.meta.env.VITE_URL}/likes/dogs/${dogId}`;
 
         const response = await fetch(url, {
             method: "DELETE",

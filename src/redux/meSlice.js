@@ -7,7 +7,7 @@ export const uploadAvatar = createAsyncThunk(
         formData.append("avatar", file);
 
         try {
-            const url = "http://localhost:3001/utenti/avatar";
+            const url = `${import.meta.env.VITE_URL}/utenti/avatar`;
             const response = await fetch(url, {
                 method: "PATCH",
                 headers: {
@@ -33,7 +33,7 @@ export const executemefetch = createAsyncThunk(
     'meFetch/executemefetch',
     async (_, { rejectWithValue }) => {
         try {
-            const url = "http://localhost:3001/utenti/me";
+            const url = `${import.meta.env.VITE_URLb}/utenti/me`;
             const response = await fetch(url, {
                 method: "GET",
                 headers: {
@@ -60,7 +60,7 @@ export const updateMeDataFetch = createAsyncThunk(
     'meFetch/updateMeDataFetch',
     async (updatedData, { rejectWithValue }) => {
         try {
-            const url = "http://localhost:3001/utenti/me";
+            const url = `${import.meta.env.VITE_URL}/utenti/me`;
             const response = await fetch(url, {
                 method: "PUT",
                 headers: {
@@ -89,7 +89,7 @@ export const addProfileToUser = createAsyncThunk(
     'meFetch/addProfileToUser',
     async ({ userId, profileType }, { rejectWithValue }) => {
         try {
-            const response = await fetch(`http://localhost:3001/utenti/${userId}/profiles/${profileType}`, {
+            const response = await fetch(`${import.meta.env.VITE_URL}/utenti/${userId}/profiles/${profileType}`, {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem("Access Token")}`,
@@ -113,7 +113,7 @@ export const removeProfileFromUser = createAsyncThunk(
     'meFetch/removeProfileFromUser',
     async ({ userId, profileType }, { rejectWithValue }) => {
         try {
-            const response = await fetch(`/api/users/${userId}/profiles/${profileType}`, {
+            const response = await fetch(`${import.meta.env.VITE_URL}/api/users/${userId}/profiles/${profileType}`, {
                 method: 'DELETE',
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem("Access Token")}`,

@@ -16,7 +16,7 @@ export const singleDogFetchSlice = createSlice({
 
 export const executedogfetch = (id) => async (dispatch) => {
     try {
-        const url = `http://localhost:3001/cani/${id}`;
+        const url = `${import.meta.env.VITE_URL}/cani/${id}`;
 
         const response = await fetch(url, {
             method: "GET",

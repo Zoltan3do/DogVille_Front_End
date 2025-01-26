@@ -4,7 +4,7 @@ export const executeLoginFetch = createAsyncThunk(
     'loginFetches/login',
     async ({ email, password }, { rejectWithValue }) => {
         try {
-            const url = "http://localhost:3001/auth/login";
+            const url = `${import.meta.env.VITE_URL}/auth/login`;
             const response = await fetch(url, {
                 method: "POST",
                 headers: {
@@ -31,7 +31,7 @@ export const executeRegisterFetch = createAsyncThunk(
     'loginFetches/register',
     async ({ name, surname, address, telephoneNumber, email, password }, { rejectWithValue }) => {
         try {
-            const url = "http://localhost:3001/auth/register";
+            const url = `${import.meta.env.VITE_URL}/auth/register`;
             const response = await fetch(url, {
                 method: "POST",
                 headers: {
