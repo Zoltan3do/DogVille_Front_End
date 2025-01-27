@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { VitePWA } from 'vite-plugin-pwa';
+import icon from "../DogVille_Front_End/src/assets/dogvilleLogo-removebg.png"
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -10,27 +11,16 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.svg', 'favicon.ico', 'robots.txt', 'apple-touch-icon.png'],
       manifest: {
-        name: 'Nome App',
-        short_name: 'App',
-        description: 'Descrizione della tua app',
-        theme_color: '#ffffff',
+        name: 'DogVille',
+        short_name: 'DV',
+        description: 'Servizio canile',
+        theme_color: '#111C20',
         icons: [
           {
-            src: 'pwa-192x192.png',
-            sizes: '192x192',
+            src: {icon},
+            sizes: '500x500',
             type: 'image/png',
-          },
-          {
-            src: 'pwa-512x512.png',
-            sizes: '512x512',
-            type: 'image/png',
-          },
-          {
-            src: 'pwa-512x512.png',
-            sizes: '512x512',
-            type: 'image/png',
-            purpose: 'any maskable',
-          },
+          }
         ],
       },
     }),
