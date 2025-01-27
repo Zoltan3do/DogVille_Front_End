@@ -1,7 +1,6 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { VitePWA } from 'vite-plugin-pwa';
-import icon from "src/assets/dogvilleLogo-removebg.png"
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -17,7 +16,7 @@ export default defineConfig({
         theme_color: '#111C20',
         icons: [
           {
-            src: {icon},
+            src: "dogvilleLogo-removebg.png",
             sizes: '500x500',
             type: 'image/png',
           }
