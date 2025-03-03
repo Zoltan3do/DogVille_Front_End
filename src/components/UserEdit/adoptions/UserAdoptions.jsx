@@ -92,7 +92,7 @@ function UserAdoptions() {
                     </div>
                 ) : (
                     <>
-                        <div className="relative w-full overflow-hidden min-h-[1075px] lg:min-h-[525px]" >
+                        <div className="relative w-full overflow-hidden min-h-[1200px] lg:min-h-[600px]" >
                             {adoptions &&
                                 adoptions.map((adoption, index) => (
                                     <div
